@@ -47,7 +47,7 @@ const ArticleCard = ({ article }: { article: Article }) => {
       <h2 className="font-heading text-2xl lg:text-3xl tracking-wide uppercase leading-tight">
         {article.title}
       </h2>
-      <p className="font-sans font-medium text-lg text-gray-700 leading-relaxed">
+      <p className="font-sans font-medium text-lg text-gray-700 leading-[1.9]">
         {article.excerpt}
       </p>
       {article.tags.length > 0 && (
@@ -101,17 +101,16 @@ function HomePage() {
       </header>
 
       <div className="max-w-5xl mx-auto px-4 md:px-8 py-12 flex flex-col gap-12">
-        <section className="relative bg-white neo-border neo-shadow p-8 lg:p-14 overflow-hidden">
-          <div className="absolute top-8 right-8 w-16 h-16 bg-[#FF00FF] rounded-full neo-border pointer-events-none" />
-          <div className="absolute bottom-8 right-20 w-10 h-10 bg-[#39FF14] rotate-45 neo-border pointer-events-none" />
-          <div className="absolute top-1/2 right-40 w-6 h-6 bg-[#FFD800] neo-border pointer-events-none hidden lg:block" />
-          <div className="flex flex-col gap-6 max-w-3xl relative z-10">
+
+        {/* HERO — bez dekorativních tvarů */}
+        <section className="bg-white neo-border neo-shadow p-8 lg:p-14">
+          <div className="flex flex-col gap-6 max-w-3xl">
             <Badge className="bg-[#FF4A4A] text-white border-none !px-4 !py-2 text-sm w-fit">Vítej u nás</Badge>
             <h1 className="font-heading text-5xl lg:text-7xl leading-[0.9] uppercase tracking-tighter">
               Vše, co chceš<br />vědět o{" "}
               <span className="bg-[#FFD800] px-2 inline-block -ml-1">rapu</span>
             </h1>
-            <p className="text-xl font-bold leading-snug text-gray-800 max-w-xl">
+            <p className="text-xl font-bold leading-[1.9] text-gray-800 max-w-xl">
               Profily raperů, návody pro beatmakery a články z české i světové scény. Pure facts.
             </p>
           </div>
