@@ -1,0 +1,44 @@
+@import url("https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;700;900&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-heading: "Archivo Black", sans-serif;
+  --font-sans: "Space Grotesk", sans-serif;
+}
+
+body {
+  background-color: #ffde00;
+  background-image: radial-gradient(rgba(0, 0, 0, 0.15) 2px, transparent 2px);
+  background-size: 24px 24px;
+  color: #000;
+  -webkit-font-smoothing: antialiased;
+}
+
+.neo-border {
+  border: 4px solid #000;
+}
+
+.neo-shadow {
+  box-shadow: 10px 10px 0px 0px #000;
+}
+
+.neo-shadow-sm {
+  box-shadow: 5px 5px 0px 0px #000;
+}
+
+.neo-button {
+  border: 4px solid #000;
+  box-shadow: 6px 6px 0px 0px #000;
+  transition: all 0.1s ease-in-out;
+  cursor: pointer;
+}
+
+.neo-button:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 8px 0px 0px #000;
+}
+
+.neo-button:active {
+  box-shadow: 0px 0px 0px 0px #000;
+  transform: translate(6px, 6px);
+}
