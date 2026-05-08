@@ -1,0 +1,112 @@
+.nav {
+  background: var(--black);
+  border-bottom: 3px solid var(--black);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.logo {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-family: 'Anton', sans-serif;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.logoMain {
+  color: var(--white);
+}
+
+.logoAccent {
+  color: var(--yellow);
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  list-style: none;
+}
+
+.link {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--white);
+  padding: 6px 14px;
+  border-radius: 2px;
+  transition: background 0.15s, color 0.15s;
+}
+
+.link:hover {
+  background: var(--yellow);
+  color: var(--black);
+}
+
+.burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.burgerLine {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--white);
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.burgerLineOpen {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--white);
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.burgerLineOpen:first-child { transform: translateY(7px) rotate(45deg); }
+.burgerLineOpenMid { display: block; width: 24px; height: 2px; background: var(--white); opacity: 0; }
+.burgerLineOpen:last-child { transform: translateY(-7px) rotate(-45deg); }
+
+@media (max-width: 640px) {
+  .burger { display: flex; }
+
+  .links {
+    display: none;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background: var(--black);
+    flex-direction: column;
+    padding: 16px 24px;
+    gap: 0;
+    border-bottom: 3px solid var(--yellow);
+  }
+
+  .linksOpen { display: flex; }
+
+  .link { width: 100%; padding: 12px 0; font-size: 1rem; }
+}

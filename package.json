@@ -1,0 +1,19 @@
+{
+  "name": "czech-rap-media",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "^14.2.0",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0",
+    "gray-matter": "^4.0.3",
+    "next-mdx-remote": "^4.4.1",
+    "reading-time": "^1.5.0"
+  }
+}
