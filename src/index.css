@@ -12,6 +12,7 @@ body {
   background-size: 24px 24px;
   color: #000;
   -webkit-font-smoothing: antialiased;
+  line-height: 1.8;
 }
 
 .neo-border { border: 4px solid #000; }
@@ -27,78 +28,111 @@ body {
 .neo-button:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0px 0px #000; }
 .neo-button:active { box-shadow: 0px 0px 0px 0px #000; transform: translate(6px, 6px); }
 
-/* Article body typography */
+/* ── Article body typography ── */
+.prose-4rap {
+  line-height: 1.85;
+}
 .prose-4rap h2 {
   font-family: "Archivo Black", sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   text-transform: uppercase;
-  letter-spacing: -0.02em;
-  margin: 2rem 0 0.75rem;
+  letter-spacing: -0.01em;
+  margin: 2.5rem 0 0.85rem;
   padding-bottom: 0.5rem;
   border-bottom: 4px solid #000;
+  line-height: 1.2;
 }
 .prose-4rap h3 {
   font-family: "Archivo Black", sans-serif;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   text-transform: uppercase;
-  margin: 1.5rem 0 0.5rem;
+  margin: 2rem 0 0.6rem;
+  line-height: 1.2;
 }
 .prose-4rap p {
   font-size: 1.1rem;
-  line-height: 1.75;
-  margin-bottom: 1rem;
+  line-height: 1.85;
+  margin-bottom: 1.25rem;
   font-weight: 500;
 }
 .prose-4rap ul, .prose-4rap ol {
   padding-left: 1.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
 }
 .prose-4rap li {
   font-size: 1.05rem;
-  line-height: 1.7;
+  line-height: 1.8;
   font-weight: 500;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.4rem;
 }
 .prose-4rap ul li { list-style-type: "▸  "; }
 .prose-4rap ol li { list-style-type: decimal; }
 .prose-4rap strong { font-weight: 900; }
 .prose-4rap em { font-style: italic; }
-.prose-4rap a { font-weight: 700; color: #000; text-decoration: underline; text-decoration-color: #FFD800; text-decoration-thickness: 3px; }
+.prose-4rap a {
+  font-weight: 700;
+  color: #000;
+  text-decoration: underline;
+  text-decoration-color: #FFD800;
+  text-decoration-thickness: 3px;
+}
 .prose-4rap a:hover { background-color: #FFD800; }
 .prose-4rap blockquote {
   border-left: 6px solid #000;
   background: #FFD800;
   padding: 1rem 1.25rem;
-  margin: 1.5rem 0;
+  margin: 1.75rem 0;
   font-weight: 700;
   font-size: 1.1rem;
+  line-height: 1.7;
 }
 .prose-4rap hr {
   border: none;
   border-top: 4px solid #000;
-  margin: 2rem 0;
+  margin: 2.5rem 0;
 }
+
+/* ── TABLE FIX — přepisuje react-markdown výchozí chování ── */
 .prose-4rap table {
   width: 100%;
   border-collapse: collapse;
-  margin: 1.5rem 0;
+  margin: 2rem 0;
   font-weight: 500;
+  display: table !important;
+  table-layout: auto;
+}
+.prose-4rap thead {
+  display: table-header-group !important;
+}
+.prose-4rap tbody {
+  display: table-row-group !important;
+}
+.prose-4rap tr {
+  display: table-row !important;
 }
 .prose-4rap th {
+  display: table-cell !important;
   background: #000;
   color: #FFD800;
   font-family: "Archivo Black", sans-serif;
   text-transform: uppercase;
-  padding: 0.5rem 0.75rem;
+  padding: 0.6rem 0.9rem;
   text-align: left;
   font-size: 0.85rem;
+  border: 3px solid #000;
+  white-space: nowrap;
 }
 .prose-4rap td {
+  display: table-cell !important;
   border: 3px solid #000;
-  padding: 0.5rem 0.75rem;
+  padding: 0.55rem 0.9rem;
   background: #fff;
+  font-size: 1rem;
+  vertical-align: middle;
 }
 .prose-4rap tr:nth-child(even) td { background: #fffbe6; }
+
+/* ── CODE ── */
 .prose-4rap code {
   background: #000;
   color: #39FF14;
@@ -111,7 +145,7 @@ body {
   color: #39FF14;
   padding: 1.25rem;
   overflow-x: auto;
-  margin: 1.5rem 0;
+  margin: 1.75rem 0;
   border: 4px solid #000;
   font-family: monospace;
   font-size: 0.9rem;
