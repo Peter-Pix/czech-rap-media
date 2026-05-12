@@ -57,31 +57,6 @@ function getTrending(articles: Article[], count = 5): Article[] {
     .map((x) => x.a);
 }
 
-// ── News ticker items ──────────────────────────────────────────
-function buildTickerItems(articles: Article[]): string[] {
-  return articles.slice(0, 8).map((a) => `${a.category.toUpperCase()} · ${a.title}`);
-}
-
-// ── NewsTicker ─────────────────────────────────────────────────
-function NewsTicker({ items }: { items: string[] }) {
-  if (!items.length) return null;
-  const doubled = [...items, ...items];
-  return (
-    <div className="bg-black text-[#7BC8A4] border-b-4 border-black overflow-hidden h-9 flex items-center">
-      <span className="font-heading text-xs uppercase px-3 border-r-4 border-[#7BC8A4] whitespace-nowrap h-full flex items-center shrink-0">
-        BREAKING
-      </span>
-      <div className="ticker-track flex items-center gap-0">
-        {doubled.map((item, i) => (
-          <span key={i} className="font-heading text-xs uppercase whitespace-nowrap px-8">
-            {item}
-            <span className="ml-8 text-[#FFD800]">◆</span>
-          </span>
-        ))}
-      </div>
-    </div>
-  );
-}
 
 // ── Header ─────────────────────────────────────────────────────
 function Header({ onSearch, unreadCount }: { onSearch: () => void; unreadCount: number }) {
@@ -233,11 +208,7 @@ function ArticleCard({
             loading="lazy"
           />
         </div>
-      ) : (
-        <div className={`w-full aspect-[16/9] border-b-4 border-black flex items-center justify-center text-4xl font-heading opacity-10 ${colorClass}`}>
-          #
-        </div>
-      )}
+      ) : null}
 
       <div className="p-5 flex flex-col gap-3 flex-1">
         {/* Meta row */}
@@ -475,7 +446,6 @@ function HomePage() {
   );
 
   const trending = useMemo(() => getTrending(articles, 5), [articles]);
-  const tickerItems = useMemo(() => buildTickerItems(articles), [articles]);
   const unreadCount = useMemo(
     () => articles.filter((a) => !readSet.has(a.slug)).length,
     [articles, readSet]
@@ -519,9 +489,6 @@ function HomePage() {
   return (
     <AppShell unreadCount={unreadCount}>
       <SEO />
-
-      {/* Sticky news ticker below header */}
-      <NewsTicker items={tickerItems} />
 
       <main className="max-w-7xl mx-auto px-4 md:px-6 py-8 flex flex-col gap-8">
 
