@@ -1,26 +1,19 @@
 {
-  "trap": [
-    "stav-ceske-rapove-sceny",
-    "cesky-rap-z-ulice-na-trun-nova-pravidla-hry"
+  "yzomandias": [
+    "yzomandias-typek-co-zmenil-pravidla-ceskeho-trapu"
   ],
-  "drill": [
-    "stav-ceske-rapove-sceny"
+  "český trap": [
+    "yzomandias-typek-co-zmenil-pravidla-ceskeho-trapu"
   ],
-  "lyrika": [
-    "stav-ceske-rapove-sceny"
+  "milion+ entertainment": [
+    "yzomandias-typek-co-zmenil-pravidla-ceskeho-trapu"
   ],
-  "streaming": [
-    "stav-ceske-rapove-sceny",
-    "cesky-rap-z-ulice-na-trun-nova-pravidla-hry"
+  "nik tend": [
+    "yzomandias-typek-co-zmenil-pravidla-ceskeho-trapu"
   ],
-  "ženské-rapperky": [
-    "stav-ceske-rapove-sceny"
-  ],
-  "mainstream": [
-    "stav-ceske-rapove-sceny"
-  ],
-  "underground": [
-    "stav-ceske-rapove-sceny"
+  "diskografie": [
+    "yzomandias-typek-co-zmenil-pravidla-ceskeho-trapu",
+    "kendrick-lamar-pulitzeruv-kral"
   ],
   "rap": [
     "rozsekej-majk-tvoje-rapova-bible-pro-texty-a-flow-co-pali"
@@ -52,9 +45,6 @@
     "freestyle-battle-scena-od-suterenu-k-arene",
     "cesky-rap-z-ulice-na-trun-nova-pravidla-hry"
   ],
-  "diskografie": [
-    "kendrick-lamar-pulitzeruv-kral"
-  ],
   "good kid m.a.a.d city": [
     "kendrick-lamar-pulitzeruv-kral"
   ],
@@ -81,7 +71,28 @@
   "hiphop-kemp": [
     "freestyle-battle-scena-od-suterenu-k-arene"
   ],
+  "ektor": [
+    "ektor-chlapek-co-rozsekal-ceskou-scenu"
+  ],
+  "cesky rap": [
+    "ektor-chlapek-co-rozsekal-ceskou-scenu"
+  ],
+  "tetris": [
+    "ektor-chlapek-co-rozsekal-ceskou-scenu"
+  ],
+  "detektor": [
+    "ektor-chlapek-co-rozsekal-ceskou-scenu"
+  ],
+  "alfa": [
+    "ektor-chlapek-co-rozsekal-ceskou-scenu"
+  ],
   "český rap": [
+    "cesky-rap-z-ulice-na-trun-nova-pravidla-hry"
+  ],
+  "trap": [
+    "cesky-rap-z-ulice-na-trun-nova-pravidla-hry"
+  ],
+  "streaming": [
     "cesky-rap-z-ulice-na-trun-nova-pravidla-hry"
   ],
   "marketing": [

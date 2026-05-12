@@ -19,9 +19,7 @@
     "era": [
       "2020s"
     ],
-    "articles": [
-      "stav-ceske-rapove-sceny"
-    ]
+    "articles": []
   },
   "nik-tendo": {
     "name": "Nik Tendo",
@@ -43,9 +41,7 @@
       "2010s",
       "2020s"
     ],
-    "articles": [
-      "stav-ceske-rapove-sceny"
-    ]
+    "articles": []
   },
   "psh": {
     "name": "PSH",
@@ -71,9 +67,7 @@
       "2010s",
       "2020s"
     ],
-    "articles": [
-      "stav-ceske-rapove-sceny"
-    ]
+    "articles": []
   },
   "viktor-sheen": {
     "name": "Viktor Sheen",
@@ -97,9 +91,7 @@
       "2010s",
       "2020s"
     ],
-    "articles": [
-      "stav-ceske-rapove-sceny"
-    ]
+    "articles": []
   },
   "yzomandias": {
     "name": "Yzomandias",
@@ -122,8 +114,6 @@
       "2010s",
       "2020s"
     ],
-    "articles": [
-      "stav-ceske-rapove-sceny"
-    ]
+    "articles": []
   }
 }

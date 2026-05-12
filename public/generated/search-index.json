@@ -1,31 +1,20 @@
 [
   {
-    "slug": "stav-ceske-rapove-sceny",
-    "title": "Český rap: z undergroundu do mainstreamu — trendy, platformy, budoucnost",
-    "excerpt": "Přehledné shrnutí proměn českého rapu: od trapu a drillu přes návrat lyriky až po vzestup ženských rapperek a streamingovou revoluci.",
+    "slug": "yzomandias-typek-co-zmenil-pravidla-ceskeho-trapu",
+    "title": "Yzomandias: týpek, co změnil pravidla českého trapu",
+    "excerpt": "Profil Yzomandiase: cesta z Karlových Varů k O2 areně, přehled alb, vliv na český trap a spolupráce s Nik Tendem.",
     "tags": [
-      "trap",
-      "drill",
-      "lyrika",
-      "streaming",
-      "ženské-rapperky",
-      "mainstream",
-      "underground"
+      "yzomandias",
+      "český trap",
+      "milion+ entertainment",
+      "nik tend",
+      "diskografie"
     ],
-    "artists": [
-      "Yzomandias",
-      "Nik Tendo",
-      "Viktor Sheen",
-      "Calin",
-      "PSH",
-      "Milion+",
-      "Dame",
-      "Kontrafakt"
-    ],
-    "genre": "czech-rap",
-    "category": "Články",
-    "date": "2025-03-01",
-    "readingTime": 4
+    "artists": [],
+    "genre": "",
+    "category": "Rapeři",
+    "date": "",
+    "readingTime": 11
   },
   {
     "slug": "rozsekej-majk-tvoje-rapova-bible-pro-texty-a-flow-co-pali",
@@ -96,6 +85,23 @@
     "category": "Články",
     "date": "",
     "readingTime": 5
+  },
+  {
+    "slug": "ektor-chlapek-co-rozsekal-ceskou-scenu",
+    "title": "Ektor: Chlápek, co rozsekal českou scénu",
+    "excerpt": "Profil Ektora: cesta od debutu přes kultovní Tetris a kontroverzní Detektor až po introspektivní Alfa a Marko. Jak se stal králem českého rapu?",
+    "tags": [
+      "ektor",
+      "cesky rap",
+      "tetris",
+      "detektor",
+      "alfa"
+    ],
+    "artists": [],
+    "genre": "",
+    "category": "Rapeři",
+    "date": "",
+    "readingTime": 7
   },
   {
     "slug": "cesky-rap-z-ulice-na-trun-nova-pravidla-hry",
