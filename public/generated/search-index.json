@@ -13,26 +13,8 @@
     "artists": [],
     "genre": "",
     "category": "Rapeři",
-    "date": "",
+    "date": "2026-05-12",
     "readingTime": 11
-  },
-  {
-    "slug": "rozsekej-majk-tvoje-rapova-bible-pro-texty-a-flow-co-pali",
-    "title": "Rozsekej majk: Tvoje rapová bible pro texty a flow, co pálí!",
-    "excerpt": "Chceš psát texty, co se zaříznou pod kůži? Nauč se strukturu, rýmová schémata a flow od profíků. Tvoje rapová bible je tady, plná tipů pro každýho rappera!",
-    "tags": [
-      "rap",
-      "texty",
-      "flow",
-      "tvorba rapu",
-      "psaní textů",
-      "návod"
-    ],
-    "artists": [],
-    "genre": "",
-    "category": "Návody",
-    "date": "",
-    "readingTime": 8
   },
   {
     "slug": "kendrick-lamar-pulitzeruv-kral",
@@ -49,7 +31,7 @@
     "artists": [],
     "genre": "",
     "category": "Rapeři",
-    "date": "",
+    "date": "2026-05-12",
     "readingTime": 4
   },
   {
@@ -66,7 +48,7 @@
     "artists": [],
     "genre": "",
     "category": "Návody",
-    "date": "",
+    "date": "2026-05-12",
     "readingTime": 6
   },
   {
@@ -83,7 +65,7 @@
     "artists": [],
     "genre": "",
     "category": "Články",
-    "date": "",
+    "date": "2026-05-12",
     "readingTime": 5
   },
   {
@@ -100,26 +82,8 @@
     "artists": [],
     "genre": "",
     "category": "Rapeři",
-    "date": "",
+    "date": "2026-05-12",
     "readingTime": 7
-  },
-  {
-    "slug": "cesky-rap-z-ulice-na-trun-nova-pravidla-hry",
-    "title": "Český rap: Z ulice na trůn — Nová pravidla hry",
-    "excerpt": "Analýza proměn českého rapu od kazet k milionům streamů: byznys, algoritmy, trap a příběhy umělců, kteří přepsali pravidla scény.",
-    "tags": [
-      "český rap",
-      "trap",
-      "streaming",
-      "hip-hop",
-      "marketing",
-      "kultura"
-    ],
-    "artists": [],
-    "genre": "",
-    "category": "Články",
-    "date": "",
-    "readingTime": 5
   },
   {
     "slug": "beat-od-nuly-jak-cesky-producent-vytvori-hit",
@@ -137,7 +101,7 @@
     "artists": [],
     "genre": "",
     "category": "Návody",
-    "date": "",
+    "date": "2026-05-12",
     "readingTime": 6
   },
   {
@@ -155,7 +119,43 @@
     "artists": [],
     "genre": "",
     "category": "Rapeři",
-    "date": "",
+    "date": "2026-05-12",
     "readingTime": 6
+  },
+  {
+    "slug": "cesky-rap-z-ulice-na-trun-nova-pravidla-hry",
+    "title": "Český rap: Z ulice na trůn — Nová pravidla hry",
+    "excerpt": "Analýza proměn českého rapu od kazet k milionům streamů: byznys, algoritmy, trap a příběhy umělců, kteří přepsali pravidla scény.",
+    "tags": [
+      "český rap",
+      "trap",
+      "streaming",
+      "hip-hop",
+      "marketing",
+      "kultura"
+    ],
+    "artists": [],
+    "genre": "",
+    "category": "Články",
+    "date": "2025-03-01",
+    "readingTime": 5
+  },
+  {
+    "slug": "rozsekej-majk-tvoje-rapova-bible-pro-texty-a-flow-co-pali",
+    "title": "Rozsekej majk: Tvoje rapová bible pro texty a flow, co pálí!",
+    "excerpt": "Chceš psát texty, co se zaříznou pod kůži? Nauč se strukturu, rýmová schémata a flow od profíků. Tvoje rapová bible je tady, plná tipů pro každýho rappera!",
+    "tags": [
+      "rap",
+      "texty",
+      "flow",
+      "tvorba rapu",
+      "psaní textů",
+      "návod"
+    ],
+    "artists": [],
+    "genre": "",
+    "category": "Návody",
+    "date": "2025-02-10",
+    "readingTime": 8
   }
 ]

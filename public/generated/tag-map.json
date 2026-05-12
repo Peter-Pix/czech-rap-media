@@ -15,25 +15,6 @@
     "yzomandias-typek-co-zmenil-pravidla-ceskeho-trapu",
     "kendrick-lamar-pulitzeruv-kral"
   ],
-  "rap": [
-    "rozsekej-majk-tvoje-rapova-bible-pro-texty-a-flow-co-pali"
-  ],
-  "texty": [
-    "rozsekej-majk-tvoje-rapova-bible-pro-texty-a-flow-co-pali"
-  ],
-  "flow": [
-    "rozsekej-majk-tvoje-rapova-bible-pro-texty-a-flow-co-pali",
-    "jak-vyhrat-battle-prakticky-pruvodce-pro-freestyle"
-  ],
-  "tvorba rapu": [
-    "rozsekej-majk-tvoje-rapova-bible-pro-texty-a-flow-co-pali"
-  ],
-  "psaní textů": [
-    "rozsekej-majk-tvoje-rapova-bible-pro-texty-a-flow-co-pali"
-  ],
-  "návod": [
-    "rozsekej-majk-tvoje-rapova-bible-pro-texty-a-flow-co-pali"
-  ],
   "kendrick lamar": [
     "kendrick-lamar-pulitzeruv-kral"
   ],
@@ -58,6 +39,10 @@
   "freestyle": [
     "jak-vyhrat-battle-prakticky-pruvodce-pro-freestyle",
     "freestyle-battle-scena-od-suterenu-k-arene"
+  ],
+  "flow": [
+    "jak-vyhrat-battle-prakticky-pruvodce-pro-freestyle",
+    "rozsekej-majk-tvoje-rapova-bible-pro-texty-a-flow-co-pali"
   ],
   "punchline": [
     "jak-vyhrat-battle-prakticky-pruvodce-pro-freestyle"
@@ -85,21 +70,6 @@
   ],
   "alfa": [
     "ektor-chlapek-co-rozsekal-ceskou-scenu"
-  ],
-  "český rap": [
-    "cesky-rap-z-ulice-na-trun-nova-pravidla-hry"
-  ],
-  "trap": [
-    "cesky-rap-z-ulice-na-trun-nova-pravidla-hry"
-  ],
-  "streaming": [
-    "cesky-rap-z-ulice-na-trun-nova-pravidla-hry"
-  ],
-  "marketing": [
-    "cesky-rap-z-ulice-na-trun-nova-pravidla-hry"
-  ],
-  "kultura": [
-    "cesky-rap-z-ulice-na-trun-nova-pravidla-hry"
   ],
   "beatmaking": [
     "beat-od-nuly-jak-cesky-producent-vytvori-hit"
@@ -139,5 +109,35 @@
   ],
   "death row records": [
     "2pac-basnik-rebel-kral-pribeh-co-hori-dodnes"
+  ],
+  "český rap": [
+    "cesky-rap-z-ulice-na-trun-nova-pravidla-hry"
+  ],
+  "trap": [
+    "cesky-rap-z-ulice-na-trun-nova-pravidla-hry"
+  ],
+  "streaming": [
+    "cesky-rap-z-ulice-na-trun-nova-pravidla-hry"
+  ],
+  "marketing": [
+    "cesky-rap-z-ulice-na-trun-nova-pravidla-hry"
+  ],
+  "kultura": [
+    "cesky-rap-z-ulice-na-trun-nova-pravidla-hry"
+  ],
+  "rap": [
+    "rozsekej-majk-tvoje-rapova-bible-pro-texty-a-flow-co-pali"
+  ],
+  "texty": [
+    "rozsekej-majk-tvoje-rapova-bible-pro-texty-a-flow-co-pali"
+  ],
+  "tvorba rapu": [
+    "rozsekej-majk-tvoje-rapova-bible-pro-texty-a-flow-co-pali"
+  ],
+  "psaní textů": [
+    "rozsekej-majk-tvoje-rapova-bible-pro-texty-a-flow-co-pali"
+  ],
+  "návod": [
+    "rozsekej-majk-tvoje-rapova-bible-pro-texty-a-flow-co-pali"
   ]
 }
