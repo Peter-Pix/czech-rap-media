@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect, useCallback, useRef } from "react";
+import { useState, useMemo, useEffect, useCallback } from "react";
 import { Routes, Route, useNavigate, useParams } from "react-router-dom";
 import { Hash, Search, Flame, Clock, Filter, X, ChevronDown } from "lucide-react";
 import { loadArticles, type Article } from "./articles";
@@ -15,17 +15,17 @@ const CATEGORIES: Category[] = ["Vše", "Rapeři", "Návody", "Články"];
 
 const CATEGORY_COLORS: Record<string, string> = {
   Rapeři: "bg-[#FF4A4A] text-white",
-  Návody: "bg-[#39FF14] text-black",
+  Návody: "bg-[#7BC8A4] text-black",
   Články: "bg-[#00BFFF] text-black",
 };
 
 const CATEGORY_DOT: Record<string, string> = {
   Rapeři: "bg-[#FF4A4A]",
-  Návody: "bg-[#39FF14]",
+  Návody: "bg-[#7BC8A4]",
   Články: "bg-[#00BFFF]",
 };
 
-const PAGE_SIZE = 12;
+
 
 // ── Read tracking ──────────────────────────────────────────────
 function getReadSet(): Set<string> {
@@ -67,8 +67,8 @@ function NewsTicker({ items }: { items: string[] }) {
   if (!items.length) return null;
   const doubled = [...items, ...items];
   return (
-    <div className="bg-black text-[#39FF14] border-b-4 border-black overflow-hidden h-9 flex items-center">
-      <span className="font-heading text-xs uppercase px-3 border-r-4 border-[#39FF14] whitespace-nowrap h-full flex items-center shrink-0">
+    <div className="bg-black text-[#7BC8A4] border-b-4 border-black overflow-hidden h-9 flex items-center">
+      <span className="font-heading text-xs uppercase px-3 border-r-4 border-[#7BC8A4] whitespace-nowrap h-full flex items-center shrink-0">
         BREAKING
       </span>
       <div className="ticker-track flex items-center gap-0">
@@ -90,20 +90,20 @@ function Header({ onSearch, unreadCount }: { onSearch: () => void; unreadCount: 
     <header className="sticky top-0 z-50 bg-black text-white border-b-4 border-black px-5 py-3 flex justify-between items-center gap-3">
       <button
         onClick={() => navigate("/")}
-        className="flex items-center gap-2 font-heading text-xl uppercase text-[#39FF14] hover:text-white transition-colors"
+        className="flex items-center gap-2 font-heading text-xl uppercase text-[#7BC8A4] hover:text-white transition-colors"
       >
-        <Hash size={22} className="text-[#39FF14]" />
+        <Hash size={22} className="text-[#7BC8A4]" />
         4RAP
       </button>
       <div className="flex items-center gap-2">
         {unreadCount > 0 && (
-          <span className="font-heading text-xs bg-[#39FF14] text-black px-2 py-0.5 border-2 border-black">
+          <span className="font-heading text-[10px] bg-[#7BC8A4] text-black px-2 py-0.5 border border-black/60">
             {unreadCount} NEW
           </span>
         )}
         <button
           onClick={onSearch}
-          className="flex items-center gap-2 neo-button bg-[#39FF14] text-black px-4 py-2 font-heading text-sm uppercase"
+          className="flex items-center gap-2 neo-button bg-[#7BC8A4] text-black px-4 py-2 font-heading text-sm uppercase"
         >
           <Search size={14} /> Hledat
         </button>
@@ -190,7 +190,7 @@ function TrendingPanel({ articles, readSet, onOpen }: { articles: Article[]; rea
                   <span className={`w-2 h-2 rounded-full shrink-0 ${CATEGORY_DOT[a.category] || "bg-gray-400"}`} />
                   <span className="font-heading text-xs uppercase text-black/50">{a.category}</span>
                   {isUnread && (
-                    <span className="text-[10px] font-bold bg-[#39FF14] border border-black px-1 uppercase">NEW</span>
+                    <span className="text-[9px] font-bold bg-[#7BC8A4] border border-black/40 px-1 uppercase tracking-wide opacity-80">NEW</span>
                   )}
                 </div>
                 <span className="font-heading text-sm uppercase leading-tight line-clamp-2">{a.title}</span>
@@ -247,7 +247,7 @@ function ArticleCard({
           </span>
           <span className="text-xs font-bold text-black/40">{formattedDate}</span>
           {isUnread && (
-            <span className="text-[10px] font-bold px-1.5 py-0.5 bg-[#39FF14] border-2 border-black uppercase">
+            <span className="text-[9px] font-bold px-1 py-px bg-[#7BC8A4] border border-black uppercase tracking-wide">
               NEW
             </span>
           )}
@@ -349,9 +349,9 @@ function FeedHeader({
           <button
             onClick={() => setFeedMode(feedMode === "all" ? "unread" : "all")}
             className={`neo-button px-3 py-1.5 font-heading text-xs uppercase flex items-center gap-1.5
-              ${feedMode === "unread" ? "bg-black text-[#39FF14]" : "bg-white text-black"}`}
+              ${feedMode === "unread" ? "bg-black text-[#7BC8A4]" : "bg-white text-black"}`}
           >
-            <span className={`w-1.5 h-1.5 rounded-full ${feedMode === "unread" ? "bg-[#39FF14]" : "bg-black/30"}`} />
+            <span className={`w-1.5 h-1.5 rounded-full ${feedMode === "unread" ? "bg-[#7BC8A4]" : "bg-black/30"}`} />
             Nepřečtené
           </button>
           <button
@@ -467,9 +467,7 @@ function HomePage() {
   const [feedMode, setFeedMode] = useState<FeedMode>("all");
   const [dateFilter, setDateFilter] = useState<DateFilter>("all");
   const [readSet, setReadSet] = useState<Set<string>>(getReadSet);
-  const [page, setPage] = useState(1);
   const [filterOpen, setFilterOpen] = useState(false);
-  const loaderRef = useRef<HTMLDivElement>(null);
 
   const featuredArticle = useMemo(
     () => articles.find((a) => a.featured) || articles[0],
@@ -511,27 +509,6 @@ function HomePage() {
     return result.sort((a, b) => new Date(b.date || 0).getTime() - new Date(a.date || 0).getTime());
   }, [articles, activeCategory, activeTags, feedMode, dateFilter, readSet, featuredArticle]);
 
-  // reset page on filter change
-  useEffect(() => { setPage(1); }, [activeCategory, activeTags, feedMode, dateFilter]);
-
-  // infinite scroll
-  useEffect(() => {
-    const el = loaderRef.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && page * PAGE_SIZE < filtered.length) {
-          setPage((p) => p + 1);
-        }
-      },
-      { rootMargin: "200px" }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [filtered.length, page]);
-
-  const visibleArticles = filtered.slice(0, page * PAGE_SIZE);
-  const hasMore = visibleArticles.length < filtered.length;
 
   const openArticle = useCallback((slug: string) => {
     markRead(slug);
@@ -579,7 +556,7 @@ function HomePage() {
 
             {/* Masonry-style responsive grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
-              {visibleArticles.map((a) => (
+              {filtered.map((a) => (
                 <ArticleCard
                   key={a.slug}
                   article={a}
@@ -597,14 +574,6 @@ function HomePage() {
               </div>
             )}
 
-            {/* Infinite scroll loader */}
-            <div ref={loaderRef} className="h-8 flex items-center justify-center">
-              {hasMore && (
-                <span className="font-heading text-xs uppercase text-black/30 animate-pulse">
-                  Načítám další…
-                </span>
-              )}
-            </div>
           </div>
 
           {/* Trending sidebar */}
