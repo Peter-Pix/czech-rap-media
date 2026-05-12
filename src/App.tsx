@@ -4,6 +4,7 @@ import { Hash, Search, X } from "lucide-react";
 import { loadArticles, type Article } from "./articles";
 import ArticlePage from "./ArticlePage";
 import SearchOverlay from "./components/SearchOverlay";
+import SEO from "./components/SEO";
 
 // ── Types ─────────────────────────────────────────────────
 
@@ -91,6 +92,11 @@ function TagPage() {
 
   return (
     <div className="min-h-screen font-sans">
+      <SEO
+        title={`#${tag}`}
+        description={`${filtered.length} články se štítkem ${tag}`}
+        url={`/tag/${tag}`}
+      />
       <Header onSearch={() => {}} />
       <main className="max-w-5xl mx-auto px-4 md:px-8 py-10">
         <div className="flex items-center gap-4 mb-8">
@@ -139,6 +145,11 @@ function ArtistPage() {
 
   return (
     <div className="min-h-screen font-sans">
+      <SEO
+        title={displayName}
+        description={artistData?.bio || `Článků o ${displayName}`}
+        url={`/artist/${slug}`}
+      />
       <Header onSearch={() => {}} />
       <main className="max-w-5xl mx-auto px-4 md:px-8 py-10">
         <button onClick={() => navigate("/")} className="neo-button bg-white text-black px-4 py-2 font-heading text-sm uppercase mb-8">← Zpět</button>
@@ -230,7 +241,6 @@ function HomePage() {
 
   const articles = useMemo(() => loadArticles(), []);
 
-  // CMD+K global shortcut
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === "k") {
@@ -253,12 +263,10 @@ function HomePage() {
     return result;
   }, [articles, activeCategory, activeTags]);
 
-  // Homepage sections (only shown when no filters active)
   const featuredArticles = useMemo(() => articles.filter((a) => a.featured), [articles]);
   const latestArticles = useMemo(() => articles.slice(0, 4), [articles]);
   const isFiltered = activeCategory !== "Vše" || activeTags.length > 0;
 
-  // All tags for the filter bar
   const allTags = useMemo(() => {
     const tagSet = new Set<string>();
     articles.forEach((a) => a.tags.forEach((t) => tagSet.add(t)));
@@ -267,6 +275,7 @@ function HomePage() {
 
   return (
     <div className="min-h-screen font-sans">
+      <SEO />
       <SearchOverlay isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
       <Header onSearch={() => setSearchOpen(true)} />
 
