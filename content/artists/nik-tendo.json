@@ -1,0 +1,11 @@
+{
+  "name": "Nik Tendo",
+  "slug": "nik-tendo",
+  "bio": "Nik Tendo je český rapper a producent, člen skupiny 7krát3. Známý svým jedinečným trap soundem a propracovanými texty.",
+  "city": "Praha",
+  "genre": ["trap", "czech-rap"],
+  "tags": ["trap", "7krát3", "producent"],
+  "image": "",
+  "active": true,
+  "era": ["2010s", "2020s"]
+}
