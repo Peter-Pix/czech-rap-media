@@ -5,14 +5,24 @@ export interface Article {
   excerpt: string;
   date: string;
   tags: string[];
+  artists: string[];
+  albums: string[];
+  producers: string[];
+  genre: string;
+  mood: string[];
+  city: string;
+  era: string;
+  related: string[];
   category: string;
   coverImage?: string;
+  featured: boolean;
   author: string;
   published: boolean;
-  rawContent: string; // MDX body bez frontmatter
+  readingTime: number;
+  rawContent: string;
 }
 
-const mdxFiles = import.meta.glob("/content/articles/*.mdx", {
+const mdxFiles = import.meta.glob("/content/articles/**/*.mdx", {
   query: "?raw",
   import: "default",
   eager: true,
@@ -27,17 +37,33 @@ function parseFrontmatter(raw: string): { fm: Record<string, unknown>; body: str
     if (colon === -1) continue;
     const key = line.slice(0, colon).trim();
     let val: unknown = line.slice(colon + 1).trim();
+    // JSON array
     if (typeof val === "string" && val.startsWith("[")) {
-      try { val = JSON.parse(val.replace(/'/g, "\"'\"")); } catch { val = []; }
-    }
-    if (val === "true") val = true;
-    if (val === "false") val = false;
-    if (typeof val === "string" && val.startsWith("\"") && val.endsWith("\"")) {
-      val = val.slice(1, -1);
+      try {
+        const cleaned = (val as string).replace(/\'(?=[^,\]]*(?:[,\]]|$))/g, "\"");
+        val = JSON.parse(cleaned);
+      } catch {
+        val = (val as string).slice(1, -1).split(",").map((s) => s.trim().replace(/^["\']|["\']$/g, "")).filter(Boolean);
+      }
+    } else if (val === "true") {
+      val = true;
+    } else if (val === "false") {
+      val = false;
+    } else if (typeof val === "string" && val.startsWith("\"") && val.endsWith("\"")) {
+      val = (val as string).slice(1, -1);
+    } else if (typeof val === "string" && val.startsWith("'") && val.endsWith("'")) {
+      val = (val as string).slice(1, -1);
     }
     fm[key] = val;
   }
   return { fm, body: match[2] };
+}
+
+function ensureArray(val: unknown): string[] {
+  if (!val) return [];
+  if (Array.isArray(val)) return val as string[];
+  if (typeof val === "string") return val.split(",").map((s) => s.trim()).filter(Boolean);
+  return [];
 }
 
 function inferCategory(tags: string[]): string {
@@ -45,6 +71,10 @@ function inferCategory(tags: string[]): string {
   if (t.includes("bio") || t.includes("raper") || t.includes("rapper")) return "Rapeři";
   if (t.includes("návod") || t.includes("studio") || t.includes("nahrávání") || t.includes("beat") || t.includes("mix")) return "Návody";
   return "Články";
+}
+
+function estimateReadingTime(text: string): number {
+  return Math.ceil(text.trim().split(/\s+/).length / 200);
 }
 
 export function loadArticles(): Article[] {
@@ -55,7 +85,7 @@ export function loadArticles(): Article[] {
     const fileSlug =
       (fm.slug as string) ||
       filePath.split("/").pop()!.replace(/\.mdx$/, "").replace(/^\d{4}-\d{2}-\d{2}-/, "");
-    const tags = Array.isArray(fm.tags) ? (fm.tags as string[]) : [];
+    const tags = ensureArray(fm.tags);
     articles.push({
       id: fileSlug,
       slug: fileSlug,
@@ -63,10 +93,20 @@ export function loadArticles(): Article[] {
       excerpt: (fm.excerpt as string) || "",
       date: (fm.date as string) || "",
       tags,
+      artists: ensureArray(fm.artists),
+      albums: ensureArray(fm.albums),
+      producers: ensureArray(fm.producers),
+      genre: (fm.genre as string) || "",
+      mood: ensureArray(fm.mood),
+      city: (fm.city as string) || "",
+      era: (fm.era as string) || "",
+      related: ensureArray(fm.related),
       category: (fm.category as string) || inferCategory(tags),
       coverImage: fm.coverImage as string | undefined,
+      featured: fm.featured === true,
       author: (fm.author as string) || "Rap Reportér",
       published: true,
+      readingTime: estimateReadingTime(body),
       rawContent: body,
     });
   }
