@@ -19,6 +19,7 @@ export async function getSearchIndex(): Promise<SearchEntry[]> {
   if (cachedIndex) return cachedIndex;
   try {
     const res = await fetch("/generated/search-index.json");
+    if (!res.ok) return [];
     cachedIndex = await res.json();
     return cachedIndex!;
   } catch {
