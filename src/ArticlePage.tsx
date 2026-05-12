@@ -5,6 +5,7 @@ import { ArrowLeft, Hash, Clock, User } from "lucide-react";
 import { loadArticles, type Article } from "./articles";
 import ReadingProgress from "./components/ReadingProgress";
 import RelatedArticles from "./components/RelatedArticles";
+import SEO from "./components/SEO";
 
 const CATEGORY_COLORS: Record<string, string> = {
   Rapeři: "bg-[#FF4A4A] text-white",
@@ -16,12 +17,12 @@ export default function ArticlePage() {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const articles = useMemo(() => loadArticles(), []);
-
   const article: Article | undefined = articles.find((a) => a.slug === slug);
 
   if (!article) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center gap-6 p-8">
+        <SEO title="404 – Nenalezeno" />
         <div className="font-heading text-6xl">404</div>
         <p className="font-heading text-2xl uppercase">Článek nenalezen.</p>
         <button onClick={() => navigate("/")} className="neo-button bg-black text-white px-6 py-3 font-heading uppercase flex items-center gap-2">
@@ -34,11 +35,17 @@ export default function ArticlePage() {
   const formattedDate = article.date
     ? new Date(article.date).toLocaleDateString("cs-CZ", { day: "numeric", month: "long", year: "numeric" })
     : "";
-
   const colorClass = CATEGORY_COLORS[article.category] || "bg-gray-200 text-black";
 
   return (
     <div className="min-h-screen font-sans">
+      <SEO
+        title={article.title}
+        description={article.excerpt}
+        image={article.coverImage || undefined}
+        url={`/article/${article.slug}`}
+        type="article"
+      />
       <ReadingProgress />
 
       {/* HEADER */}
@@ -58,6 +65,18 @@ export default function ArticlePage() {
         </button>
       </header>
 
+      {/* COVER IMAGE */}
+      {article.coverImage && (
+        <div className="w-full max-h-[400px] overflow-hidden border-b-4 border-black">
+          <img
+            src={article.coverImage}
+            alt={article.title}
+            className="w-full h-full object-cover"
+            loading="lazy"
+          />
+        </div>
+      )}
+
       <div className="max-w-3xl mx-auto px-4 md:px-8 py-12 flex flex-col gap-10">
 
         {/* ARTICLE HEADER */}
@@ -76,14 +95,18 @@ export default function ArticlePage() {
               </span>
             )}
           </div>
+
           <h1 className="font-heading text-3xl lg:text-4xl uppercase leading-tight">
             {article.title}
           </h1>
+
           {article.excerpt && (
             <p className="text-lg font-medium text-gray-600 leading-relaxed border-l-4 border-black pl-4">
               {article.excerpt}
             </p>
           )}
+
+          {/* Tags */}
           {article.tags.length > 0 && (
             <div className="flex flex-wrap gap-2 pt-2">
               {article.tags.map((tag) => (
@@ -97,6 +120,8 @@ export default function ArticlePage() {
               ))}
             </div>
           )}
+
+          {/* Artists */}
           {article.artists.length > 0 && (
             <div className="flex flex-wrap gap-2">
               {article.artists.map((artist) => (
@@ -110,6 +135,15 @@ export default function ArticlePage() {
               ))}
             </div>
           )}
+
+          {/* Meta info row */}
+          {(article.genre || article.city || article.era) && (
+            <div className="flex flex-wrap gap-3 text-xs font-bold text-black/40 uppercase pt-1">
+              {article.genre && <span>Genre: {article.genre}</span>}
+              {article.city && <span>📍 {article.city}</span>}
+              {article.era && <span>Era: {article.era}</span>}
+            </div>
+          )}
         </div>
 
         {/* ARTICLE BODY */}
@@ -119,7 +153,7 @@ export default function ArticlePage() {
           </div>
         </div>
 
-        {/* RELATED ARTICLES */}
+        {/* RELATED */}
         <RelatedArticles currentSlug={article.slug} />
 
       </div>
