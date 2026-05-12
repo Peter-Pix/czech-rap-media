@@ -31,7 +31,8 @@
     "kendrick-lamar-pulitzeruv-kral",
     "freestyle-battle-scena-od-suterenu-k-arene",
     "freestyle-a-battle-scena-od-suterenu-k-arene",
-    "cesky-rap-z-ulice-na-trun-nova-pravidla-hry"
+    "cesky-rap-z-ulice-na-trun-nova-pravidla-hry",
+    "rozsekej-majk-rapova-bible-texty-flow"
   ],
   "good kid m.a.a.d city": [
     "kendrick-lamar-pulitzeruv-kral"
@@ -50,7 +51,8 @@
   ],
   "flow": [
     "jak-vyhrat-battle-prakticky-pruvodce-pro-freestyle",
-    "rozsekej-majk-tvoje-rapova-bible-pro-texty-a-flow-co-pali"
+    "rozsekej-majk-tvoje-rapova-bible-pro-texty-a-flow-co-pali",
+    "rozsekej-majk-rapova-bible-texty-flow"
   ],
   "punchline": [
     "jak-vyhrat-battle-prakticky-pruvodce-pro-freestyle"
@@ -146,10 +148,12 @@
     "cesky-rap-z-ulice-na-trun-nova-pravidla-hry"
   ],
   "rap": [
-    "rozsekej-majk-tvoje-rapova-bible-pro-texty-a-flow-co-pali"
+    "rozsekej-majk-tvoje-rapova-bible-pro-texty-a-flow-co-pali",
+    "rozsekej-majk-rapova-bible-texty-flow"
   ],
   "texty": [
-    "rozsekej-majk-tvoje-rapova-bible-pro-texty-a-flow-co-pali"
+    "rozsekej-majk-tvoje-rapova-bible-pro-texty-a-flow-co-pali",
+    "rozsekej-majk-rapova-bible-texty-flow"
   ],
   "tvorba rapu": [
     "rozsekej-majk-tvoje-rapova-bible-pro-texty-a-flow-co-pali"
@@ -158,6 +162,16 @@
     "rozsekej-majk-tvoje-rapova-bible-pro-texty-a-flow-co-pali"
   ],
   "návod": [
-    "rozsekej-majk-tvoje-rapova-bible-pro-texty-a-flow-co-pali"
+    "rozsekej-majk-tvoje-rapova-bible-pro-texty-a-flow-co-pali",
+    "rozsekej-majk-rapova-bible-texty-flow"
+  ],
+  "psaní": [
+    "rozsekej-majk-rapova-bible-texty-flow"
+  ],
+  "tvorba": [
+    "rozsekej-majk-rapova-bible-texty-flow"
+  ],
+  "mikrofon": [
+    "rozsekej-majk-rapova-bible-texty-flow"
   ]
 }
