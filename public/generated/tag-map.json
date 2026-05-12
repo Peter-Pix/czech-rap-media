@@ -1,6 +1,7 @@
 {
   "trap": [
-    "stav-ceske-rapove-sceny"
+    "stav-ceske-rapove-sceny",
+    "cesky-rap-z-ulice-na-trun-nova-pravidla-hry"
   ],
   "drill": [
     "stav-ceske-rapove-sceny"
@@ -9,7 +10,8 @@
     "stav-ceske-rapove-sceny"
   ],
   "streaming": [
-    "stav-ceske-rapove-sceny"
+    "stav-ceske-rapove-sceny",
+    "cesky-rap-z-ulice-na-trun-nova-pravidla-hry"
   ],
   "ženské-rapperky": [
     "stav-ceske-rapove-sceny"
@@ -20,25 +22,22 @@
   "underground": [
     "stav-ceske-rapove-sceny"
   ],
-  "psaní-textů": [
+  "rap": [
+    "rozsekej-majk-tvoje-rapova-bible-pro-texty-a-flow-co-pali"
+  ],
+  "texty": [
     "rozsekej-majk-tvoje-rapova-bible-pro-texty-a-flow-co-pali"
   ],
   "flow": [
     "rozsekej-majk-tvoje-rapova-bible-pro-texty-a-flow-co-pali"
   ],
-  "rýmy": [
+  "tvorba rapu": [
+    "rozsekej-majk-tvoje-rapova-bible-pro-texty-a-flow-co-pali"
+  ],
+  "psaní textů": [
     "rozsekej-majk-tvoje-rapova-bible-pro-texty-a-flow-co-pali"
   ],
   "návod": [
-    "rozsekej-majk-tvoje-rapova-bible-pro-texty-a-flow-co-pali"
-  ],
-  "tipy": [
-    "rozsekej-majk-tvoje-rapova-bible-pro-texty-a-flow-co-pali"
-  ],
-  "freestyle": [
-    "rozsekej-majk-tvoje-rapova-bible-pro-texty-a-flow-co-pali"
-  ],
-  "storytelling": [
     "rozsekej-majk-tvoje-rapova-bible-pro-texty-a-flow-co-pali"
   ],
   "kendrick lamar": [
@@ -48,7 +47,8 @@
     "kendrick-lamar-pulitzeruv-kral"
   ],
   "hip-hop": [
-    "kendrick-lamar-pulitzeruv-kral"
+    "kendrick-lamar-pulitzeruv-kral",
+    "cesky-rap-z-ulice-na-trun-nova-pravidla-hry"
   ],
   "diskografie": [
     "kendrick-lamar-pulitzeruv-kral"
@@ -58,5 +58,32 @@
   ],
   "damn": [
     "kendrick-lamar-pulitzeruv-kral"
+  ],
+  "český rap": [
+    "cesky-rap-z-ulice-na-trun-nova-pravidla-hry"
+  ],
+  "marketing": [
+    "cesky-rap-z-ulice-na-trun-nova-pravidla-hry"
+  ],
+  "kultura": [
+    "cesky-rap-z-ulice-na-trun-nova-pravidla-hry"
+  ],
+  "2pac": [
+    "2pac-basnik-rebel-kral-pribeh-co-hori-dodnes"
+  ],
+  "tupac shakur": [
+    "2pac-basnik-rebel-kral-pribeh-co-hori-dodnes"
+  ],
+  "hip-hop historie": [
+    "2pac-basnik-rebel-kral-pribeh-co-hori-dodnes"
+  ],
+  "west coast rap": [
+    "2pac-basnik-rebel-kral-pribeh-co-hori-dodnes"
+  ],
+  "legenda": [
+    "2pac-basnik-rebel-kral-pribeh-co-hori-dodnes"
+  ],
+  "death row records": [
+    "2pac-basnik-rebel-kral-pribeh-co-hori-dodnes"
   ]
 }

@@ -32,25 +32,18 @@
     "title": "Rozsekej majk: Tvoje rapová bible pro texty a flow, co pálí!",
     "excerpt": "Chceš psát texty, co se zaříznou pod kůži? Nauč se strukturu, rýmová schémata a flow od profíků. Tvoje rapová bible je tady, plná tipů pro každýho rappera!",
     "tags": [
-      "psaní-textů",
+      "rap",
+      "texty",
       "flow",
-      "rýmy",
-      "návod",
-      "tipy",
-      "freestyle",
-      "storytelling"
+      "tvorba rapu",
+      "psaní textů",
+      "návod"
     ],
-    "artists": [
-      "Yzomandias",
-      "PSH",
-      "Viktor Sheen",
-      "Dame",
-      "Kontrafakt"
-    ],
-    "genre": "czech-rap",
+    "artists": [],
+    "genre": "",
     "category": "Návody",
-    "date": "2025-02-10",
-    "readingTime": 4
+    "date": "",
+    "readingTime": 8
   },
   {
     "slug": "kendrick-lamar-pulitzeruv-kral",
@@ -69,5 +62,41 @@
     "category": "Rapeři",
     "date": "",
     "readingTime": 4
+  },
+  {
+    "slug": "cesky-rap-z-ulice-na-trun-nova-pravidla-hry",
+    "title": "Český rap: Z ulice na trůn — Nová pravidla hry",
+    "excerpt": "Analýza proměn českého rapu od kazet k milionům streamů: byznys, algoritmy, trap a příběhy umělců, kteří přepsali pravidla scény.",
+    "tags": [
+      "český rap",
+      "trap",
+      "streaming",
+      "hip-hop",
+      "marketing",
+      "kultura"
+    ],
+    "artists": [],
+    "genre": "",
+    "category": "Články",
+    "date": "",
+    "readingTime": 5
+  },
+  {
+    "slug": "2pac-basnik-rebel-kral-pribeh-co-hori-dodnes",
+    "title": "2Pac: Básník, rebel, král. Příběh, co hoří dodnes.",
+    "excerpt": "Prozkoumejte fascinující život Tupaca Shakura, od chudoby v New Yorku, přes umělecký zrod v Baltimoru, až po status ikony a tragický konec. Jeho odkaz hoří dodnes.",
+    "tags": [
+      "2pac",
+      "tupac shakur",
+      "hip-hop historie",
+      "west coast rap",
+      "legenda",
+      "death row records"
+    ],
+    "artists": [],
+    "genre": "",
+    "category": "Rapeři",
+    "date": "",
+    "readingTime": 6
   }
 ]
