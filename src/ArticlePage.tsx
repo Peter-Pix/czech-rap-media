@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import { ArrowLeft, Hash, Clock, User } from "lucide-react";
@@ -13,11 +13,18 @@ const CATEGORY_COLORS: Record<string, string> = {
   Články: "bg-[#00BFFF] text-black",
 };
 
-export default function ArticlePage() {
+export default function ArticlePage({ onRead }: { onRead?: (slug: string) => void }) {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const articles = useMemo(() => loadArticles(), []);
   const article: Article | undefined = articles.find((a) => a.slug === slug);
+
+  // Mark as read on open
+  useEffect(() => {
+    if (article?.slug && onRead) {
+      onRead(article.slug);
+    }
+  }, [article?.slug, onRead]);
 
   if (!article) {
     return (
@@ -25,7 +32,10 @@ export default function ArticlePage() {
         <SEO title="404 – Nenalezeno" />
         <div className="font-heading text-6xl">404</div>
         <p className="font-heading text-2xl uppercase">Článek nenalezen.</p>
-        <button onClick={() => navigate("/")} className="neo-button bg-black text-white px-6 py-3 font-heading uppercase flex items-center gap-2">
+        <button
+          onClick={() => navigate("/")}
+          className="neo-button bg-black text-white px-6 py-3 font-heading uppercase flex items-center gap-2"
+        >
           <ArrowLeft size={18} /> Zpět na hlavní
         </button>
       </div>
@@ -33,7 +43,11 @@ export default function ArticlePage() {
   }
 
   const formattedDate = article.date
-    ? new Date(article.date).toLocaleDateString("cs-CZ", { day: "numeric", month: "long", year: "numeric" })
+    ? new Date(article.date).toLocaleDateString("cs-CZ", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      })
     : "";
   const colorClass = CATEGORY_COLORS[article.category] || "bg-gray-200 text-black";
 
@@ -82,7 +96,9 @@ export default function ArticlePage() {
         {/* ARTICLE HEADER */}
         <div className="bg-white neo-border neo-shadow p-8 lg:p-12 flex flex-col gap-5">
           <div className="flex items-center gap-4 flex-wrap">
-            <span className={`inline-block px-3 py-1 text-sm font-bold tracking-wider uppercase neo-border ${colorClass}`}>
+            <span
+              className={`inline-block px-3 py-1 text-sm font-bold tracking-wider uppercase neo-border ${colorClass}`}
+            >
               {article.category}
             </span>
             <span className="font-bold text-gray-500 text-sm">{formattedDate}</span>
@@ -127,7 +143,9 @@ export default function ArticlePage() {
               {article.artists.map((artist) => (
                 <button
                   key={artist}
-                  onClick={() => navigate(`/artist/${artist.toLowerCase().replace(/\s+/g, "-")}`)}
+                  onClick={() =>
+                    navigate(`/artist/${artist.toLowerCase().replace(/\s+/g, "-")}`)
+                  }
                   className="text-xs font-bold uppercase px-2 py-0.5 bg-white neo-border hover:bg-[#FF4A4A] hover:text-white transition-colors"
                 >
                   🎤 {artist}
@@ -155,7 +173,6 @@ export default function ArticlePage() {
 
         {/* RELATED */}
         <RelatedArticles currentSlug={article.slug} />
-
       </div>
     </div>
   );
