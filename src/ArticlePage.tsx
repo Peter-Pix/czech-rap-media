@@ -1,8 +1,10 @@
 import { useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
-import { ArrowLeft, ArrowRight, Hash, Tag } from "lucide-react";
+import { ArrowLeft, Hash, Clock, User } from "lucide-react";
 import { loadArticles, type Article } from "./articles";
+import ReadingProgress from "./components/ReadingProgress";
+import RelatedArticles from "./components/RelatedArticles";
 
 const CATEGORY_COLORS: Record<string, string> = {
   Rapeři: "bg-[#FF4A4A] text-white",
@@ -15,10 +17,7 @@ export default function ArticlePage() {
   const navigate = useNavigate();
   const articles = useMemo(() => loadArticles(), []);
 
-  const index = articles.findIndex((a) => a.slug === slug);
-  const article: Article | undefined = articles[index];
-  const prev = index > 0 ? articles[index - 1] : null;
-  const next = index < articles.length - 1 ? articles[index + 1] : null;
+  const article: Article | undefined = articles.find((a) => a.slug === slug);
 
   if (!article) {
     return (
@@ -40,6 +39,8 @@ export default function ArticlePage() {
 
   return (
     <div className="min-h-screen font-sans">
+      <ReadingProgress />
+
       {/* HEADER */}
       <header className="sticky top-0 z-50 bg-black text-white border-b-4 border-black px-6 py-4 flex justify-between items-center gap-3">
         <button
@@ -66,21 +67,46 @@ export default function ArticlePage() {
               {article.category}
             </span>
             <span className="font-bold text-gray-500 text-sm">{formattedDate}</span>
-            <span className="font-bold text-gray-400 text-sm">— {article.author}</span>
+            <span className="flex items-center gap-1 font-bold text-gray-400 text-sm">
+              <User size={13} /> {article.author}
+            </span>
+            {article.readingTime > 0 && (
+              <span className="flex items-center gap-1 font-bold text-gray-400 text-sm">
+                <Clock size={13} /> {article.readingTime} min čtení
+              </span>
+            )}
           </div>
-          <h1 className="font-heading text-4xl lg:text-5xl tracking-tight uppercase leading-tight">
+          <h1 className="font-heading text-3xl lg:text-4xl uppercase leading-tight">
             {article.title}
           </h1>
-          <p className="text-xl font-bold text-gray-600 leading-snug border-l-4 border-[#FFD800] pl-4">
-            {article.excerpt}
-          </p>
+          {article.excerpt && (
+            <p className="text-lg font-medium text-gray-600 leading-relaxed border-l-4 border-black pl-4">
+              {article.excerpt}
+            </p>
+          )}
           {article.tags.length > 0 && (
-            <div className="flex flex-wrap gap-2 pt-1 items-center">
-              <Tag size={14} className="text-gray-400" />
+            <div className="flex flex-wrap gap-2 pt-2">
               {article.tags.map((tag) => (
-                <span key={tag} className="text-xs font-bold uppercase px-2 py-0.5 bg-[#FFD800] neo-border">
+                <button
+                  key={tag}
+                  onClick={() => navigate(`/tag/${encodeURIComponent(tag)}`)}
+                  className="text-xs font-bold uppercase px-2 py-0.5 bg-[#FFD800] neo-border hover:bg-black hover:text-[#FFD800] transition-colors"
+                >
                   #{tag}
-                </span>
+                </button>
+              ))}
+            </div>
+          )}
+          {article.artists.length > 0 && (
+            <div className="flex flex-wrap gap-2">
+              {article.artists.map((artist) => (
+                <button
+                  key={artist}
+                  onClick={() => navigate(`/artist/${artist.toLowerCase().replace(/\s+/g, "-")}`)}
+                  className="text-xs font-bold uppercase px-2 py-0.5 bg-white neo-border hover:bg-[#FF4A4A] hover:text-white transition-colors"
+                >
+                  🎤 {artist}
+                </button>
               ))}
             </div>
           )}
@@ -93,52 +119,10 @@ export default function ArticlePage() {
           </div>
         </div>
 
-        {/* PREV / NEXT NAVIGATION */}
-        <nav className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {prev ? (
-            <button
-              onClick={() => navigate(`/article/${prev.slug}`)}
-              className="neo-button bg-white text-black p-5 text-left flex flex-col gap-1 group"
-            >
-              <span className="font-bold text-xs uppercase text-gray-400 flex items-center gap-1">
-                <ArrowLeft size={14} /> Novější článek
-              </span>
-              <span className="font-heading text-base uppercase leading-tight group-hover:underline">
-                {prev.title}
-              </span>
-            </button>
-          ) : <div />}
-          {next ? (
-            <button
-              onClick={() => navigate(`/article/${next.slug}`)}
-              className="neo-button bg-black text-white p-5 text-right flex flex-col gap-1 sm:items-end group"
-            >
-              <span className="font-bold text-xs uppercase text-[#FFD800] flex items-center gap-1">
-                Starší článek <ArrowRight size={14} />
-              </span>
-              <span className="font-heading text-base uppercase leading-tight group-hover:underline">
-                {next.title}
-              </span>
-            </button>
-          ) : <div />}
-        </nav>
+        {/* RELATED ARTICLES */}
+        <RelatedArticles currentSlug={article.slug} />
 
-        {/* BACK TO HOME */}
-        <div className="flex justify-center">
-          <button
-            onClick={() => navigate("/")}
-            className="neo-button bg-black text-white px-8 py-4 font-heading text-lg uppercase flex items-center gap-3"
-          >
-            <ArrowLeft size={20} /> Všechny články
-          </button>
-        </div>
       </div>
-
-      {/* FOOTER */}
-      <footer className="bg-black text-white text-center p-8 border-t-4 border-black mt-8">
-        <p className="font-heading text-2xl uppercase tracking-wider">4RAP © 2026</p>
-        <p className="font-bold mt-2 text-gray-400 text-sm">Vytvořeno pro skutečné fanoušky.</p>
-      </footer>
     </div>
   );
 }
