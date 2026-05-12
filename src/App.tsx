@@ -9,6 +9,9 @@ import TagFilterBar from "./components/TagFilterBar";
 import { getArtistMap, getTagMap, type ArtistEntry } from "./lib/metadata";
 
 type Category = "Vše" | "Rapeři" | "Návody" | "Články";
+type FeedMode = "all" | "unread";
+type DateFilter = "all" | "7d" | "30d" | "365d";
+
 const CATEGORIES: Category[] = ["Vše", "Rapeři", "Návody", "Články"];
 
 const CATEGORY_COLORS: Record<string, string> = {
@@ -35,7 +38,7 @@ const FilterButton = ({ children, isActive, onClick }: { children: React.ReactNo
   </button>
 );
 
-const ArticleCard = ({ article, onTagClick }: { article: Article; onTagClick?: (tag: string) => void }) => {
+const ArticleCard = ({ article, unread }: { article: Article; unread?: boolean }) => {
   const navigate = useNavigate();
   const colorClass = CATEGORY_COLORS[article.category] || "bg-gray-200 text-black";
   const formattedDate = article.date
@@ -50,11 +53,15 @@ const ArticleCard = ({ article, onTagClick }: { article: Article; onTagClick?: (
       <div className="flex items-center gap-4 flex-wrap">
         <Badge className={colorClass}>{article.category}</Badge>
         <span className="font-bold text-gray-500 text-sm">{formattedDate}</span>
-        {article.readingTime > 0 && (
-          <span className="font-bold text-gray-400 text-sm">{article.readingTime} min čtení</span>
+
+        {unread && (
+          <span className="font-bold text-xs px-2 py-0.5 bg-[#39FF14] neo-border uppercase">
+            NEW
+          </span>
         )}
+
         {article.featured && (
-          <span className="font-bold text-xs px-2 py-0.5 bg-[#FFD800] neo-border uppercase">⭐ Featured</span>
+          <span className="font-bold text-xs px-2 py-0.5 bg-[#FFD800] neo-border uppercase">Featured</span>
         )}
       </div>
 
@@ -67,21 +74,15 @@ const ArticleCard = ({ article, onTagClick }: { article: Article; onTagClick?: (
       </p>
 
       {article.tags.length > 0 && (
-        <div className="flex flex-wrap gap-2 pt-1" onClick={(e) => e.stopPropagation()}>
+        <div className="flex flex-wrap gap-2 pt-1">
           {article.tags.slice(0, 4).map((tag) => (
-            <button
+            <span
               key={tag}
-              onClick={() => onTagClick ? onTagClick(tag) : navigate(`/tag/${encodeURIComponent(tag)}`)}
-              className="text-xs font-bold uppercase px-2 py-0.5 bg-[#FFD800] neo-border hover:bg-black hover:text-[#FFD800] transition-colors"
+              className="text-xs font-bold uppercase px-2 py-0.5 bg-[#FFD800] neo-border"
             >
               #{tag}
-            </button>
-          ))}
-          {article.tags.length > 4 && (
-            <span className="text-xs font-bold uppercase px-2 py-0.5 bg-white neo-border text-black/50">
-              +{article.tags.length - 4}
             </span>
-          )}
+          ))}
         </div>
       )}
     </article>
@@ -127,29 +128,177 @@ function Header({ onSearch }: { onSearch: () => void }) {
         className="flex items-center gap-2 neo-button bg-[#39FF14] text-black px-4 py-2 font-heading text-sm uppercase"
       >
         <Search size={16} /> Hledat
-        <span className="hidden md:inline text-xs opacity-60 ml-1">⌘K</span>
       </button>
     </header>
   );
 }
 
-function EmptyState({ category }: { category: string }) {
-  return (
-    <div className="bg-white neo-border neo-shadow p-12 text-center flex flex-col gap-4">
-      <div className="font-heading text-5xl">📭</div>
-      <p className="font-heading text-2xl uppercase">
-        {category === "Vše" ? "Žádné články zatím." : `Žádné články v kategorii „${category}".`}
-      </p>
-    </div>
-  );
-}
+function HomePage() {
+  const articles = useMemo(() => loadArticles(), []);
 
-function SectionDivider({ label }: { label: string }) {
+  const [activeCategory, setActiveCategory] = useState<Category>("Vše");
+  const [activeTags, setActiveTags] = useState<string[]>([]);
+  const [feedMode, setFeedMode] = useState<FeedMode>("all");
+  const [dateFilter, setDateFilter] = useState<DateFilter>("all");
+  const [readArticles, setReadArticles] = useState<string[]>([]);
+
+  useEffect(() => {
+    const stored = localStorage.getItem("read_articles");
+    if (stored) {
+      try {
+        setReadArticles(JSON.parse(stored));
+      } catch {}
+    }
+  }, []);
+
+  const toggleTag = useCallback((tag: string) => {
+    setActiveTags((prev) => prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]);
+  }, []);
+
+  const featuredArticle = useMemo(() => {
+    return articles.find((a) => a.featured) || articles[0];
+  }, [articles]);
+
+  const filtered = useMemo(() => {
+    let result = [...articles];
+
+    if (featuredArticle) {
+      result = result.filter((a) => a.slug !== featuredArticle.slug);
+    }
+
+    if (activeCategory !== "Vše") {
+      result = result.filter((a) => a.category === activeCategory);
+    }
+
+    if (activeTags.length > 0) {
+      result = result.filter((a) => activeTags.every((t) => a.tags.includes(t)));
+    }
+
+    if (feedMode === "unread") {
+      result = result.filter((a) => !readArticles.includes(a.slug));
+    }
+
+    if (dateFilter !== "all") {
+      const now = Date.now();
+      const limits: Record<string, number> = {
+        "7d": 7,
+        "30d": 30,
+        "365d": 365,
+      };
+
+      result = result.filter((a) => {
+        if (!a.date) return false;
+        const diff = now - new Date(a.date).getTime();
+        const days = diff / (1000 * 60 * 60 * 24);
+        return days <= limits[dateFilter];
+      });
+    }
+
+    return result.sort((a, b) => {
+      return new Date(b.date || 0).getTime() - new Date(a.date || 0).getTime();
+    });
+  }, [articles, activeCategory, activeTags, feedMode, dateFilter, readArticles, featuredArticle]);
+
   return (
-    <div className="flex items-center gap-4 my-2">
-      <h2 className="font-heading text-xl uppercase shrink-0">{label}</h2>
-      <div className="flex-1 h-1 bg-black" />
-    </div>
+    <AppShell>
+      <SEO />
+
+      <main className="max-w-6xl mx-auto px-4 md:px-8 py-10 flex flex-col gap-8">
+
+        {featuredArticle && (
+          <section
+            className="bg-black text-white neo-border neo-shadow p-8 lg:p-12 cursor-pointer"
+            onClick={() => window.location.href = `#/article/${featuredArticle.slug}`}
+          >
+            <div className="flex flex-wrap items-center gap-3 mb-5">
+              <span className="bg-[#FFD800] text-black px-3 py-1 neo-border font-bold uppercase text-sm">
+                Featured Article
+              </span>
+              <span className="text-sm uppercase text-white/60">
+                {featuredArticle.category}
+              </span>
+            </div>
+
+            <h1 className="font-heading text-4xl lg:text-6xl uppercase leading-none mb-5 max-w-4xl">
+              {featuredArticle.title}
+            </h1>
+
+            <p className="text-lg text-white/70 max-w-2xl leading-relaxed">
+              {featuredArticle.excerpt}
+            </p>
+          </section>
+        )}
+
+        <section className="bg-white neo-border neo-shadow p-5 flex flex-col gap-5">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <h2 className="font-heading text-2xl uppercase">Feed</h2>
+              <p className="text-sm font-bold uppercase text-black/50">
+                {filtered.length} článků
+              </p>
+            </div>
+
+            <div className="flex flex-wrap gap-2">
+              <FilterButton isActive={feedMode === "all"} onClick={() => setFeedMode("all")}>
+                Vše
+              </FilterButton>
+
+              <FilterButton isActive={feedMode === "unread"} onClick={() => setFeedMode("unread")}>
+                Nepřečtené
+              </FilterButton>
+            </div>
+          </div>
+
+          <div className="flex flex-wrap gap-3">
+            {CATEGORIES.map((cat) => (
+              <FilterButton
+                key={cat}
+                isActive={activeCategory === cat}
+                onClick={() => setActiveCategory(cat)}
+              >
+                {cat}
+              </FilterButton>
+            ))}
+          </div>
+
+          <div className="flex flex-wrap gap-3">
+            <FilterButton isActive={dateFilter === "all"} onClick={() => setDateFilter("all")}>
+              Všechny data
+            </FilterButton>
+
+            <FilterButton isActive={dateFilter === "7d"} onClick={() => setDateFilter("7d")}>
+              7 dní
+            </FilterButton>
+
+            <FilterButton isActive={dateFilter === "30d"} onClick={() => setDateFilter("30d")}>
+              30 dní
+            </FilterButton>
+
+            <FilterButton isActive={dateFilter === "365d"} onClick={() => setDateFilter("365d")}>
+              Rok
+            </FilterButton>
+          </div>
+
+          <TagFilterBar
+            articles={articles}
+            activeTags={activeTags}
+            onToggleTag={toggleTag}
+            onClearTags={() => setActiveTags([])}
+            initialLimit={10}
+          />
+        </section>
+
+        <section className="flex flex-col gap-6">
+          {filtered.map((article) => (
+            <ArticleCard
+              key={article.slug}
+              article={article}
+              unread={!readArticles.includes(article.slug)}
+            />
+          ))}
+        </section>
+      </main>
+    </AppShell>
   );
 }
 
@@ -174,185 +323,28 @@ function TagPage() {
 
   const isKnownTag = knownTags === null || knownTags.has(tag);
 
-  return (
-    <AppShell>
-      <SEO title={`#${tag}`} description={`${filtered.length} článků se štítkem ${tag}`} url={`/tag/${tag}`} />
-      <main className="max-w-5xl mx-auto px-4 md:px-8 py-10">
-        <div className="flex items-center gap-4 mb-8 flex-wrap">
-          <button onClick={() => navigate("/")} className="neo-button bg-white text-black px-4 py-2 font-heading text-sm uppercase">← Zpět</button>
-          <h1 className="font-heading text-3xl uppercase">#{tag}</h1>
-          <span className="font-bold text-gray-500">{filtered.length} článků</span>
-        </div>
-
-        {!isKnownTag ? (
-          <p className="font-heading text-xl uppercase text-black/50">Tenhle tag zatím neexistuje v žádném článku.</p>
-        ) : filtered.length === 0 ? (
-          <p className="font-heading text-xl uppercase text-black/50">Žádné články s tímto tagem.</p>
-        ) : (
-          <div className="flex flex-col gap-6">
-            {filtered.map((a) => <ArticleCard key={a.slug} article={a} />)}
-          </div>
-        )}
-      </main>
-    </AppShell>
-  );
+  return <AppShell><main className="max-w-5xl mx-auto px-4 md:px-8 py-10"><button onClick={() => navigate("/")} className="neo-button bg-white text-black px-4 py-2 font-heading text-sm uppercase">← Zpět</button><div className="mt-8">{!isKnownTag ? <p>Tag neexistuje.</p> : filtered.map((a) => <ArticleCard key={a.slug} article={a} />)}</div></main></AppShell>;
 }
 
 function ArtistPage() {
   const { slug = "" } = useParams<{ slug: string }>();
-  const navigate = useNavigate();
   const articles = useMemo(() => loadArticles(), []);
   const [artistData, setArtistData] = useState<ArtistEntry | null>(null);
 
   useEffect(() => {
-    let cancelled = false;
-    getArtistMap().then((map) => {
-      if (!cancelled) setArtistData(map[slug] ?? null);
-    });
-    return () => { cancelled = true; };
+    getArtistMap().then((map) => setArtistData(map[slug] ?? null));
   }, [slug]);
-
-  const articleTags = useMemo(() => {
-    const tags = new Set<string>();
-    articles.forEach((article) => article.tags.forEach((tag) => tags.add(tag)));
-    return tags;
-  }, [articles]);
 
   const artistArticles = useMemo(
     () => articles.filter((a) => a.artists.some((ar) => slugifyArtist(ar) === slug)),
     [articles, slug]
   );
 
-  const displayName = artistData?.name || slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
-  const realArtistTags = artistData?.tags?.filter((tag) => articleTags.has(tag)) ?? [];
-
   return (
     <AppShell>
-      <SEO title={displayName} description={artistData?.bio || `Články o ${displayName}`} url={`/artist/${slug}`} />
-      <main className="max-w-5xl mx-auto px-4 md:px-8 py-10">
-        <button onClick={() => navigate("/")} className="neo-button bg-white text-black px-4 py-2 font-heading text-sm uppercase mb-8">← Zpět</button>
-
-        <div className="bg-white neo-border neo-shadow p-8 mb-10 flex flex-col gap-4">
-          <div className="flex items-center gap-3 flex-wrap">
-            <span className="text-5xl">🎤</span>
-            <h1 className="font-heading text-4xl uppercase">{displayName}</h1>
-            {artistData?.city && <span className="font-bold text-gray-500">📍 {artistData.city}</span>}
-          </div>
-          {artistData?.bio && <p className="text-lg font-medium text-gray-700 leading-relaxed">{artistData.bio}</p>}
-          {artistData?.genre && artistData.genre.length > 0 && (
-            <div className="flex flex-wrap gap-2">
-              {artistData.genre.map((g) => (
-                <span key={g} className="text-xs font-bold uppercase px-2 py-0.5 bg-[#00BFFF] neo-border">{g}</span>
-              ))}
-            </div>
-          )}
-          {realArtistTags.length > 0 && (
-            <div className="flex flex-wrap gap-2">
-              {realArtistTags.slice(0, 8).map((t) => (
-                <button key={t} onClick={() => navigate(`/tag/${encodeURIComponent(t)}`)} className="text-xs font-bold uppercase px-2 py-0.5 bg-[#FFD800] neo-border hover:bg-black hover:text-[#FFD800] transition-colors">
-                  #{t}
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
-
-        <h2 className="font-heading text-2xl uppercase mb-6 border-b-4 border-black pb-3">
-          Články o {displayName} ({artistArticles.length})
-        </h2>
-        {artistArticles.length === 0 ? (
-          <p className="font-heading text-xl uppercase text-black/50">Zatím žádné články.</p>
-        ) : (
-          <div className="flex flex-col gap-6">
-            {artistArticles.map((a) => <ArticleCard key={a.slug} article={a} />)}
-          </div>
-        )}
-      </main>
-    </AppShell>
-  );
-}
-
-function HomePage() {
-  const [activeCategory, setActiveCategory] = useState<Category>("Vše");
-  const [activeTags, setActiveTags] = useState<string[]>([]);
-  const articles = useMemo(() => loadArticles(), []);
-
-  const toggleTag = useCallback((tag: string) => {
-    setActiveTags((prev) => prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]);
-  }, []);
-
-  const filtered = useMemo(() => {
-    let result = articles;
-    if (activeCategory !== "Vše") result = result.filter((a) => a.category === activeCategory);
-    if (activeTags.length > 0) result = result.filter((a) => activeTags.every((t) => a.tags.includes(t)));
-    return result;
-  }, [articles, activeCategory, activeTags]);
-
-  const featuredArticles = useMemo(() => articles.filter((a) => a.featured), [articles]);
-  const latestArticles = useMemo(() => articles.slice(0, 6), [articles]);
-  const isFiltered = activeCategory !== "Vše" || activeTags.length > 0;
-
-  return (
-    <AppShell>
-      <SEO />
-      <main className="max-w-5xl mx-auto px-4 md:px-8 py-10 flex flex-col gap-8">
-        <div className="bg-black text-[#FFDE00] neo-border neo-shadow p-8 lg:p-12">
-          <h1 className="font-heading text-5xl lg:text-7xl uppercase leading-none mb-4">
-            Český<br />Rap<br />Vesmír
-          </h1>
-          <p className="font-sans text-lg font-medium text-[#FFDE00]/80 max-w-md">
-            Profily raperů, recenze, návody, drama. Všechno co se děje na české scéně.
-          </p>
-        </div>
-
-        <div className="flex gap-3 flex-wrap">
-          {CATEGORIES.map((cat) => (
-            <FilterButton key={cat} isActive={activeCategory === cat} onClick={() => setActiveCategory(cat)}>
-              {cat}
-            </FilterButton>
-          ))}
-        </div>
-
-        <TagFilterBar
-          articles={articles}
-          activeTags={activeTags}
-          onToggleTag={toggleTag}
-          onClearTags={() => setActiveTags([])}
-          initialLimit={8}
-        />
-
-        {isFiltered && (
-          <p className="font-bold text-sm text-black/60 uppercase">
-            {filtered.length} článků
-            {activeCategory !== "Vše" ? ` v kategorii ${activeCategory}` : ""}
-            {activeTags.length > 0 ? ` · tagy: ${activeTags.join(", ")}` : ""}
-          </p>
-        )}
-
-        {isFiltered ? (
-          filtered.length === 0 ? <EmptyState category={activeCategory} /> : (
-            <div className="flex flex-col gap-6">
-              {filtered.map((a) => <ArticleCard key={a.slug} article={a} onTagClick={toggleTag} />)}
-            </div>
-          )
-        ) : (
-          <div className="flex flex-col gap-10">
-            {featuredArticles.length > 0 && (
-              <section>
-                <SectionDivider label="⭐ Editorial Picks" />
-                <div className="flex flex-col gap-6 mt-4">
-                  {featuredArticles.map((a) => <ArticleCard key={a.slug} article={a} onTagClick={toggleTag} />)}
-                </div>
-              </section>
-            )}
-            <section>
-              <SectionDivider label="🔥 Nejnovější" />
-              <div className="flex flex-col gap-6 mt-4">
-                {latestArticles.map((a) => <ArticleCard key={a.slug} article={a} onTagClick={toggleTag} />)}
-              </div>
-            </section>
-          </div>
-        )}
+      <main className="max-w-5xl mx-auto px-4 md:px-8 py-10 flex flex-col gap-6">
+        <h1 className="font-heading text-4xl uppercase">{artistData?.name || slug}</h1>
+        {artistArticles.map((a) => <ArticleCard key={a.slug} article={a} />)}
       </main>
     </AppShell>
   );
