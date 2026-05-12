@@ -1,0 +1,37 @@
+name: Generate content indexes
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'content/**'
+      - 'scripts/generate-indexes.js'
+      - 'package.json'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate-indexes:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-actions[bot]'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Generate indexes
+        run: node scripts/generate-indexes.js
+
+      - name: Commit generated indexes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'chore(generated): update content indexes'
+          file_pattern: public/generated/*.json
