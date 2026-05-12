@@ -5,6 +5,7 @@ import { loadArticles, type Article } from "./articles";
 import ArticlePage from "./ArticlePage";
 import SearchOverlay from "./components/SearchOverlay";
 import SEO from "./components/SEO";
+import { getArtistMap, type ArtistEntry } from "./lib/metadata";
 
 // ── Types ─────────────────────────────────────────────────
 
@@ -17,7 +18,7 @@ const CATEGORY_COLORS: Record<string, string> = {
   Články: "bg-[#00BFFF] text-black",
 };
 
-// ── Small components ──────────────────────────────────────
+// ── Article Card ──────────────────────────────────────────
 
 const Badge = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
   <span className={`inline-block px-3 py-1 text-sm font-bold tracking-wider uppercase neo-border ${className}`}>
@@ -89,17 +90,12 @@ function TagPage() {
     () => articles.filter((a) => a.tags.includes(tag || "")),
     [articles, tag]
   );
-
   return (
     <div className="min-h-screen font-sans">
-      <SEO
-        title={`#${tag}`}
-        description={`${filtered.length} články se štítkem ${tag}`}
-        url={`/tag/${tag}`}
-      />
+      <SEO title={`#${tag}`} description={`${filtered.length} články se štítkem ${tag}`} url={`/tag/${tag}`} />
       <Header onSearch={() => {}} />
       <main className="max-w-5xl mx-auto px-4 md:px-8 py-10">
-        <div className="flex items-center gap-4 mb-8">
+        <div className="flex items-center gap-4 mb-8 flex-wrap">
           <button onClick={() => navigate("/")} className="neo-button bg-white text-black px-4 py-2 font-heading text-sm uppercase">← Zpět</button>
           <h1 className="font-heading text-3xl uppercase">#{tag}</h1>
           <span className="font-bold text-gray-500">{filtered.length} článků</span>
@@ -122,16 +118,14 @@ function ArtistPage() {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const articles = useMemo(() => loadArticles(), []);
-
-  const [artistData, setArtistData] = useState<{
-    name: string; bio: string; city: string; genre: string[]; tags: string[];
-  } | null>(null);
+  const [artistData, setArtistData] = useState<ArtistEntry | null>(null);
 
   useEffect(() => {
-    fetch(`/content/artists/${slug}.json`)
-      .then((r) => r.ok ? r.json() : null)
-      .then(setArtistData)
-      .catch(() => setArtistData(null));
+    let cancelled = false;
+    getArtistMap().then((map) => {
+      if (!cancelled && slug) setArtistData(map[slug] ?? null);
+    });
+    return () => { cancelled = true; };
   }, [slug]);
 
   const artistArticles = useMemo(
@@ -145,11 +139,7 @@ function ArtistPage() {
 
   return (
     <div className="min-h-screen font-sans">
-      <SEO
-        title={displayName}
-        description={artistData?.bio || `Článků o ${displayName}`}
-        url={`/artist/${slug}`}
-      />
+      <SEO title={displayName} description={artistData?.bio || `Články o ${displayName}`} url={`/artist/${slug}`} />
       <Header onSearch={() => {}} />
       <main className="max-w-5xl mx-auto px-4 md:px-8 py-10">
         <button onClick={() => navigate("/")} className="neo-button bg-white text-black px-4 py-2 font-heading text-sm uppercase mb-8">← Zpět</button>
@@ -161,6 +151,13 @@ function ArtistPage() {
             {artistData?.city && <span className="font-bold text-gray-500">📍 {artistData.city}</span>}
           </div>
           {artistData?.bio && <p className="text-lg font-medium text-gray-700 leading-relaxed">{artistData.bio}</p>}
+          {artistData?.genre && artistData.genre.length > 0 && (
+            <div className="flex flex-wrap gap-2">
+              {artistData.genre.map((g) => (
+                <span key={g} className="text-xs font-bold uppercase px-2 py-0.5 bg-[#00BFFF] neo-border">{g}</span>
+              ))}
+            </div>
+          )}
           {artistData?.tags && artistData.tags.length > 0 && (
             <div className="flex flex-wrap gap-2">
               {artistData.tags.map((t) => (
@@ -211,7 +208,7 @@ function Header({ onSearch }: { onSearch: () => void }) {
   );
 }
 
-// ── Homepage ──────────────────────────────────────────────
+// ── Homepage sections ─────────────────────────────────────
 
 function EmptyState({ category }: { category: string }) {
   return (
@@ -234,19 +231,14 @@ function SectionDivider({ label }: { label: string }) {
 }
 
 function HomePage() {
-  const navigate = useNavigate();
   const [searchOpen, setSearchOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState<Category>("Vše");
   const [activeTags, setActiveTags] = useState<string[]>([]);
-
   const articles = useMemo(() => loadArticles(), []);
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
-        e.preventDefault();
-        setSearchOpen(true);
-      }
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") { e.preventDefault(); setSearchOpen(true); }
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
@@ -264,13 +256,13 @@ function HomePage() {
   }, [articles, activeCategory, activeTags]);
 
   const featuredArticles = useMemo(() => articles.filter((a) => a.featured), [articles]);
-  const latestArticles = useMemo(() => articles.slice(0, 4), [articles]);
+  const latestArticles = useMemo(() => articles.slice(0, 6), [articles]);
   const isFiltered = activeCategory !== "Vše" || activeTags.length > 0;
 
   const allTags = useMemo(() => {
     const tagSet = new Set<string>();
     articles.forEach((a) => a.tags.forEach((t) => tagSet.add(t)));
-    return Array.from(tagSet).slice(0, 20);
+    return Array.from(tagSet).slice(0, 24);
   }, [articles]);
 
   return (
@@ -324,7 +316,7 @@ function HomePage() {
           </div>
         )}
 
-        {/* Active filter info */}
+        {/* Filter result count */}
         {isFiltered && (
           <p className="font-bold text-sm text-black/60 uppercase">
             {filtered.length} článků
@@ -333,19 +325,15 @@ function HomePage() {
           </p>
         )}
 
-        {/* Filtered view */}
+        {/* Content */}
         {isFiltered ? (
-          filtered.length === 0 ? (
-            <EmptyState category={activeCategory} />
-          ) : (
+          filtered.length === 0 ? <EmptyState category={activeCategory} /> : (
             <div className="flex flex-col gap-6">
               {filtered.map((a) => <ArticleCard key={a.slug} article={a} onTagClick={toggleTag} />)}
             </div>
           )
         ) : (
-          /* Homepage sections */
           <div className="flex flex-col gap-10">
-            {/* Featured */}
             {featuredArticles.length > 0 && (
               <section>
                 <SectionDivider label="⭐ Editorial Picks" />
@@ -354,8 +342,6 @@ function HomePage() {
                 </div>
               </section>
             )}
-
-            {/* Latest */}
             <section>
               <SectionDivider label="🔥 Nejnovější" />
               <div className="flex flex-col gap-6 mt-4">
