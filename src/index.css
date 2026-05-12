@@ -143,14 +143,14 @@ body {
 .prose-4rap tr:nth-child(even) td { background: #fffae8; }
 .prose-4rap code {
   background: #000;
-  color: #39FF14;
+  color: #7BC8A4;
   font-size: 0.9em;
   padding: 0.1em 0.4em;
   border-radius: 2px;
 }
 .prose-4rap pre {
   background: #111;
-  color: #39FF14;
+  color: #7BC8A4;
   padding: 1.25rem;
   overflow-x: auto;
   margin: 1.5rem 0;
