@@ -5,15 +5,24 @@
   "kendrick-lamar-pulitzeruv-kral": [
     "yzomandias-typek-co-zmenil-pravidla-ceskeho-trapu",
     "freestyle-battle-scena-od-suterenu-k-arene",
+    "freestyle-a-battle-scena-od-suterenu-k-arene",
     "cesky-rap-z-ulice-na-trun-nova-pravidla-hry"
   ],
   "jak-vyhrat-battle-prakticky-pruvodce-pro-freestyle": [
     "freestyle-battle-scena-od-suterenu-k-arene",
+    "freestyle-a-battle-scena-od-suterenu-k-arene",
     "rozsekej-majk-tvoje-rapova-bible-pro-texty-a-flow-co-pali"
   ],
   "freestyle-battle-scena-od-suterenu-k-arene": [
     "jak-vyhrat-battle-prakticky-pruvodce-pro-freestyle",
+    "freestyle-a-battle-scena-od-suterenu-k-arene",
     "kendrick-lamar-pulitzeruv-kral",
+    "cesky-rap-z-ulice-na-trun-nova-pravidla-hry"
+  ],
+  "freestyle-a-battle-scena-od-suterenu-k-arene": [
+    "freestyle-battle-scena-od-suterenu-k-arene",
+    "kendrick-lamar-pulitzeruv-kral",
+    "jak-vyhrat-battle-prakticky-pruvodce-pro-freestyle",
     "cesky-rap-z-ulice-na-trun-nova-pravidla-hry"
   ],
   "ektor-chlapek-co-rozsekal-ceskou-scenu": [],
@@ -21,7 +30,8 @@
   "2pac-basnik-rebel-kral-pribeh-co-hori-dodnes": [],
   "cesky-rap-z-ulice-na-trun-nova-pravidla-hry": [
     "kendrick-lamar-pulitzeruv-kral",
-    "freestyle-battle-scena-od-suterenu-k-arene"
+    "freestyle-battle-scena-od-suterenu-k-arene",
+    "freestyle-a-battle-scena-od-suterenu-k-arene"
   ],
   "rozsekej-majk-tvoje-rapova-bible-pro-texty-a-flow-co-pali": [
     "jak-vyhrat-battle-prakticky-pruvodce-pro-freestyle"
