@@ -1,0 +1,11 @@
+{
+  "name": "PSH",
+  "slug": "psh",
+  "bio": "PSH (Phantom Spittin Hardcore) je legendární česká rapová skupina. Považováni za průkopníky české rap scény s důrazem na lyriku a storytelling.",
+  "city": "Praha",
+  "genre": ["hip-hop", "lyrical-rap", "czech-rap"],
+  "tags": ["lyrika", "storytelling", "legenda", "Praha", "underground"],
+  "image": "",
+  "active": true,
+  "era": ["2000s", "2010s", "2020s"]
+}
