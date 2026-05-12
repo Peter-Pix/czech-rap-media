@@ -21,6 +21,7 @@ export async function getTagMap(): Promise<TagMap> {
   if (cachedTags) return cachedTags;
   try {
     const res = await fetch("/generated/tag-map.json");
+    if (!res.ok) return {};
     cachedTags = await res.json();
     return cachedTags!;
   } catch {
@@ -32,6 +33,7 @@ export async function getArtistMap(): Promise<ArtistMap> {
   if (cachedArtists) return cachedArtists;
   try {
     const res = await fetch("/generated/artist-map.json");
+    if (!res.ok) return {};
     cachedArtists = await res.json();
     return cachedArtists!;
   } catch {
