@@ -1,0 +1,11 @@
+{
+  "name": "Calin",
+  "slug": "calin",
+  "bio": "Calin je český rapper a vizionář, jehož estetika a brand přesahují hudbu. Jeden z nejvíce stylově konzistentních umělců na české scéně.",
+  "city": "Praha",
+  "genre": ["trap", "czech-rap"],
+  "tags": ["trap", "mainstream", "brand", "estetika"],
+  "image": "",
+  "active": true,
+  "era": ["2020s"]
+}
