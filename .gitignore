@@ -1,7 +1,9 @@
-.DS_Store
+node_modules
+dist
 .env
-.env.local
-node_modules/
-.next/
-out/
-*.log
+.DS_Store
+*.local
+
+# Generated indexes (built at deploy time)
+# generated/
+# Uncomment above to exclude from git, or keep for local dev convenience
