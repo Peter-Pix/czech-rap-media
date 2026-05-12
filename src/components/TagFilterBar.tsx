@@ -59,9 +59,6 @@ export default function TagFilterBar({
       <div className="flex flex-col md:flex-row md:items-center gap-3 justify-between">
         <div>
           <h2 className="font-heading text-lg uppercase">Tagy ve článcích</h2>
-          <p className="text-xs font-bold text-black/50 uppercase">
-            Jen tagy, které reálně existují v publikovaných článcích
-          </p>
         </div>
 
         <label className="flex items-center gap-2 bg-[#FFDE00] neo-border px-3 py-2 md:min-w-[260px]">
