@@ -1,8 +1,11 @@
-import { useState, useMemo } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
-import { Target, Headphones, BookOpen, Music, Hash } from "lucide-react";
+import { useState, useMemo, useEffect, useCallback } from "react";
+import { Routes, Route, useNavigate, useParams } from "react-router-dom";
+import { Hash, Search, X } from "lucide-react";
 import { loadArticles, type Article } from "./articles";
 import ArticlePage from "./ArticlePage";
+import SearchOverlay from "./components/SearchOverlay";
+
+// ── Types ─────────────────────────────────────────────────
 
 type Category = "Vše" | "Rapeři" | "Návody" | "Články";
 const CATEGORIES: Category[] = ["Vše", "Rapeři", "Návody", "Články"];
@@ -12,6 +15,8 @@ const CATEGORY_COLORS: Record<string, string> = {
   Návody: "bg-[#39FF14] text-black",
   Články: "bg-[#00BFFF] text-black",
 };
+
+// ── Small components ──────────────────────────────────────
 
 const Badge = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
   <span className={`inline-block px-3 py-1 text-sm font-bold tracking-wider uppercase neo-border ${className}`}>
@@ -29,7 +34,7 @@ const FilterButton = ({ children, isActive, onClick }: { children: React.ReactNo
   </button>
 );
 
-const ArticleCard = ({ article }: { article: Article }) => {
+const ArticleCard = ({ article, onTagClick }: { article: Article; onTagClick?: (tag: string) => void }) => {
   const navigate = useNavigate();
   const colorClass = CATEGORY_COLORS[article.category] || "bg-gray-200 text-black";
   const formattedDate = article.date
@@ -43,6 +48,12 @@ const ArticleCard = ({ article }: { article: Article }) => {
       <div className="flex items-center gap-4 flex-wrap">
         <Badge className={colorClass}>{article.category}</Badge>
         <span className="font-bold text-gray-500 text-sm">{formattedDate}</span>
+        {article.readingTime > 0 && (
+          <span className="font-bold text-gray-400 text-sm">{article.readingTime} min čtení</span>
+        )}
+        {article.featured && (
+          <span className="font-bold text-xs px-2 py-0.5 bg-[#FFD800] neo-border uppercase">⭐ Featured</span>
+        )}
       </div>
       <h2 className="font-heading text-2xl lg:text-3xl tracking-wide uppercase leading-tight">
         {article.title}
@@ -51,11 +62,15 @@ const ArticleCard = ({ article }: { article: Article }) => {
         {article.excerpt}
       </p>
       {article.tags.length > 0 && (
-        <div className="flex flex-wrap gap-2 pt-1">
-          {article.tags.map((tag) => (
-            <span key={tag} className="text-xs font-bold uppercase px-2 py-0.5 bg-[#FFD800] neo-border">
+        <div className="flex flex-wrap gap-2 pt-1" onClick={(e) => e.stopPropagation()}>
+          {article.tags.slice(0, 5).map((tag) => (
+            <button
+              key={tag}
+              onClick={() => onTagClick ? onTagClick(tag) : navigate(`/tag/${encodeURIComponent(tag)}`)}
+              className="text-xs font-bold uppercase px-2 py-0.5 bg-[#FFD800] neo-border hover:bg-black hover:text-[#FFD800] transition-colors"
+            >
               #{tag}
-            </span>
+            </button>
           ))}
         </div>
       )}
@@ -63,98 +78,297 @@ const ArticleCard = ({ article }: { article: Article }) => {
   );
 };
 
-const EmptyState = ({ category }: { category: string }) => (
-  <div className="bg-white neo-border neo-shadow p-12 text-center flex flex-col gap-4">
-    <div className="font-heading text-5xl">📭</div>
-    <p className="font-heading text-2xl uppercase">
-      {category === "Vše" ? "Žádné články zatím." : `Žádné články v kategorii „${category}".`}
-    </p>
-    <p className="font-bold text-gray-500">Pipeline běží. Brzy přibudou.</p>
-  </div>
-);
+// ── Tag Page ──────────────────────────────────────────────
 
-function HomePage() {
-  const [activeCategory, setActiveCategory] = useState<Category>("Vše");
-  const allArticles = useMemo(() => loadArticles(), []);
-  const filtered = activeCategory === "Vše" ? allArticles : allArticles.filter((a) => a.category === activeCategory);
-  const counts = useMemo(() => ({
-    Rapeři: allArticles.filter((a) => a.category === "Rapeři").length,
-    Návody: allArticles.filter((a) => a.category === "Návody").length,
-    Články: allArticles.filter((a) => a.category === "Články").length,
-  }), [allArticles]);
-
-  const icons: Record<Category, React.ReactNode> = {
-    Vše: <Target size={18} />,
-    Rapeři: <Headphones size={18} />,
-    Návody: <Music size={18} />,
-    Články: <BookOpen size={18} />,
-  };
+function TagPage() {
+  const { tag } = useParams<{ tag: string }>();
+  const navigate = useNavigate();
+  const articles = useMemo(() => loadArticles(), []);
+  const filtered = useMemo(
+    () => articles.filter((a) => a.tags.includes(tag || "")),
+    [articles, tag]
+  );
 
   return (
     <div className="min-h-screen font-sans">
-      <header className="sticky top-0 z-50 bg-black text-white border-b-4 border-black px-6 py-4 flex flex-col sm:flex-row justify-between items-center gap-3">
-        <div className="flex items-center gap-3">
-          <Hash size={32} className="text-[#39FF14]" />
-          <span className="font-heading text-4xl uppercase tracking-tighter">4RAP</span>
+      <Header onSearch={() => {}} />
+      <main className="max-w-5xl mx-auto px-4 md:px-8 py-10">
+        <div className="flex items-center gap-4 mb-8">
+          <button onClick={() => navigate("/")} className="neo-button bg-white text-black px-4 py-2 font-heading text-sm uppercase">← Zpět</button>
+          <h1 className="font-heading text-3xl uppercase">#{tag}</h1>
+          <span className="font-bold text-gray-500">{filtered.length} článků</span>
         </div>
-        <p className="font-bold text-base text-[#FFD800] tracking-wide">Český rapový vesmír. No cap.</p>
-      </header>
-
-      <div className="max-w-5xl mx-auto px-4 md:px-8 py-12 flex flex-col gap-12">
-
-        {/* HERO — bez dekorativních tvarů */}
-        <section className="bg-white neo-border neo-shadow p-8 lg:p-14">
-          <div className="flex flex-col gap-6 max-w-3xl">
-            <Badge className="bg-[#FF4A4A] text-white border-none !px-4 !py-2 text-sm w-fit">Vítej u nás</Badge>
-            <h1 className="font-heading text-5xl lg:text-7xl leading-[0.9] uppercase tracking-tighter">
-              Vše, co chceš<br />vědět o{" "}
-              <span className="bg-[#FFD800] px-2 inline-block -ml-1">rapu</span>
-            </h1>
-            <p className="text-xl font-bold leading-[1.9] text-gray-800 max-w-xl">
-              Profily raperů, návody pro beatmakery a články z české i světové scény. Pure facts.
-            </p>
-          </div>
-        </section>
-
-        <main className="flex flex-col gap-8">
-          <div className="flex flex-wrap gap-3 items-center">
-            <span className="font-heading text-2xl uppercase mr-2">Filtrovat:</span>
-            {CATEGORIES.map((cat) => (
-              <FilterButton key={cat} isActive={activeCategory === cat} onClick={() => setActiveCategory(cat)}>
-                {icons[cat]} {cat}
-              </FilterButton>
-            ))}
-          </div>
+        {filtered.length === 0 ? (
+          <p className="font-heading text-xl uppercase text-black/50">Žádné články s tímto tagem.</p>
+        ) : (
           <div className="flex flex-col gap-6">
-            {filtered.length > 0
-              ? filtered.map((article) => <ArticleCard key={article.id} article={article} />)
-              : <EmptyState category={activeCategory} />}
+            {filtered.map((a) => <ArticleCard key={a.slug} article={a} />)}
           </div>
-        </main>
-
-        <section className="grid grid-cols-3 gap-4">
-          {(["Rapeři", "Návody", "Články"] as const).map((cat) => (
-            <div key={cat} className="bg-black text-white neo-border neo-shadow p-4 text-center">
-              <div className="font-heading text-4xl text-[#FFD800]">{counts[cat]}</div>
-              <div className="font-bold text-sm uppercase tracking-widest mt-1">{cat}</div>
-            </div>
-          ))}
-        </section>
-      </div>
-
-      <footer className="bg-black text-white text-center p-8 border-t-4 border-black mt-8">
-        <p className="font-heading text-2xl uppercase tracking-wider">4RAP © 2026</p>
-        <p className="font-bold mt-2 text-gray-400 text-sm">Vytvořeno pro skutečné fanoušky.</p>
-      </footer>
+        )}
+      </main>
     </div>
   );
 }
+
+// ── Artist Page ───────────────────────────────────────────
+
+function ArtistPage() {
+  const { slug } = useParams<{ slug: string }>();
+  const navigate = useNavigate();
+  const articles = useMemo(() => loadArticles(), []);
+
+  const [artistData, setArtistData] = useState<{
+    name: string; bio: string; city: string; genre: string[]; tags: string[];
+  } | null>(null);
+
+  useEffect(() => {
+    fetch(`/content/artists/${slug}.json`)
+      .then((r) => r.ok ? r.json() : null)
+      .then(setArtistData)
+      .catch(() => setArtistData(null));
+  }, [slug]);
+
+  const artistArticles = useMemo(
+    () => articles.filter((a) =>
+      a.artists.some((ar) => ar.toLowerCase().replace(/\s+/g, "-") === slug)
+    ),
+    [articles, slug]
+  );
+
+  const displayName = artistData?.name || slug?.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()) || "";
+
+  return (
+    <div className="min-h-screen font-sans">
+      <Header onSearch={() => {}} />
+      <main className="max-w-5xl mx-auto px-4 md:px-8 py-10">
+        <button onClick={() => navigate("/")} className="neo-button bg-white text-black px-4 py-2 font-heading text-sm uppercase mb-8">← Zpět</button>
+
+        <div className="bg-white neo-border neo-shadow p-8 mb-10 flex flex-col gap-4">
+          <div className="flex items-center gap-3 flex-wrap">
+            <span className="text-5xl">🎤</span>
+            <h1 className="font-heading text-4xl uppercase">{displayName}</h1>
+            {artistData?.city && <span className="font-bold text-gray-500">📍 {artistData.city}</span>}
+          </div>
+          {artistData?.bio && <p className="text-lg font-medium text-gray-700 leading-relaxed">{artistData.bio}</p>}
+          {artistData?.tags && artistData.tags.length > 0 && (
+            <div className="flex flex-wrap gap-2">
+              {artistData.tags.map((t) => (
+                <button key={t} onClick={() => navigate(`/tag/${t}`)} className="text-xs font-bold uppercase px-2 py-0.5 bg-[#FFD800] neo-border hover:bg-black hover:text-[#FFD800] transition-colors">
+                  #{t}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <h2 className="font-heading text-2xl uppercase mb-6 border-b-4 border-black pb-3">
+          Články o {displayName} ({artistArticles.length})
+        </h2>
+        {artistArticles.length === 0 ? (
+          <p className="font-heading text-xl uppercase text-black/50">Zatím žádné články.</p>
+        ) : (
+          <div className="flex flex-col gap-6">
+            {artistArticles.map((a) => <ArticleCard key={a.slug} article={a} />)}
+          </div>
+        )}
+      </main>
+    </div>
+  );
+}
+
+// ── Header ────────────────────────────────────────────────
+
+function Header({ onSearch }: { onSearch: () => void }) {
+  const navigate = useNavigate();
+  return (
+    <header className="sticky top-0 z-50 bg-black text-white border-b-4 border-black px-6 py-4 flex justify-between items-center gap-3">
+      <button
+        onClick={() => navigate("/")}
+        className="flex items-center gap-2 font-heading text-xl uppercase text-[#39FF14] hover:text-white transition-colors"
+      >
+        <Hash size={24} className="text-[#39FF14]" />
+        4RAP
+      </button>
+      <button
+        onClick={onSearch}
+        className="flex items-center gap-2 neo-button bg-[#39FF14] text-black px-4 py-2 font-heading text-sm uppercase"
+      >
+        <Search size={16} /> Hledat
+        <span className="hidden md:inline text-xs opacity-60 ml-1">⌘K</span>
+      </button>
+    </header>
+  );
+}
+
+// ── Homepage ──────────────────────────────────────────────
+
+function EmptyState({ category }: { category: string }) {
+  return (
+    <div className="bg-white neo-border neo-shadow p-12 text-center flex flex-col gap-4">
+      <div className="font-heading text-5xl">📭</div>
+      <p className="font-heading text-2xl uppercase">
+        {category === "Vše" ? "Žádné články zatím." : `Žádné články v kategorii „${category}".`}
+      </p>
+    </div>
+  );
+}
+
+function SectionDivider({ label }: { label: string }) {
+  return (
+    <div className="flex items-center gap-4 my-2">
+      <h2 className="font-heading text-xl uppercase shrink-0">{label}</h2>
+      <div className="flex-1 h-1 bg-black" />
+    </div>
+  );
+}
+
+function HomePage() {
+  const navigate = useNavigate();
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [activeCategory, setActiveCategory] = useState<Category>("Vše");
+  const [activeTags, setActiveTags] = useState<string[]>([]);
+
+  const articles = useMemo(() => loadArticles(), []);
+
+  // CMD+K global shortcut
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+        e.preventDefault();
+        setSearchOpen(true);
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, []);
+
+  const toggleTag = useCallback((tag: string) => {
+    setActiveTags((prev) => prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]);
+  }, []);
+
+  const filtered = useMemo(() => {
+    let result = articles;
+    if (activeCategory !== "Vše") result = result.filter((a) => a.category === activeCategory);
+    if (activeTags.length > 0) result = result.filter((a) => activeTags.every((t) => a.tags.includes(t)));
+    return result;
+  }, [articles, activeCategory, activeTags]);
+
+  // Homepage sections (only shown when no filters active)
+  const featuredArticles = useMemo(() => articles.filter((a) => a.featured), [articles]);
+  const latestArticles = useMemo(() => articles.slice(0, 4), [articles]);
+  const isFiltered = activeCategory !== "Vše" || activeTags.length > 0;
+
+  // All tags for the filter bar
+  const allTags = useMemo(() => {
+    const tagSet = new Set<string>();
+    articles.forEach((a) => a.tags.forEach((t) => tagSet.add(t)));
+    return Array.from(tagSet).slice(0, 20);
+  }, [articles]);
+
+  return (
+    <div className="min-h-screen font-sans">
+      <SearchOverlay isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
+      <Header onSearch={() => setSearchOpen(true)} />
+
+      <main className="max-w-5xl mx-auto px-4 md:px-8 py-10 flex flex-col gap-8">
+
+        {/* Hero */}
+        <div className="bg-black text-[#FFDE00] neo-border neo-shadow p-8 lg:p-12">
+          <h1 className="font-heading text-5xl lg:text-7xl uppercase leading-none mb-4">
+            Český<br />Rap<br />Vesmír
+          </h1>
+          <p className="font-sans text-lg font-medium text-[#FFDE00]/80 max-w-md">
+            Profily raperů, recenze, návody, drama. Všechno co se děje na české scéně.
+          </p>
+        </div>
+
+        {/* Category Filters */}
+        <div className="flex gap-3 flex-wrap">
+          {CATEGORIES.map((cat) => (
+            <FilterButton key={cat} isActive={activeCategory === cat} onClick={() => setActiveCategory(cat)}>
+              {cat}
+            </FilterButton>
+          ))}
+        </div>
+
+        {/* Tag filters */}
+        {allTags.length > 0 && (
+          <div className="flex flex-wrap gap-2">
+            {allTags.map((tag) => (
+              <button
+                key={tag}
+                onClick={() => toggleTag(tag)}
+                className={`text-xs font-bold uppercase px-3 py-1 neo-border transition-colors
+                  ${activeTags.includes(tag) ? "bg-black text-[#FFD800]" : "bg-[#FFD800] text-black hover:bg-black hover:text-[#FFD800]"}`}
+              >
+                #{tag}
+              </button>
+            ))}
+            {activeTags.length > 0 && (
+              <button
+                onClick={() => setActiveTags([])}
+                className="flex items-center gap-1 text-xs font-bold uppercase px-3 py-1 neo-border bg-[#FF4A4A] text-white"
+              >
+                <X size={12} /> Zrušit filtry
+              </button>
+            )}
+          </div>
+        )}
+
+        {/* Active filter info */}
+        {isFiltered && (
+          <p className="font-bold text-sm text-black/60 uppercase">
+            {filtered.length} článků
+            {activeCategory !== "Vše" ? ` v kategorii ${activeCategory}` : ""}
+            {activeTags.length > 0 ? ` · tagy: ${activeTags.join(", ")}` : ""}
+          </p>
+        )}
+
+        {/* Filtered view */}
+        {isFiltered ? (
+          filtered.length === 0 ? (
+            <EmptyState category={activeCategory} />
+          ) : (
+            <div className="flex flex-col gap-6">
+              {filtered.map((a) => <ArticleCard key={a.slug} article={a} onTagClick={toggleTag} />)}
+            </div>
+          )
+        ) : (
+          /* Homepage sections */
+          <div className="flex flex-col gap-10">
+            {/* Featured */}
+            {featuredArticles.length > 0 && (
+              <section>
+                <SectionDivider label="⭐ Editorial Picks" />
+                <div className="flex flex-col gap-6 mt-4">
+                  {featuredArticles.map((a) => <ArticleCard key={a.slug} article={a} onTagClick={toggleTag} />)}
+                </div>
+              </section>
+            )}
+
+            {/* Latest */}
+            <section>
+              <SectionDivider label="🔥 Nejnovější" />
+              <div className="flex flex-col gap-6 mt-4">
+                {latestArticles.map((a) => <ArticleCard key={a.slug} article={a} onTagClick={toggleTag} />)}
+              </div>
+            </section>
+          </div>
+        )}
+      </main>
+    </div>
+  );
+}
+
+// ── Router ────────────────────────────────────────────────
 
 export default function App() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/article/:slug" element={<ArticlePage />} />
+      <Route path="/tag/:tag" element={<TagPage />} />
+      <Route path="/artist/:slug" element={<ArtistPage />} />
     </Routes>
   );
 }
