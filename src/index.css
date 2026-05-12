@@ -28,15 +28,7 @@ body {
 .neo-button:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0px 0px #000; }
 .neo-button:active { box-shadow: 0px 0px 0px 0px #000; transform: translate(6px, 6px); }
 
-/* ── News ticker animation ── */
-.ticker-track {
-  display: flex;
-  animation: ticker-scroll 35s linear infinite;
-  will-change: transform;
-}
-.ticker-track:hover { animation-play-state: paused; }
 
-@keyframes ticker-scroll {
   0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
