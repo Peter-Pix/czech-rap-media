@@ -28,6 +28,33 @@ body {
 .neo-button:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0px 0px #000; }
 .neo-button:active { box-shadow: 0px 0px 0px 0px #000; transform: translate(6px, 6px); }
 
+/* ── News ticker animation ── */
+.ticker-track {
+  display: flex;
+  animation: ticker-scroll 35s linear infinite;
+  will-change: transform;
+}
+.ticker-track:hover { animation-play-state: paused; }
+
+@keyframes ticker-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ── line-clamp utilities ── */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 /* ── Article body typography ── */
 .prose-4rap {
   line-height: 1.85;
@@ -55,7 +82,8 @@ body {
   margin-bottom: 1.25rem;
   font-weight: 500;
 }
-.prose-4rap ul, .prose-4rap ol {
+.prose-4rap ul,
+.prose-4rap ol {
   padding-left: 1.5rem;
   margin-bottom: 1.25rem;
 }
@@ -91,64 +119,49 @@ body {
   border-top: 4px solid #000;
   margin: 2.5rem 0;
 }
-
-/* ── TABLE FIX — přepisuje react-markdown výchozí chování ── */
 .prose-4rap table {
   width: 100%;
   border-collapse: collapse;
   margin: 2rem 0;
   font-weight: 500;
-  display: table !important;
-  table-layout: auto;
+  display: block;
+  overflow-x: auto;
 }
-.prose-4rap thead {
-  display: table-header-group !important;
-}
-.prose-4rap tbody {
-  display: table-row-group !important;
-}
-.prose-4rap tr {
-  display: table-row !important;
+.prose-4rap th,
+.prose-4rap td {
+  border: 2px solid #000;
+  padding: 0.5rem 0.75rem;
+  text-align: left;
 }
 .prose-4rap th {
-  display: table-cell !important;
   background: #000;
   color: #FFD800;
   font-family: "Archivo Black", sans-serif;
-  text-transform: uppercase;
-  padding: 0.6rem 0.9rem;
-  text-align: left;
   font-size: 0.85rem;
-  border: 3px solid #000;
-  white-space: nowrap;
+  text-transform: uppercase;
 }
-.prose-4rap td {
-  display: table-cell !important;
-  border: 3px solid #000;
-  padding: 0.55rem 0.9rem;
-  background: #fff;
-  font-size: 1rem;
-  vertical-align: middle;
-}
-.prose-4rap tr:nth-child(even) td { background: #fffbe6; }
-
-/* ── CODE ── */
+.prose-4rap tr:nth-child(even) td { background: #fffae8; }
 .prose-4rap code {
   background: #000;
   color: #39FF14;
-  padding: 0.1rem 0.4rem;
-  font-size: 0.9rem;
-  font-family: monospace;
+  font-size: 0.9em;
+  padding: 0.1em 0.4em;
+  border-radius: 2px;
 }
 .prose-4rap pre {
-  background: #000;
+  background: #111;
   color: #39FF14;
   padding: 1.25rem;
   overflow-x: auto;
-  margin: 1.75rem 0;
+  margin: 1.5rem 0;
   border: 4px solid #000;
-  font-family: monospace;
-  font-size: 0.9rem;
-  line-height: 1.6;
 }
-.prose-4rap pre code { background: none; padding: 0; color: inherit; }
+.prose-4rap pre code {
+  background: none;
+  padding: 0;
+}
+.prose-4rap img {
+  max-width: 100%;
+  border: 4px solid #000;
+  margin: 1.5rem 0;
+}
