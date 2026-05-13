@@ -1,6 +1,7 @@
 {
   "beatmaking": [
-    "zacni-tvorit-beat-pruvodce-bez-draheho-softu"
+    "zacni-tvorit-beat-pruvodce-bez-draheho-softu",
+    "beat-od-nuly-jak-cesky-producent-vytvori-hit"
   ],
   "daw": [
     "zacni-tvorit-beat-pruvodce-bez-draheho-softu"
@@ -15,11 +16,30 @@
     "kendrick-lamar-kral",
     "freestyle-battle-scena-od-suterenu-k-arene",
     "freestyle-a-battle-scena-od-suterenu-k-arene",
+    "z-ulice-na-trun-jak-cesky-rap-prepsal-pravidla-hry",
     "cesky-rap-z-ulice-na-trun-nova-pravidla-hry",
     "rozsekej-majk-rapova-bible-texty-flow"
   ],
   "navody": [
     "zacni-tvorit-beat-pruvodce-bez-draheho-softu"
+  ],
+  "notorious b.i.g.": [
+    "notorious-b-i-g-legenda-ktera-prepsala-pravidla-hip-hopu"
+  ],
+  "biggie": [
+    "notorious-b-i-g-legenda-ktera-prepsala-pravidla-hip-hopu"
+  ],
+  "ready to die": [
+    "notorious-b-i-g-legenda-ktera-prepsala-pravidla-hip-hopu"
+  ],
+  "life after death": [
+    "notorious-b-i-g-legenda-ktera-prepsala-pravidla-hip-hopu"
+  ],
+  "east coast": [
+    "notorious-b-i-g-legenda-ktera-prepsala-pravidla-hip-hopu"
+  ],
+  "rap legendy": [
+    "notorious-b-i-g-legenda-ktera-prepsala-pravidla-hip-hopu"
   ],
   "eminem": [
     "eminem-shadyho-odkaz-jak-technika-a-kontroverze-prepsaly-rapovej-game"
@@ -134,6 +154,21 @@
   "alfa": [
     "ektor-chlapek-co-rozsekal-ceskou-scenu"
   ],
+  "producenti": [
+    "beat-od-nuly-jak-cesky-producent-vytvori-hit"
+  ],
+  "domácí-studio": [
+    "beat-od-nuly-jak-cesky-producent-vytvori-hit"
+  ],
+  "produkce": [
+    "beat-od-nuly-jak-cesky-producent-vytvori-hit"
+  ],
+  "sound-design": [
+    "beat-od-nuly-jak-cesky-producent-vytvori-hit"
+  ],
+  "český-hip-hop": [
+    "beat-od-nuly-jak-cesky-producent-vytvori-hit"
+  ],
   "2pac": [
     "2pac-basnik-rebel-kral-pribeh-co-hori-dodnes"
   ],
@@ -153,10 +188,18 @@
     "2pac-basnik-rebel-kral-pribeh-co-hori-dodnes"
   ],
   "český rap": [
+    "z-ulice-na-trun-jak-cesky-rap-prepsal-pravidla-hry",
     "cesky-rap-z-ulice-na-trun-nova-pravidla-hry"
   ],
+  "streamy": [
+    "z-ulice-na-trun-jak-cesky-rap-prepsal-pravidla-hry"
+  ],
   "trap": [
+    "z-ulice-na-trun-jak-cesky-rap-prepsal-pravidla-hry",
     "cesky-rap-z-ulice-na-trun-nova-pravidla-hry"
+  ],
+  "byznys": [
+    "z-ulice-na-trun-jak-cesky-rap-prepsal-pravidla-hry"
   ],
   "streaming": [
     "cesky-rap-z-ulice-na-trun-nova-pravidla-hry"
