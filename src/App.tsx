@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect, useCallback } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import { Hash, Search, Flame, Clock, Filter, X, ChevronDown } from "lucide-react";
+import { Hash, Search, Flame, Clock, Filter, X, ChevronDown, Sun, Moon } from "lucide-react";
 import { loadArticles, type Article } from "./articles";
 import ArticlePage from "./ArticlePage";
 import SearchOverlay from "./components/SearchOverlay";
@@ -15,16 +15,47 @@ type FeedMode = "all" | "unread";
 const CATEGORIES: Category[] = ["Vše", "Rapeři", "Návody", "Články"];
 
 const CATEGORY_COLORS: Record<string, string> = {
-  Rapeři: "bg-[#ff5a2e] text-white",
-  Návody: "bg-[#4a90e2] text-white",
-  Články: "bg-[#7c3aed] text-white",
+  Rapeři: "bg-accent text-ink-inverse",
+  Návody: "bg-blue-600 text-white dark:bg-blue-500",
+  Články: "bg-violet-600 text-white dark:bg-violet-500",
 };
 
 const CATEGORY_DOT: Record<string, string> = {
-  Rapeři: "bg-[#ff5a2e]",
-  Návody: "bg-[#4a90e2]",
-  Články: "bg-[#7c3aed]",
+  Rapeři: "bg-accent",
+  Návody: "bg-blue-600 dark:bg-blue-500",
+  Články: "bg-violet-600 dark:bg-violet-500",
 };
+
+// Theme utilities
+function getTheme(): "light" | "dark" {
+  if (typeof window === "undefined") return "light";
+  const stored = localStorage.getItem("crm_theme");
+  if (stored === "dark" || stored === "light") return stored;
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
+
+function setTheme(theme: "light" | "dark") {
+  localStorage.setItem("crm_theme", theme);
+  document.documentElement.classList.toggle("dark", theme === "dark");
+}
+
+function useTheme() {
+  const [theme, setThemeState] = useState<"light" | "dark">("light");
+  
+  useEffect(() => {
+    const initialTheme = getTheme();
+    setThemeState(initialTheme);
+    document.documentElement.classList.toggle("dark", initialTheme === "dark");
+  }, []);
+  
+  const toggle = useCallback(() => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setThemeState(newTheme);
+    setTheme(newTheme);
+  }, [theme]);
+  
+  return { theme, toggle };
+}
 
 function getReadSet(): Set<string> {
   try {
@@ -60,32 +91,44 @@ function getTrending(articles: Article[], count = 5): Article[] {
     .map((x) => x.a);
 }
 
-function Header({ onSearch, unreadCount }: { onSearch: () => void; unreadCount: number }) {
+function Header({ onSearch, unreadCount, theme, onToggleTheme }: { onSearch: () => void; unreadCount: number; theme: "light" | "dark"; onToggleTheme: () => void }) {
   const navigate = useNavigate();
 
   return (
-    <header className="sticky top-0 z-50 bg-white border-b border-[#e5e5e5] px-4 sm:px-6 py-4 flex flex-wrap sm:flex-nowrap justify-between items-center gap-3 overflow-hidden shadow-sm">
+    <header className="sticky top-0 z-50 border-b px-3 sm:px-5 py-2.5 sm:py-3 flex justify-between items-center gap-2 sm:gap-3">
       <button
         onClick={() => navigate("/")}
-        className="flex items-center gap-2 font-heading text-xl sm:text-2xl uppercase text-[#ff5a2e] hover:text-[#e63d0a] transition-colors shrink-0"
+        className="flex items-center gap-1.5 font-heading text-lg sm:text-xl uppercase text-accent hover:opacity-80 transition-opacity shrink-0"
       >
-        <Hash size={24} className="text-[#ff5a2e] shrink-0" />
+        <Hash size={18} className="sm:w-5 sm:h-5 shrink-0" />
         <span>4RAP</span>
       </button>
 
-      <div className="flex items-center justify-end gap-3 w-full sm:w-auto min-w-0">
+      <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
         {unreadCount > 0 && (
-          <span className="font-heading text-xs bg-[#ff5a2e] text-white px-2.5 py-1.5 rounded-md border border-[#ff5a2e] shrink-0">
-            {unreadCount} NEW
+          <span className="font-heading text-[10px] sm:text-xs bg-accent text-paper px-2 py-1 rounded shrink-0">
+            {unreadCount}
           </span>
         )}
 
         <button
-          onClick={onSearch}
-          className="flex items-center justify-center gap-2 neo-button bg-[#ff5a2e] hover:bg-[#e63d0a] text-white px-4 sm:px-5 py-2.5 font-medium text-sm uppercase min-w-0 w-full sm:w-auto transition-all"
+          onClick={onToggleTheme}
+          className="flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-secondary hover:bg-border transition-colors"
+          aria-label={theme === "light" ? "Switch to dark mode" : "Switch to light mode"}
         >
-          <Search size={16} className="shrink-0" />
-          <span className="truncate">Hledat</span>
+          {theme === "light" ? (
+            <Moon size={16} className="sm:w-[18px] sm:h-[18px] text-ink" />
+          ) : (
+            <Sun size={16} className="sm:w-[18px] sm:h-[18px] text-ink" />
+          )}
+        </button>
+
+        <button
+          onClick={onSearch}
+          className="flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-accent hover:bg-accent-hover text-paper transition-colors"
+          aria-label="Search"
+        >
+          <Search size={16} className="sm:w-[18px] sm:h-[18px]" />
         </button>
       </div>
     </header>
@@ -103,55 +146,53 @@ function HeroArticle({ article, onOpen }: { article: Article; onOpen: () => void
 
   return (
     <section
-      className="relative bg-white text-slate-900 neo-border neo-shadow cursor-pointer group overflow-hidden rounded-xl transition-all hover:shadow-lg"
+      className="relative bg-card text-ink neo-border neo-shadow cursor-pointer group overflow-hidden rounded-lg sm:rounded-xl transition-all hover:shadow-lg"
       onClick={onOpen}
-      style={{ minHeight: 360 }}
     >
       {article.coverImage && (
         <div className="absolute inset-0">
           <img
             src={article.coverImage}
             alt={article.title}
-            className="w-full h-full object-cover opacity-60 group-hover:opacity-75 transition-opacity duration-300"
+            className="w-full h-full object-cover opacity-50 dark:opacity-40 group-hover:opacity-60 transition-opacity duration-300"
           />
-
-          <div className="absolute inset-0 bg-gradient-to-t from-white via-white/70 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-card via-card/80 to-transparent" />
         </div>
       )}
 
-      <div className="relative z-10 p-6 sm:p-8 lg:p-12 flex flex-col justify-end h-full min-h-[360px]">
-        <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-5">
-          <span className="bg-[#ff5a2e] text-white px-3 py-1.5 font-bold uppercase text-xs rounded-md">
-            ★ Featured
+      <div className="relative z-10 p-4 sm:p-6 lg:p-10 flex flex-col justify-end min-h-[260px] sm:min-h-[320px]">
+        <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-3 sm:mb-4">
+          <span className="bg-accent text-paper px-2 sm:px-2.5 py-1 font-bold uppercase text-[10px] sm:text-xs rounded">
+            Featured
           </span>
 
           <span
-            className={`px-3 py-1.5 font-bold uppercase text-xs rounded-md ${CATEGORY_COLORS[article.category] || "bg-slate-200 text-slate-900"}`}
+            className={`px-2 sm:px-2.5 py-1 font-bold uppercase text-[10px] sm:text-xs rounded ${CATEGORY_COLORS[article.category] || "bg-secondary text-ink"}`}
           >
             {article.category}
           </span>
 
           {formattedDate && (
-            <span className="text-slate-600 text-xs font-medium uppercase">
+            <span className="text-muted text-[10px] sm:text-xs font-medium uppercase">
               {formattedDate}
             </span>
           )}
         </div>
 
-        <h1 className="font-heading text-3xl sm:text-5xl lg:text-6xl uppercase leading-tight mb-4 max-w-4xl group-hover:text-[#ff5a2e] transition-colors text-balance">
+        <h1 className="font-heading text-xl sm:text-3xl lg:text-4xl uppercase leading-[1.1] mb-2 sm:mb-3 group-hover:text-accent transition-colors">
           {article.title}
         </h1>
 
-        <p className="text-slate-700 text-base sm:text-lg lg:text-lg max-w-2xl leading-relaxed mb-6 line-clamp-3 sm:line-clamp-none">
+        <p className="text-muted text-sm sm:text-base leading-relaxed mb-3 sm:mb-4 line-clamp-2 sm:line-clamp-3 max-w-2xl">
           {article.excerpt}
         </p>
 
         {article.tags.length > 0 && (
-          <div className="flex flex-wrap gap-2">
-            {article.tags.slice(0, 5).map((tag) => (
+          <div className="flex flex-wrap gap-1.5">
+            {article.tags.slice(0, 4).map((tag) => (
               <span
                 key={tag}
-                className="text-xs font-medium uppercase px-3 py-1.5 bg-slate-200 border border-slate-300 text-slate-700 rounded-md"
+                className="text-[10px] sm:text-xs font-medium uppercase px-2 py-1 bg-secondary/80 text-muted rounded"
               >
                 #{tag}
               </span>
