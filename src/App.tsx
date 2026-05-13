@@ -216,42 +216,39 @@ function TrendingPanel({
   if (!articles.length) return null;
 
   return (
-    <aside className="bg-white neo-border neo-shadow flex flex-col overflow-hidden rounded-xl">
-      <div className="border-b border-[#e5e5e5] px-5 sm:px-6 py-4 flex items-center gap-2">
-        <Flame size={18} className="text-[#ff5a2e] shrink-0" />
-        <span className="font-heading text-sm uppercase text-slate-900 truncate">Trending this week</span>
+    <aside className="bg-card neo-border neo-shadow flex flex-col overflow-hidden rounded-lg sm:rounded-xl">
+      <div className="border-b border-border px-3 sm:px-4 py-2.5 flex items-center gap-2">
+        <Flame size={14} className="text-accent shrink-0" />
+        <span className="font-heading text-xs sm:text-sm uppercase text-ink truncate">Trending</span>
       </div>
 
-      <div className="flex flex-col divide-y divide-[#e5e5e5]">
+      <div className="flex flex-col divide-y divide-border">
         {articles.map((a, i) => {
           const isUnread = !readSet.has(a.slug);
 
           return (
             <button
               key={a.slug}
-              className="p-4 sm:p-5 text-left hover:bg-slate-50 transition-colors flex gap-3 items-start min-w-0"
+              className="p-3 text-left hover:bg-secondary transition-colors flex gap-2 items-start min-w-0"
               onClick={() => onOpen(a.slug)}
             >
-              <span className="font-heading text-2xl text-slate-300 shrink-0 leading-none mt-0.5">
+              <span className="font-heading text-base text-muted-soft shrink-0 leading-none mt-0.5">
                 {String(i + 1).padStart(2, "0")}
               </span>
 
-              <div className="flex flex-col gap-1.5 min-w-0 flex-1">
-                <div className="flex items-center gap-2 min-w-0 flex-wrap">
-                  <span className={`w-2 h-2 rounded-full shrink-0 ${CATEGORY_DOT[a.category] || "bg-slate-300"}`} />
-
-                  <span className="font-heading text-xs uppercase text-slate-600 truncate">
+              <div className="flex flex-col gap-1 min-w-0 flex-1">
+                <div className="flex items-center gap-1.5 min-w-0 flex-wrap">
+                  <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${CATEGORY_DOT[a.category] || "bg-muted"}`} />
+                  <span className="font-heading text-[10px] uppercase text-muted truncate">
                     {a.category}
                   </span>
-
                   {isUnread && (
-                    <span className="text-xs font-bold bg-[#ff5a2e] text-white border border-[#ff5a2e] px-1.5 py-0.5 uppercase tracking-wide rounded-sm shrink-0">
+                    <span className="text-[9px] font-bold bg-accent text-paper px-1 py-0.5 uppercase rounded-sm shrink-0">
                       NEW
                     </span>
                   )}
                 </div>
-
-                <span className="font-heading text-sm uppercase leading-tight line-clamp-2 break-words text-slate-900">
+                <span className="font-heading text-xs sm:text-sm uppercase leading-tight line-clamp-2 break-words text-ink">
                   {a.title}
                 </span>
               </div>
@@ -272,7 +269,7 @@ function ArticleCard({
   isUnread: boolean;
   onOpen: () => void;
 }) {
-  const colorClass = CATEGORY_COLORS[article.category] || "bg-slate-200 text-slate-900";
+  const colorClass = CATEGORY_COLORS[article.category] || "bg-secondary text-ink";
 
   const formattedDate = article.date
     ? new Date(article.date).toLocaleDateString("cs-CZ", {
@@ -285,10 +282,10 @@ function ArticleCard({
   return (
     <article
       onClick={onOpen}
-      className="bg-white neo-border neo-shadow flex flex-col cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all duration-200 overflow-hidden min-w-0 rounded-xl"
+      className="bg-card neo-border neo-shadow flex flex-col cursor-pointer hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 overflow-hidden min-w-0 rounded-lg sm:rounded-xl"
     >
       {article.coverImage ? (
-        <div className="w-full aspect-[16/9] overflow-hidden border-b border-[#e5e5e5] bg-slate-100">
+        <div className="w-full aspect-[16/9] overflow-hidden border-b border-border bg-secondary">
           <img
             src={article.coverImage}
             alt={article.title}
@@ -298,63 +295,57 @@ function ArticleCard({
         </div>
       ) : null}
 
-      <div className="p-4 sm:p-5 flex flex-col gap-3 flex-1 min-w-0">
-        <div className="flex items-center gap-2 flex-wrap min-w-0">
-          <span
-            className={`text-xs font-bold px-2.5 py-1 uppercase rounded-md shrink-0 ${colorClass}`}
-          >
+      <div className="p-3 sm:p-4 flex flex-col gap-2 sm:gap-2.5 flex-1 min-w-0">
+        <div className="flex items-center gap-1.5 flex-wrap min-w-0">
+          <span className={`text-[10px] sm:text-xs font-bold px-2 py-0.5 uppercase rounded shrink-0 ${colorClass}`}>
             {article.category}
           </span>
-
-          <span className="text-xs font-medium text-slate-500 truncate">
+          <span className="text-[10px] sm:text-xs font-medium text-muted truncate">
             {formattedDate}
           </span>
-
           {isUnread && (
-            <span className="text-xs font-bold px-2 py-1 bg-[#ff5a2e] text-white uppercase rounded-md tracking-wide shrink-0">
+            <span className="text-[9px] sm:text-[10px] font-bold px-1.5 py-0.5 bg-accent text-paper uppercase rounded shrink-0">
               NEW
             </span>
           )}
-
           {article.featured && (
-            <span className="text-sm font-bold px-2 py-1 bg-[#ffd966] text-slate-900 rounded-md uppercase shrink-0">
-              ★
+            <span className="text-[10px] font-bold px-1.5 py-0.5 bg-accent-soft text-accent rounded uppercase shrink-0">
+              Featured
             </span>
           )}
         </div>
 
-        <h2 className="font-heading text-base sm:text-lg uppercase leading-tight line-clamp-3 flex-1 break-words text-slate-900">
+        <h2 className="font-heading text-sm sm:text-base uppercase leading-tight line-clamp-3 flex-1 break-words text-ink">
           {article.title}
         </h2>
 
         {!article.coverImage && article.excerpt && (
-          <p className="text-sm font-medium text-slate-600 leading-relaxed line-clamp-3 break-words">
+          <p className="text-xs sm:text-sm font-medium text-muted leading-relaxed line-clamp-2 break-words">
             {article.excerpt}
           </p>
         )}
 
         {article.tags.length > 0 && (
-          <div className="flex flex-wrap gap-1.5 pt-2">
-            {article.tags.slice(0, 3).map((tag) => (
+          <div className="flex flex-wrap gap-1 pt-1">
+            {article.tags.slice(0, 2).map((tag) => (
               <span
                 key={tag}
-                className="text-xs font-medium uppercase px-2 py-1 bg-slate-100 border border-slate-200 text-slate-700 rounded-md"
+                className="text-[10px] font-medium uppercase px-1.5 py-0.5 bg-secondary text-muted rounded"
               >
                 #{tag}
               </span>
             ))}
-
-            {article.tags.length > 3 && (
-              <span className="text-xs font-medium uppercase px-2 py-1 bg-slate-100 border border-slate-200 text-slate-600 rounded-md">
-                +{article.tags.length - 3}
+            {article.tags.length > 2 && (
+              <span className="text-[10px] font-medium uppercase px-1.5 py-0.5 bg-secondary text-muted-soft rounded">
+                +{article.tags.length - 2}
               </span>
             )}
           </div>
         )}
 
         {article.readingTime > 0 && (
-          <div className="flex items-center gap-1.5 text-xs font-medium text-slate-500 uppercase mt-auto pt-3 border-t border-slate-200">
-            <Clock size={12} className="shrink-0" />
+          <div className="flex items-center gap-1 text-[10px] font-medium text-muted-soft uppercase mt-auto pt-2 border-t border-border">
+            <Clock size={10} className="shrink-0" />
             {article.readingTime} min
           </div>
         )}
@@ -399,38 +390,36 @@ function FeedHeader({
     (feedMode === "unread" ? 1 : 0);
 
   return (
-    <div className="bg-white neo-border neo-shadow overflow-hidden rounded-xl">
-      <div className="px-5 sm:px-6 py-5 flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-[#e5e5e5]">
-        <div className="flex items-center gap-2 sm:gap-3 flex-wrap min-w-0">
-          <h2 className="font-heading text-lg sm:text-xl uppercase text-slate-900 shrink-0">Feed</h2>
-
-          <span className="font-heading text-xs sm:text-sm text-slate-600 border border-slate-300 px-3 py-1 rounded-md shrink-0">
+    <div className="bg-card neo-border neo-shadow overflow-hidden rounded-lg sm:rounded-xl">
+      <div className="px-3 sm:px-4 py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-3 border-b border-border">
+        <div className="flex items-center gap-2 flex-wrap min-w-0">
+          <h2 className="font-heading text-sm sm:text-base uppercase text-ink shrink-0">Feed</h2>
+          <span className="font-heading text-[10px] sm:text-xs text-muted border border-border px-2 py-0.5 rounded shrink-0">
             {total} články
           </span>
-
           {activeCount > 0 && (
-            <span className="font-heading text-xs bg-[#ff5a2e] text-white px-3 py-1 rounded-md shrink-0">
+            <span className="font-heading text-[10px] sm:text-xs bg-accent text-paper px-2 py-0.5 rounded shrink-0">
               {activeCount} filtrů
             </span>
           )}
         </div>
 
-        <div className="flex flex-wrap items-center gap-2 w-full lg:w-auto">
+        <div className="flex items-center gap-1.5">
           <button
             onClick={() => setFeedMode(feedMode === "all" ? "unread" : "all")}
-            className={`neo-button px-4 py-2 font-medium text-xs uppercase flex items-center justify-center gap-1.5 flex-1 sm:flex-none rounded-lg transition-all ${feedMode === "unread" ? "bg-[#ff5a2e] text-white" : "bg-slate-100 text-slate-900 hover:bg-slate-200"}`}
+            className={`neo-button px-2.5 py-1.5 font-medium text-[10px] sm:text-xs uppercase flex items-center justify-center gap-1 rounded transition-all ${feedMode === "unread" ? "bg-accent text-paper" : "bg-secondary text-ink hover:bg-border"}`}
           >
-            <span className={`w-1.5 h-1.5 rounded-full ${feedMode === "unread" ? "bg-white" : "bg-slate-400"}`} />
+            <span className={`w-1 h-1 rounded-full ${feedMode === "unread" ? "bg-paper" : "bg-muted"}`} />
             Nepřečtené
           </button>
 
           <button
             onClick={() => setFilterOpen(!filterOpen)}
-            className={`neo-button px-4 py-2 font-medium text-xs uppercase flex items-center justify-center gap-1.5 flex-1 sm:flex-none rounded-lg transition-all ${filterOpen ? "bg-slate-900 text-white" : "bg-slate-100 text-slate-900 hover:bg-slate-200"}`}
+            className={`neo-button px-2.5 py-1.5 font-medium text-[10px] sm:text-xs uppercase flex items-center justify-center gap-1 rounded transition-all ${filterOpen ? "bg-ink text-paper" : "bg-secondary text-ink hover:bg-border"}`}
           >
-            <Filter size={14} />
+            <Filter size={12} />
             Filtr
-            <ChevronDown size={14} className={`transition-transform ${filterOpen ? "rotate-180" : ""}`} />
+            <ChevronDown size={12} className={`transition-transform ${filterOpen ? "rotate-180" : ""}`} />
           </button>
 
           {activeCount > 0 && (
@@ -441,25 +430,24 @@ function FeedHeader({
                 setFeedMode("all");
                 clearTags();
               }}
-              className="neo-button px-4 py-2 font-medium text-xs uppercase flex items-center justify-center gap-1 bg-[#ff5a2e] text-white hover:bg-[#e63d0a] flex-1 sm:flex-none rounded-lg transition-all"
+              className="neo-button px-2.5 py-1.5 font-medium text-[10px] sm:text-xs uppercase flex items-center justify-center gap-1 bg-accent text-paper hover:bg-accent-hover rounded transition-all"
             >
-              <X size={14} /> Reset
+              <X size={12} /> Reset
             </button>
           )}
         </div>
       </div>
 
       {filterOpen && (
-        <div className="px-5 sm:px-6 py-5 flex flex-col gap-5 border-b border-[#e5e5e5] bg-slate-50 overflow-hidden">
-          <div className="flex flex-col gap-3">
-            <span className="font-heading text-xs uppercase text-slate-700 font-semibold">Kategorie</span>
-
-            <div className="flex flex-wrap gap-2">
+        <div className="px-3 sm:px-4 py-3 flex flex-col gap-3 border-b border-border bg-secondary overflow-hidden">
+          <div className="flex flex-col gap-2">
+            <span className="font-heading text-[10px] uppercase text-muted font-semibold">Kategorie</span>
+            <div className="flex flex-wrap gap-1.5">
               {CATEGORIES.map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
-                  className={`neo-button px-4 py-2 font-medium text-xs uppercase rounded-lg transition-all ${activeCategory === cat ? "bg-slate-900 text-white" : "bg-white text-slate-900 border border-slate-200 hover:border-slate-300"}`}
+                  className={`neo-button px-2.5 py-1.5 font-medium text-[10px] sm:text-xs uppercase rounded transition-all ${activeCategory === cat ? "bg-ink text-paper" : "bg-card text-ink border border-border hover:border-muted"}`}
                 >
                   {cat}
                 </button>
@@ -467,15 +455,14 @@ function FeedHeader({
             </div>
           </div>
 
-          <div className="flex flex-col gap-3">
-            <span className="font-heading text-xs uppercase text-slate-700 font-semibold">Datum</span>
-
-            <div className="flex flex-wrap gap-2">
+          <div className="flex flex-col gap-2">
+            <span className="font-heading text-[10px] uppercase text-muted font-semibold">Datum</span>
+            <div className="flex flex-wrap gap-1.5">
               {(["all", "7d", "30d", "365d"] as DateFilter[]).map((d) => (
                 <button
                   key={d}
                   onClick={() => setDateFilter(d)}
-                  className={`neo-button px-4 py-2 font-medium text-xs uppercase rounded-lg transition-all ${dateFilter === d ? "bg-slate-900 text-white" : "bg-white text-slate-900 border border-slate-200 hover:border-slate-300"}`}
+                  className={`neo-button px-2.5 py-1.5 font-medium text-[10px] sm:text-xs uppercase rounded transition-all ${dateFilter === d ? "bg-ink text-paper" : "bg-card text-ink border border-border hover:border-muted"}`}
                 >
                   {d === "all" ? "Vše" : d === "7d" ? "7 dní" : d === "30d" ? "30 dní" : "Rok"}
                 </button>
@@ -483,9 +470,8 @@ function FeedHeader({
             </div>
           </div>
 
-          <div className="flex flex-col gap-3 min-w-0">
-            <span className="font-heading text-xs uppercase text-slate-700 font-semibold">Tagy</span>
-
+          <div className="flex flex-col gap-2 min-w-0">
+            <span className="font-heading text-[10px] uppercase text-muted font-semibold">Tagy</span>
             <TagFilterBar
               articles={allArticles}
               activeTags={activeTags}
@@ -500,7 +486,7 @@ function FeedHeader({
   );
 }
 
-function AppShell({ children, unreadCount }: { children: React.ReactNode; unreadCount: number }) {
+function AppShell({ children, unreadCount, theme, onToggleTheme }: { children: React.ReactNode; unreadCount: number; theme: "light" | "dark"; onToggleTheme: () => void }) {
   const [searchOpen, setSearchOpen] = useState(false);
 
   useEffect(() => {
@@ -517,9 +503,9 @@ function AppShell({ children, unreadCount }: { children: React.ReactNode; unread
   }, []);
 
   return (
-    <div className="min-h-screen font-sans overflow-x-clip bg-white">
+    <div className="min-h-screen font-sans overflow-x-clip bg-paper transition-colors duration-200">
       <SearchOverlay isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
-      <Header onSearch={() => setSearchOpen(true)} unreadCount={unreadCount} />
+      <Header onSearch={() => setSearchOpen(true)} unreadCount={unreadCount} theme={theme} onToggleTheme={onToggleTheme} />
       {children}
     </div>
   );
@@ -528,6 +514,7 @@ function AppShell({ children, unreadCount }: { children: React.ReactNode; unread
 function HomePage() {
   const navigate = useNavigate();
   const articles = useMemo(() => loadArticles(), []);
+  const { theme, toggle: toggleTheme } = useTheme();
 
   const [activeCategory, setActiveCategory] = useState<Category>("Vše");
   const [activeTags, setActiveTags] = useState<string[]>([]);
@@ -603,7 +590,7 @@ function HomePage() {
   );
 
   return (
-    <AppShell unreadCount={unreadCount}>
+    <AppShell unreadCount={unreadCount} theme={theme} onToggleTheme={toggleTheme}>
       <SEO />
 
       <main className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 py-4 sm:py-6 md:py-8 flex flex-col gap-4 sm:gap-6 overflow-hidden">
@@ -614,7 +601,7 @@ function HomePage() {
           />
         )}
 
-        <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 items-start min-w-0">
+        <div className="flex flex-col lg:flex-row gap-4 sm:gap-5 items-start min-w-0">
           <div className="flex-1 min-w-0 flex flex-col gap-3 sm:gap-4 w-full">
             <FeedHeader
               total={filtered.length}
@@ -644,19 +631,18 @@ function HomePage() {
             </div>
 
             {filtered.length === 0 && (
-              <div className="bg-white neo-border neo-shadow p-6 sm:p-10 text-center overflow-hidden rounded-lg">
-                <p className="font-heading text-lg sm:text-xl uppercase text-slate-400">
+              <div className="bg-card neo-border neo-shadow p-6 sm:p-8 text-center overflow-hidden rounded-lg">
+                <p className="font-heading text-base sm:text-lg uppercase text-muted">
                   Žádné články
                 </p>
-
-                <p className="font-medium text-slate-500 mt-2 text-sm">
+                <p className="font-medium text-muted-soft mt-2 text-sm">
                   Zkus jiný filtr nebo reset.
                 </p>
               </div>
             )}
           </div>
 
-          <div className="w-full lg:w-64 xl:w-72 shrink-0 lg:sticky lg:top-20 min-w-0">
+          <div className="w-full lg:w-60 xl:w-64 shrink-0 lg:sticky lg:top-16 min-w-0">
             <TrendingPanel
               articles={trending}
               readSet={readSet}

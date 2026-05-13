@@ -8,9 +8,9 @@ import RelatedArticles from "./components/RelatedArticles";
 import SEO from "./components/SEO";
 
 const CATEGORY_COLORS: Record<string, string> = {
-  Rapeři: "bg-[#ff5a2e] text-white",
-  Návody: "bg-[#4a90e2] text-white",
-  Články: "bg-[#7c3aed] text-white",
+  Rapeři: "bg-accent text-paper",
+  Návody: "bg-blue-600 text-white",
+  Články: "bg-violet-600 text-white",
 };
 
 export default function ArticlePage({ onRead }: { onRead?: (slug: string) => void }) {
@@ -28,13 +28,13 @@ export default function ArticlePage({ onRead }: { onRead?: (slug: string) => voi
 
   if (!article) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center gap-4 p-4">
+      <div className="min-h-screen flex flex-col items-center justify-center gap-4 p-4 bg-paper">
         <SEO title="404 – Nenalezeno" />
-        <div className="font-heading text-5xl text-slate-300">404</div>
-        <p className="font-heading text-xl uppercase text-slate-600">Článek nenalezen.</p>
+        <div className="font-heading text-5xl text-muted-soft">404</div>
+        <p className="font-heading text-xl uppercase text-muted">Článek nenalezen.</p>
         <button
           onClick={() => navigate("/")}
-          className="neo-button bg-[#ff5a2e] text-white px-5 py-2.5 font-medium uppercase flex items-center gap-2 rounded-lg"
+          className="neo-button bg-accent text-paper px-5 py-2.5 font-medium uppercase flex items-center gap-2 rounded-lg"
         >
           <ArrowLeft size={16} /> Zpět
         </button>
@@ -49,10 +49,10 @@ export default function ArticlePage({ onRead }: { onRead?: (slug: string) => voi
         year: "numeric",
       })
     : "";
-  const colorClass = CATEGORY_COLORS[article.category] || "bg-gray-200 text-black";
+  const colorClass = CATEGORY_COLORS[article.category] || "bg-secondary text-ink";
 
   return (
-    <div className="min-h-screen font-sans bg-white">
+    <div className="min-h-screen font-sans bg-paper transition-colors duration-200">
       <SEO
         title={article.title}
         description={article.excerpt}
@@ -63,17 +63,17 @@ export default function ArticlePage({ onRead }: { onRead?: (slug: string) => voi
       <ReadingProgress />
 
       {/* HEADER */}
-      <header className="sticky top-0 z-50 bg-white border-b border-[#e5e5e5] px-3 sm:px-6 py-3 flex justify-between items-center gap-2 shadow-sm">
+      <header className="sticky top-0 z-50 border-b border-border px-3 sm:px-5 py-2.5 flex justify-between items-center gap-2 bg-card/95 backdrop-blur-sm">
         <button
           onClick={() => navigate("/")}
-          className="flex items-center gap-1.5 font-heading text-lg sm:text-xl uppercase text-[#ff5a2e] hover:text-[#e63d0a] transition-colors"
+          className="flex items-center gap-1.5 font-heading text-lg sm:text-xl uppercase text-accent hover:opacity-80 transition-opacity"
         >
-          <Hash size={20} className="text-[#ff5a2e]" />
+          <Hash size={18} className="sm:w-5 sm:h-5" />
           4RAP
         </button>
         <button
           onClick={() => navigate("/")}
-          className="neo-button bg-slate-100 text-slate-900 px-3 sm:px-4 py-2 font-medium text-xs sm:text-sm uppercase flex items-center gap-1.5 rounded-lg hover:bg-slate-200 transition-colors"
+          className="neo-button bg-secondary text-ink px-3 py-1.5 font-medium text-xs uppercase flex items-center gap-1.5 rounded-lg hover:bg-border transition-colors"
         >
           <ArrowLeft size={14} /> Zpět
         </button>
@@ -81,7 +81,7 @@ export default function ArticlePage({ onRead }: { onRead?: (slug: string) => voi
 
       {/* COVER IMAGE */}
       {article.coverImage && (
-        <div className="w-full max-h-[280px] sm:max-h-[360px] overflow-hidden border-b border-[#e5e5e5]">
+        <div className="w-full max-h-[240px] sm:max-h-[320px] overflow-hidden border-b border-border">
           <img
             src={article.coverImage}
             alt={article.title}
@@ -91,45 +91,43 @@ export default function ArticlePage({ onRead }: { onRead?: (slug: string) => voi
         </div>
       )}
 
-      <div className="max-w-3xl mx-auto px-3 sm:px-4 md:px-6 py-4 sm:py-6 md:py-8 flex flex-col gap-4 sm:gap-6">
+      <div className="max-w-3xl mx-auto px-3 sm:px-4 md:px-6 py-4 sm:py-6 md:py-8 flex flex-col gap-4 sm:gap-5">
 
         {/* ARTICLE HEADER */}
-        <div className="bg-white neo-border neo-shadow p-4 sm:p-6 lg:p-8 flex flex-col gap-3 sm:gap-4 rounded-lg sm:rounded-xl">
-          <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
-            <span
-              className={`inline-block px-2 sm:px-3 py-1 text-[10px] sm:text-xs font-bold tracking-wider uppercase rounded ${colorClass}`}
-            >
+        <div className="bg-card neo-border neo-shadow p-4 sm:p-6 flex flex-col gap-3 rounded-lg sm:rounded-xl">
+          <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+            <span className={`inline-block px-2 py-0.5 text-[10px] sm:text-xs font-bold uppercase rounded ${colorClass}`}>
               {article.category}
             </span>
-            <span className="font-medium text-slate-500 text-[10px] sm:text-xs">{formattedDate}</span>
-            <span className="flex items-center gap-1 font-medium text-slate-400 text-[10px] sm:text-xs">
-              <User size={11} /> {article.author}
+            <span className="font-medium text-muted text-[10px] sm:text-xs">{formattedDate}</span>
+            <span className="flex items-center gap-1 font-medium text-muted-soft text-[10px] sm:text-xs">
+              <User size={10} /> {article.author}
             </span>
             {article.readingTime > 0 && (
-              <span className="flex items-center gap-1 font-medium text-slate-400 text-[10px] sm:text-xs">
-                <Clock size={11} /> {article.readingTime} min
+              <span className="flex items-center gap-1 font-medium text-muted-soft text-[10px] sm:text-xs">
+                <Clock size={10} /> {article.readingTime} min
               </span>
             )}
           </div>
 
-          <h1 className="font-heading text-xl sm:text-2xl lg:text-3xl uppercase leading-tight text-slate-900">
+          <h1 className="font-heading text-xl sm:text-2xl lg:text-3xl uppercase leading-tight text-ink">
             {article.title}
           </h1>
 
           {article.excerpt && (
-            <p className="text-sm sm:text-base font-medium text-slate-600 leading-relaxed border-l-3 border-[#ff5a2e] pl-3 sm:pl-4">
+            <p className="text-sm sm:text-base font-medium text-muted leading-relaxed border-l-2 border-accent pl-3">
               {article.excerpt}
             </p>
           )}
 
           {/* Tags */}
           {article.tags.length > 0 && (
-            <div className="flex flex-wrap gap-1.5 pt-1">
+            <div className="flex flex-wrap gap-1 pt-1">
               {article.tags.map((tag) => (
                 <button
                   key={tag}
                   onClick={() => navigate(`/tag/${encodeURIComponent(tag)}`)}
-                  className="text-[10px] sm:text-xs font-medium uppercase px-2 py-1 bg-slate-100 text-slate-700 rounded hover:bg-[#ff5a2e] hover:text-white transition-colors"
+                  className="text-[10px] sm:text-xs font-medium uppercase px-2 py-0.5 bg-secondary text-muted rounded hover:bg-accent hover:text-paper transition-colors"
                 >
                   #{tag}
                 </button>
@@ -139,14 +137,14 @@ export default function ArticlePage({ onRead }: { onRead?: (slug: string) => voi
 
           {/* Artists */}
           {article.artists.length > 0 && (
-            <div className="flex flex-wrap gap-1.5">
+            <div className="flex flex-wrap gap-1">
               {article.artists.map((artist) => (
                 <button
                   key={artist}
                   onClick={() =>
                     navigate(`/artist/${artist.toLowerCase().replace(/\s+/g, "-")}`)
                   }
-                  className="text-[10px] sm:text-xs font-medium uppercase px-2 py-1 bg-white border border-slate-200 text-slate-700 rounded hover:bg-[#ff5a2e] hover:text-white hover:border-[#ff5a2e] transition-colors"
+                  className="text-[10px] sm:text-xs font-medium uppercase px-2 py-0.5 bg-card border border-border text-muted rounded hover:bg-accent hover:text-paper hover:border-accent transition-colors"
                 >
                   {artist}
                 </button>
@@ -156,7 +154,7 @@ export default function ArticlePage({ onRead }: { onRead?: (slug: string) => voi
 
           {/* Meta info row */}
           {(article.genre || article.city || article.era) && (
-            <div className="flex flex-wrap gap-2 sm:gap-3 text-[10px] sm:text-xs font-medium text-slate-400 uppercase pt-1">
+            <div className="flex flex-wrap gap-2 text-[10px] sm:text-xs font-medium text-muted-soft uppercase pt-1">
               {article.genre && <span>Genre: {article.genre}</span>}
               {article.city && <span>{article.city}</span>}
               {article.era && <span>Era: {article.era}</span>}
@@ -165,7 +163,7 @@ export default function ArticlePage({ onRead }: { onRead?: (slug: string) => voi
         </div>
 
         {/* ARTICLE BODY */}
-        <div className="bg-white neo-border neo-shadow p-4 sm:p-6 lg:p-8 rounded-lg sm:rounded-xl">
+        <div className="bg-card neo-border neo-shadow p-4 sm:p-6 rounded-lg sm:rounded-xl">
           <div className="prose-4rap">
             <ReactMarkdown>{article.rawContent}</ReactMarkdown>
           </div>

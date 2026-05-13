@@ -4,6 +4,18 @@
 @theme {
   --font-heading: "Archivo Black", sans-serif;
   --font-sans: "Inter", sans-serif;
+  
+  /* Color utilities mapped to CSS variables */
+  --color-ink: var(--color-ink);
+  --color-paper: var(--color-paper);
+  --color-accent: var(--color-accent);
+  --color-accent-hover: var(--color-accent-hover);
+  --color-accent-soft: var(--color-accent-soft);
+  --color-muted: var(--color-muted);
+  --color-muted-soft: var(--color-muted-soft);
+  --color-border: var(--color-border);
+  --color-secondary: var(--color-secondary);
+  --color-card: var(--color-card);
 }
 
 /* Light mode (default) */
