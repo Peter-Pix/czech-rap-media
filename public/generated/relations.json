@@ -1,9 +1,16 @@
 {
   "zacni-tvorit-beat-pruvodce-bez-draheho-softu": [
+    "eminem-shadyho-odkaz-jak-technika-a-kontroverze-prepsaly-rapovej-game",
     "kendrick-lamar-pulitzeruv-kral",
     "freestyle-battle-scena-od-suterenu-k-arene",
     "freestyle-a-battle-scena-od-suterenu-k-arene",
-    "beat-od-nuly-jak-cesky-producent-vytvori-hit",
+    "beat-od-nuly-jak-cesky-producent-vytvori-hit"
+  ],
+  "eminem-shadyho-odkaz-jak-technika-a-kontroverze-prepsaly-rapovej-game": [
+    "zacni-tvorit-beat-pruvodce-bez-draheho-softu",
+    "kendrick-lamar-pulitzeruv-kral",
+    "freestyle-battle-scena-od-suterenu-k-arene",
+    "freestyle-a-battle-scena-od-suterenu-k-arene",
     "cesky-rap-z-ulice-na-trun-nova-pravidla-hry"
   ],
   "yzomandias-typek-co-zmenil-pravidla-ceskeho-trapu": [
@@ -11,10 +18,10 @@
   ],
   "kendrick-lamar-pulitzeruv-kral": [
     "zacni-tvorit-beat-pruvodce-bez-draheho-softu",
+    "eminem-shadyho-odkaz-jak-technika-a-kontroverze-prepsaly-rapovej-game",
     "yzomandias-typek-co-zmenil-pravidla-ceskeho-trapu",
     "freestyle-battle-scena-od-suterenu-k-arene",
-    "freestyle-a-battle-scena-od-suterenu-k-arene",
-    "cesky-rap-z-ulice-na-trun-nova-pravidla-hry"
+    "freestyle-a-battle-scena-od-suterenu-k-arene"
   ],
   "jak-vyhrat-battle-prakticky-pruvodce-pro-freestyle": [
     "freestyle-battle-scena-od-suterenu-k-arene",
@@ -26,15 +33,15 @@
     "jak-vyhrat-battle-prakticky-pruvodce-pro-freestyle",
     "freestyle-a-battle-scena-od-suterenu-k-arene",
     "zacni-tvorit-beat-pruvodce-bez-draheho-softu",
-    "kendrick-lamar-pulitzeruv-kral",
-    "cesky-rap-z-ulice-na-trun-nova-pravidla-hry"
+    "eminem-shadyho-odkaz-jak-technika-a-kontroverze-prepsaly-rapovej-game",
+    "kendrick-lamar-pulitzeruv-kral"
   ],
   "freestyle-a-battle-scena-od-suterenu-k-arene": [
     "freestyle-battle-scena-od-suterenu-k-arene",
     "zacni-tvorit-beat-pruvodce-bez-draheho-softu",
+    "eminem-shadyho-odkaz-jak-technika-a-kontroverze-prepsaly-rapovej-game",
     "kendrick-lamar-pulitzeruv-kral",
-    "jak-vyhrat-battle-prakticky-pruvodce-pro-freestyle",
-    "cesky-rap-z-ulice-na-trun-nova-pravidla-hry"
+    "jak-vyhrat-battle-prakticky-pruvodce-pro-freestyle"
   ],
   "ektor-chlapek-co-rozsekal-ceskou-scenu": [],
   "beat-od-nuly-jak-cesky-producent-vytvori-hit": [
@@ -43,10 +50,10 @@
   "2pac-basnik-rebel-kral-pribeh-co-hori-dodnes": [],
   "cesky-rap-z-ulice-na-trun-nova-pravidla-hry": [
     "zacni-tvorit-beat-pruvodce-bez-draheho-softu",
+    "eminem-shadyho-odkaz-jak-technika-a-kontroverze-prepsaly-rapovej-game",
     "kendrick-lamar-pulitzeruv-kral",
     "freestyle-battle-scena-od-suterenu-k-arene",
-    "freestyle-a-battle-scena-od-suterenu-k-arene",
-    "rozsekej-majk-rapova-bible-texty-flow"
+    "freestyle-a-battle-scena-od-suterenu-k-arene"
   ],
   "rozsekej-majk-tvoje-rapova-bible-pro-texty-a-flow-co-pali": [
     "rozsekej-majk-rapova-bible-texty-flow",
@@ -55,8 +62,8 @@
   "rozsekej-majk-rapova-bible-texty-flow": [
     "rozsekej-majk-tvoje-rapova-bible-pro-texty-a-flow-co-pali",
     "zacni-tvorit-beat-pruvodce-bez-draheho-softu",
+    "eminem-shadyho-odkaz-jak-technika-a-kontroverze-prepsaly-rapovej-game",
     "kendrick-lamar-pulitzeruv-kral",
-    "jak-vyhrat-battle-prakticky-pruvodce-pro-freestyle",
-    "freestyle-battle-scena-od-suterenu-k-arene"
+    "jak-vyhrat-battle-prakticky-pruvodce-pro-freestyle"
   ]
 }
