@@ -1,5 +1,41 @@
 [
   {
+    "slug": "vytvor-prvni-beat-zacatecnici-fl-studio-ableton",
+    "title": "Vytvoř svůj první beat: Vše co potřebuješ (bez speciálního software)",
+    "excerpt": "Nemusíš koupit drahý software. Tady je návod na tvůj první beat se zdarma dostupnými nástroji.",
+    "tags": [
+      "návody",
+      "beat production",
+      "fl studio",
+      "produkcí",
+      "začátečníci",
+      "daw"
+    ],
+    "artists": [],
+    "genre": "",
+    "category": "Návody",
+    "date": "2026-05-13",
+    "readingTime": 3
+  },
+  {
+    "slug": "marpo-cesky-rapper-biografia-legenda",
+    "title": "Marpo: Od undergroundu k hlavnímu proudu českého rapu",
+    "excerpt": "Příběh Marpa — jak se ze začínajícího rapera z Brna stal jedním z nejrespektovanějších hlasů českého hip-hopu.",
+    "tags": [
+      "rapeři",
+      "marpo",
+      "cesku",
+      "brno",
+      "underground",
+      "hip hop"
+    ],
+    "artists": [],
+    "genre": "",
+    "category": "Rapeři",
+    "date": "2026-05-13",
+    "readingTime": 2
+  },
+  {
     "slug": "kendrick-lamar-biografia-pulitzer-prize",
     "title": "Kendrick Lamar: Od Compton k nejrespektovanějšímu emcee naší doby",
     "excerpt": "Příběh Kendricka Lamara — jak doškolák z Comptonu stal se nejinteligentnějším hlasem moderního rapu a získal Pulitzerovu cenu.",
@@ -53,6 +89,24 @@
     "category": "Články",
     "date": "2026-05-13",
     "readingTime": 3
+  },
+  {
+    "slug": "drake-kendrick-beef-2026-novy-album",
+    "title": "Drake vs. Kendrick: Největší beef v rapu právě nabírá obrátky",
+    "excerpt": "Zpět v bitvě. Drake chystá nový album přesně teď, když Kendrick řeší kontroverzi s GNX. Analyzujeme, co se za kurzívem děje.",
+    "tags": [
+      "články",
+      "drake",
+      "kendrick",
+      "beef",
+      "2026",
+      "hip hop drama"
+    ],
+    "artists": [],
+    "genre": "",
+    "category": "Články",
+    "date": "2026-05-13",
+    "readingTime": 2
   },
   {
     "slug": "calin-cesky-rapovy-genius",
