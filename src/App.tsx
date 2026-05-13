@@ -564,7 +564,7 @@ function HomePage() {
     <AppShell unreadCount={unreadCount}>
       <SEO />
 
-      <main className="max-w-7xl mx-auto px-4 md:px-6 py-6 sm:py-10 flex flex-col gap-6 sm:gap-8 overflow-hidden">
+      <main className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 py-4 sm:py-6 md:py-8 flex flex-col gap-4 sm:gap-6 overflow-hidden">
         {featuredArticle && (
           <HeroArticle
             article={featuredArticle}
@@ -572,8 +572,8 @@ function HomePage() {
           />
         )}
 
-        <div className="flex flex-col lg:flex-row gap-6 items-start min-w-0">
-          <div className="flex-1 min-w-0 flex flex-col gap-4 w-full">
+        <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 items-start min-w-0">
+          <div className="flex-1 min-w-0 flex flex-col gap-3 sm:gap-4 w-full">
             <FeedHeader
               total={filtered.length}
               feedMode={feedMode}
@@ -590,7 +590,7 @@ function HomePage() {
               setFilterOpen={setFilterOpen}
             />
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 items-stretch">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4 items-stretch">
               {filtered.map((a) => (
                 <ArticleCard
                   key={a.slug}
@@ -602,19 +602,19 @@ function HomePage() {
             </div>
 
             {filtered.length === 0 && (
-              <div className="bg-white neo-border neo-shadow p-8 sm:p-12 text-center overflow-hidden">
-                <p className="font-heading text-xl sm:text-2xl uppercase text-black/30">
+              <div className="bg-white neo-border neo-shadow p-6 sm:p-10 text-center overflow-hidden rounded-lg">
+                <p className="font-heading text-lg sm:text-xl uppercase text-slate-400">
                   Žádné články
                 </p>
 
-                <p className="font-bold text-black/40 mt-2 text-sm sm:text-base">
+                <p className="font-medium text-slate-500 mt-2 text-sm">
                   Zkus jiný filtr nebo reset.
                 </p>
               </div>
             )}
           </div>
 
-          <div className="w-full lg:w-72 xl:w-80 shrink-0 lg:sticky lg:top-24 min-w-0">
+          <div className="w-full lg:w-64 xl:w-72 shrink-0 lg:sticky lg:top-20 min-w-0">
             <TrendingPanel
               articles={trending}
               readSet={readSet}

@@ -9,9 +9,9 @@ interface Props {
 }
 
 const CATEGORY_COLORS: Record<string, string> = {
-  "Rapeři": "bg-[#FF4A4A] text-white",
-  "Návody": "bg-[#39FF14] text-black",
-  "Články": "bg-[#00BFFF] text-black",
+  "Rapeři": "bg-[#ff5a2e] text-white",
+  "Návody": "bg-[#4a90e2] text-white",
+  "Články": "bg-[#7c3aed] text-white",
 };
 
 export default function RelatedArticles({ currentSlug }: Props) {
@@ -36,29 +36,29 @@ export default function RelatedArticles({ currentSlug }: Props) {
   if (!related.length) return null;
 
   return (
-    <section className="mt-12">
-      <h2 className="font-heading text-2xl uppercase mb-6 border-b-4 border-black pb-3">
+    <section className="mt-4 sm:mt-6">
+      <h2 className="font-heading text-base sm:text-lg uppercase mb-3 sm:mb-4 border-b-2 border-[#ff5a2e] pb-2 text-slate-900">
         Čti taky
       </h2>
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {related.map((article) => {
-          const colorClass = CATEGORY_COLORS[article.category] || "bg-gray-200 text-black";
+          const colorClass = CATEGORY_COLORS[article.category] || "bg-slate-200 text-slate-900";
           return (
             <article
               key={article.slug}
               onClick={() => navigate(`/article/${article.slug}`)}
-              className="bg-white neo-border neo-shadow p-5 flex flex-col gap-3 cursor-pointer hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[12px_12px_0px_0px_#000] transition-all duration-100"
+              className="bg-white neo-border neo-shadow p-3 sm:p-4 flex flex-col gap-2 cursor-pointer hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 rounded-lg"
             >
-              <span className={`self-start text-xs font-bold px-2 py-0.5 neo-border uppercase ${colorClass}`}>
+              <span className={`self-start text-[10px] sm:text-xs font-bold px-2 py-0.5 rounded uppercase ${colorClass}`}>
                 {article.category}
               </span>
-              <h3 className="font-heading text-base uppercase leading-tight">
+              <h3 className="font-heading text-sm sm:text-base uppercase leading-tight text-slate-900">
                 {article.title}
               </h3>
-              <p className="text-sm font-medium text-gray-600 leading-relaxed line-clamp-2">
+              <p className="text-xs sm:text-sm font-medium text-slate-600 leading-relaxed line-clamp-2">
                 {article.excerpt}
               </p>
-              <span className="flex items-center gap-1 text-xs font-bold uppercase mt-auto text-black/60 hover:text-black">
+              <span className="flex items-center gap-1 text-[10px] sm:text-xs font-medium uppercase mt-auto text-[#ff5a2e] hover:text-[#e63d0a]">
                 Číst <ArrowRight size={12} />
               </span>
             </article>
