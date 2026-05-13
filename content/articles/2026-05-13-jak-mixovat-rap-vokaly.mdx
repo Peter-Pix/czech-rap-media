@@ -1,0 +1,146 @@
+---
+title: "Jak mixovat rap vokály: od čistého zvuku k punchy průrazu"
+slug: "jak-mixovat-rap-vokaly"
+excerpt: "Mixování rapu je věda i umění. Nauč se základní techniky, které změní tvé amatérské nahrávky v profesionální tracky."
+date: "2026-05-13"
+tags: ["n\u00e1vody", "mix", "mastering", "vok\u00e1ly", "produkce", "komprese"]
+coverImage: "/images/cover.jpg"
+author: "Rap Reportér"
+published: true
+---
+
+## Základ: čistota a průzračnost
+
+Dobrý mix rapu začíná čistou nahrávkou. Pokud máš špatný source, žádný plug-in ti ho neodstaví. Ale předpokládám, že máš nahrávku bez velkého šumu — jde teď o následující:
+
+### 1. Normalizace a RMS metering
+
+Nejdřív normalizuj vokál tak, aby jeho RMS (průměrná hlasitost) byl kolem -18 až -16 dB. Není to o maximální hlasitosti, ale o konzistenci.
+
+**Jak:** V Reaperu či FL Studiu použij Normalization tool s **peak normalization na -2 dB** a pak normalizuj podle RMS.
+
+### 2. Odstranění oddechů a kliknutí
+
+Smaž nebo ztlum všechny:
+- Oddychy mezi frázemi (gate nebo odseknutí)
+- Kliknutí na počátku slov (de-click)
+- Šum pozadí (gentle EQ cut na 80–100 Hz)
+
+**Prakticky:** Poslouchej vokál v headphonech bez beatu. Slyšíš každý oddech? Ztiš ho či smaž. Důležité je, aby se pauzy tvrdě zastavily — ne dlouhý tail, který by rozbíjel rytmus.
+
+### 3. EQ — chceš, aby se vokál prorazil
+
+Pro rap je normální:
+- **High-pass filtr:** 80 Hz a dolů — pryč
+- **Presence peak:** +3–5 dB kolem 2–3 kHz — prorazivost, srozumitelnost
+- **Subfrequency cut:** -2 dB kolem 200 Hz — zbavuje se mumláníh hlubokých frekvencí
+- **Air (vysoké frekvence):** +1–2 dB kolem 10 kHz — brightness (ale pozor, ne přehnaně)
+
+**Nástroj:** Lineární phase EQ (např. Fabfilter Pro-Q nebo stock EQ s linear phase) — aby se nezpoždily útoky.
+
+### 4. Komprese: sjednocení dynamiky
+
+Rap potřebuje **agresivní kompresi**, aby každá slabika byla slyšet stejně. Standardní nastavení:
+
+- **Ratio:** 4:1 až 8:1
+- **Attack:** 5–10 ms (chceš chytit útok, ne ho zabít)
+- **Release:** 50–100 ms
+- **Makeup gain:** aby se vokál zvedl na původní level
+
+**Trik:** Nastav threshold tak, aby komprese pracovala kolem -6 až -10 dB. To není moc, ale postačuje.
+
+### 5. Deesser — sibilanty nejsou tvůj kamarád
+
+Piblinky (S, Z, C) se v rapu exponují. Vstav **multiband compressor** (nebo dedikovaný deesser):
+- Cílové frekvence: 4–6 kHz
+- Ratio: 2:1, gentle
+
+Zkus si to sám — najeď na sbilantu a vyposlouchej rozdíl.
+
+### 6. Saturace a warmth
+
+Malá dávka **tape saturation** nebo **soft clipper** přidá "teplotu" a tlumí hrubé hrany. Nástroje:
+- Soundtoys Decapitator (best)
+- Waves J37 (vintage tape)
+- Stock saturation pluginu v tvém DAW
+
+Nastavení: **drive 3–5 dB**, nic víc. Chceš cítit, ne slyšet.
+
+### 7. Reverb a delay — minimálně
+
+V rapu je trend **suchý vokál**. Žádný velký reverb, maximálně:
+- Krátký room reverb (0.5–1 sec) — jen pro plasticity
+- Tiny delay (16th nebo 32nd note) na 15–20% wet — psychoakustika
+- Nebo vůbec nic — beat a vokál, hotovo.
+
+### 8. Limitér na konci
+
+Na master buse rap vokálu (ještě před mainním mixem) postav **limiter**:
+- Threshold: -1 dB
+- Release: fast (100 ms)
+
+Ochrana před clipping, nic víc.
+
+---
+
+## Praktický workflow: step by step
+
+1. **Slož vokál do DAW** — import MDX file do jedné tracky
+2. **High-pass filtr** — 80 Hz pryč
+3. **Gate** — chytej jenom vokál, ne šum
+4. **De-click** — smaž artefakty
+5. **EQ** — presence peak, air, bass cut
+6. **Komprese** — agresivně (6:1 ratio)
+7. **Deesser** — 4–6 kHz gentle
+8. **Saturace** — 3–5 dB drive
+9. **Limitér** — safety
+10. **Listen & iterate** — poslouchej 10x, adjustuj
+
+---
+
+## Masterování rapu
+
+Jakmile je mix hotový, masterování je daleko jednodušší:
+
+- **Linear phase EQ** — +1–2 dB kolem 3 kHz pro punch
+- **Multiband compression** — na bass (1–2 dB reduction kolem 100 Hz)
+- **Limiter** — -0.3 dB thresh, -6 dB ceiling (=loud pero safe)
+- **Metering:** LUFS -14 až -10 pro Spotify, YouTube, ATSoundCloud
+
+**Trik:** Poslouchej masterovaný track na slabých reprobdechnčích — v autě, sluchátcích, na telefonu. Pokud zní dobře všude, je to dobré.
+
+---
+
+## Kontrola: Slyšíš to?
+
+Po mixu si postav otázky:
+- Slyšíš každou slabiku bez úsilí?
+- Je vokál v centru mix (panning 0)?
+- Není ni moc hlasitý, ani moc tichý oproti beatu?
+- Jsou hrany měkké, nebo ostré?
+- Na malých reproduktorech (telefon) to zní OK?
+
+Pokud je odpověď **ano**, jsi hotový.
+
+---
+
+## Nástroje, které stačí
+
+Nemusíš mít $1000 plug-inů:
+
+- **Reaper** — $60, all-in-one, stock pluginy jsou solidní
+- **FL Studio** — $99, speciálně pro beatmakery
+- **Cakewalk** — zdarma, übersolid stock EQ a komprese
+- **Audacity** — zdarma, pro rychlé snímky (odstraňování sibilant, normalizace)
+
+Plug-iny za peníze (pokud máš budget):
+- Fabfilter Pro-Q (EQ) — $179
+- Soundtoys Decapitator (saturation) — $99
+- Waves SSL G-Master (komprese) — $99
+
+Ale upřímně? Stock pluginy v Reaperu/FL se vyrovnají drahým alternativám, pokud víš, jak je používat.
+
+---
+
+Mixování je iterativní proces. Čím víc tracků si namixuješ, tím lépe pocítíš, kde je problém. Takže si vezmi starou nahrávku, aplikuj toto a uvidíš sám.
+
