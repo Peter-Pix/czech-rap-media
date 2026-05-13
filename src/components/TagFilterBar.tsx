@@ -55,36 +55,33 @@ export default function TagFilterBar({
   const hiddenCount = Math.max(0, filteredTags.length - initialLimit);
 
   return (
-    <section className="bg-white neo-border neo-shadow p-4 md:p-5 flex flex-col gap-4">
-      <div className="flex flex-col md:flex-row md:items-center gap-3 justify-between">
-        <div>
-          <h2 className="font-heading text-lg uppercase">Tagy ve článcích</h2>
-        </div>
+    <div className="flex flex-col gap-2">
+      <label className="flex items-center gap-2 bg-card border border-border rounded px-2.5 py-1.5">
+        <Search size={12} className="text-muted shrink-0" />
+        <input
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Hledat tag…"
+          className="w-full bg-transparent outline-none font-medium text-[10px] sm:text-xs text-ink placeholder:text-muted-soft"
+        />
+      </label>
 
-        <label className="flex items-center gap-2 bg-[#FFDE00] neo-border px-3 py-2 md:min-w-[260px]">
-          <Search size={16} />
-          <input
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Hledat tag…"
-            className="w-full bg-transparent outline-none font-bold text-sm placeholder:text-black/40"
-          />
-        </label>
-      </div>
-
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-1">
         {visibleTags.map(({ tag, count }) => {
           const active = activeTags.includes(tag);
           return (
             <button
               key={tag}
               onClick={() => onToggleTag(tag)}
-              className={`text-xs font-bold uppercase px-3 py-1 neo-border transition-colors flex items-center gap-1
-                ${active ? "bg-black text-[#FFD800]" : "bg-[#FFD800] text-black hover:bg-black hover:text-[#FFD800]"}`}
-              title={`${count} článků`}
+              className={`text-[9px] sm:text-[10px] font-medium uppercase px-1.5 py-0.5 rounded border transition-all flex items-center gap-0.5 ${
+                active 
+                  ? "bg-accent text-paper border-accent" 
+                  : "bg-card text-muted border-border hover:border-accent hover:text-accent"
+              }`}
+              title={`${count} články`}
             >
               #{tag}
-              <span className={`text-[10px] px-1 ${active ? "text-[#FFD800]/70" : "text-black/40"}`}>{count}</span>
+              <span className={`text-[8px] ${active ? "text-paper/70" : "text-muted-soft"}`}>{count}</span>
             </button>
           );
         })}
@@ -92,26 +89,26 @@ export default function TagFilterBar({
         {activeTags.length > 0 && (
           <button
             onClick={onClearTags}
-            className="flex items-center gap-1 text-xs font-bold uppercase px-3 py-1 neo-border bg-[#FF4A4A] text-white"
+            className="flex items-center gap-0.5 text-[9px] sm:text-[10px] font-medium uppercase px-1.5 py-0.5 rounded bg-accent text-paper transition-all"
           >
-            <X size={12} /> Zrušit tagy
+            <X size={10} /> Reset
           </button>
         )}
       </div>
 
       {!visibleTags.length && (
-        <p className="font-heading text-sm uppercase text-black/40">Žádný tag neodpovídá hledání.</p>
+        <p className="text-[10px] text-muted">Žádný tag neodpovídá.</p>
       )}
 
       {!query.trim() && hiddenCount > 0 && (
         <button
           onClick={() => setExpanded((v) => !v)}
-          className="self-start flex items-center gap-1 font-heading text-xs uppercase underline decoration-4 decoration-black underline-offset-4 hover:opacity-70"
+          className="self-start flex items-center gap-0.5 text-[9px] sm:text-[10px] font-medium text-accent hover:text-accent-hover transition-colors"
         >
-          {expanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
-          {expanded ? "Ukázat míň" : `Ukázat dalších ${hiddenCount}`}
+          {expanded ? <ChevronUp size={10} /> : <ChevronDown size={10} />}
+          {expanded ? "Méně" : `+${hiddenCount} dalších`}
         </button>
       )}
-    </section>
+    </div>
   );
 }

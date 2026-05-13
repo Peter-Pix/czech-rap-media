@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { Search, X, Clock, Hash } from "lucide-react";
+import { Search, X, Clock } from "lucide-react";
 import { search, type SearchEntry } from "../lib/search";
 
 interface Props {
@@ -9,9 +9,9 @@ interface Props {
 }
 
 const CATEGORY_COLORS: Record<string, string> = {
-  "Rapeři": "bg-[#FF4A4A] text-white",
-  "Návody": "bg-[#39FF14] text-black",
-  "Články": "bg-[#00BFFF] text-black",
+  "Rapeři": "bg-accent text-paper",
+  "Návody": "bg-blue-600 text-white",
+  "Články": "bg-violet-600 text-white",
 };
 
 export default function SearchOverlay({ isOpen, onClose }: Props) {
@@ -57,58 +57,58 @@ export default function SearchOverlay({ isOpen, onClose }: Props) {
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-start justify-center pt-[10vh] px-4"
+      className="fixed inset-0 z-[100] flex items-start justify-center pt-[10vh] sm:pt-[15vh] px-3 sm:px-4"
       onClick={onClose}
     >
       {/* Backdrop */}
-      <div className="absolute inset-0 bg-black/80" />
+      <div className="absolute inset-0 bg-ink/40 backdrop-blur-sm" />
 
       {/* Panel */}
       <div
-        className="relative w-full max-w-2xl bg-[#FFDE00] neo-border neo-shadow"
+        className="relative w-full max-w-2xl bg-card neo-border neo-shadow rounded-lg sm:rounded-xl overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Input row */}
-        <div className="flex items-center gap-3 px-5 py-4 border-b-4 border-black">
-          <Search size={22} className="text-black shrink-0" />
+        <div className="flex items-center gap-2 sm:gap-3 px-3 sm:px-5 py-3 sm:py-4 border-b border-border">
+          <Search size={18} className="text-accent shrink-0" />
           <input
             ref={inputRef}
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Hledej články, rapeře, tagy…"
-            className="flex-1 bg-transparent font-heading text-lg uppercase outline-none placeholder:text-black/40"
+            className="flex-1 bg-transparent font-medium text-sm sm:text-base outline-none text-ink placeholder:text-muted-soft"
           />
-          <button onClick={onClose} className="shrink-0 hover:opacity-70">
-            <X size={22} />
+          <button onClick={onClose} className="shrink-0 text-muted hover:text-ink transition-colors">
+            <X size={18} />
           </button>
         </div>
 
         {/* Results */}
         {results.length > 0 && (
-          <ul className="divide-y-4 divide-black max-h-[60vh] overflow-y-auto">
+          <ul className="divide-y divide-border max-h-[55vh] sm:max-h-[60vh] overflow-y-auto">
             {results.map((r) => (
               <li key={r.slug}>
                 <button
                   onClick={() => handleSelect(r.slug)}
-                  className="w-full text-left px-5 py-4 hover:bg-black hover:text-[#FFDE00] transition-colors group"
+                  className="w-full text-left px-3 sm:px-5 py-3 sm:py-4 hover:bg-secondary transition-colors group"
                 >
-                  <div className="flex items-center gap-3 mb-1">
-                    <span className={`text-xs font-bold px-2 py-0.5 neo-border uppercase ${CATEGORY_COLORS[r.category] || "bg-gray-200 text-black"} group-hover:border-[#FFDE00]`}>
+                  <div className="flex items-center gap-2 mb-1.5 sm:mb-2">
+                    <span className={`text-[10px] sm:text-xs font-semibold px-2 py-0.5 sm:py-1 rounded uppercase ${CATEGORY_COLORS[r.category] || "bg-secondary text-ink"}`}>
                       {r.category}
                     </span>
                     {r.readingTime > 0 && (
-                      <span className="flex items-center gap-1 text-xs font-bold text-black/50 group-hover:text-[#FFDE00]/70">
-                        <Clock size={12} /> {r.readingTime} min
+                      <span className="flex items-center gap-1 text-[10px] sm:text-xs font-medium text-muted">
+                        <Clock size={10} /> {r.readingTime} min
                       </span>
                     )}
                   </div>
-                  <p className="font-heading text-base uppercase leading-tight">{r.title}</p>
+                  <p className="font-heading text-sm sm:text-base uppercase leading-tight text-ink group-hover:text-accent">{r.title}</p>
                   {r.tags.length > 0 && (
-                    <div className="flex gap-2 mt-2 flex-wrap">
-                      {r.tags.slice(0, 4).map((t) => (
-                        <span key={t} className="flex items-center gap-0.5 text-xs font-bold text-black/60 group-hover:text-[#FFDE00]/60">
-                          <Hash size={10} />#{t}
+                    <div className="flex gap-1.5 sm:gap-2 mt-2 flex-wrap">
+                      {r.tags.slice(0, 3).map((t) => (
+                        <span key={t} className="flex items-center gap-0.5 text-[10px] sm:text-xs font-medium text-muted">
+                          #{t}
                         </span>
                       ))}
                     </div>
@@ -121,15 +121,15 @@ export default function SearchOverlay({ isOpen, onClose }: Props) {
 
         {/* Empty state */}
         {query.trim() && !loading && results.length === 0 && (
-          <div className="px-5 py-8 text-center font-heading text-lg uppercase text-black/50">
-            Nic nenalezeno pro „{query}"
+          <div className="px-3 sm:px-5 py-6 sm:py-8 text-center font-heading text-sm sm:text-lg uppercase text-muted">
+            Nic nenalezeno
           </div>
         )}
 
         {/* Hint */}
         {!query && (
-          <div className="px-5 py-4 font-bold text-sm text-black/50 uppercase tracking-wider">
-            Začni psát — ESC pro zavření
+          <div className="px-3 sm:px-5 py-3 sm:py-4 font-medium text-xs sm:text-sm text-muted-soft uppercase">
+            ESC pro zavření
           </div>
         )}
       </div>
