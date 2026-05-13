@@ -1,4 +1,29 @@
 {
+  "rapeři": [
+    "kendrick-lamar-biografia-pulitzer-prize",
+    "eminem-техника-flow-legenda",
+    "calin-cesky-rapovy-genius"
+  ],
+  "kendrick lamar": [
+    "kendrick-lamar-biografia-pulitzer-prize",
+    "kendrick-lamar-pulitzeruv-kral"
+  ],
+  "compton": [
+    "kendrick-lamar-biografia-pulitzer-prize"
+  ],
+  "usa": [
+    "kendrick-lamar-biografia-pulitzer-prize",
+    "eminem-техника-flow-legenda"
+  ],
+  "pulitzer prize": [
+    "kendrick-lamar-biografia-pulitzer-prize"
+  ],
+  "poetry": [
+    "kendrick-lamar-biografia-pulitzer-prize"
+  ],
+  "aktivismus": [
+    "kendrick-lamar-biografia-pulitzer-prize"
+  ],
   "návody": [
     "jak-mixovat-rap-vokaly"
   ],
@@ -18,10 +43,6 @@
   "komprese": [
     "jak-mixovat-rap-vokaly"
   ],
-  "rapeři": [
-    "eminem-техника-flow-legenda",
-    "calin-cesky-rapovy-genius"
-  ],
   "eminem": [
     "eminem-техника-flow-legenda"
   ],
@@ -32,9 +53,6 @@
     "eminem-техника-flow-legenda"
   ],
   "technika": [
-    "eminem-техника-flow-legenda"
-  ],
-  "usa": [
     "eminem-техника-flow-legenda"
   ],
   "calin": [
@@ -92,9 +110,6 @@
   ],
   "O2 arena": [
     "yzomandias-typek-co-zmenil-pravidla-ceskeho-trapu"
-  ],
-  "kendrick lamar": [
-    "kendrick-lamar-pulitzeruv-kral"
   ],
   "pulitzer": [
     "kendrick-lamar-pulitzeruv-kral"
