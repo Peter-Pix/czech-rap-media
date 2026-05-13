@@ -106,42 +106,6 @@
     "readingTime": 4
   },
   {
-    "slug": "jak-vyhrat-battle-prakticky-pruvodce-pro-freestyle",
-    "title": "Jak vyhrát battle: praktický průvodce pro freestyle",
-    "excerpt": "Praktický návod od zkušeného battlera: trénink flow, killer punchline, personalizace, mentální hra a rychlé reakce — konkrétní cvičení pro českou scénu.",
-    "tags": [
-      "battle",
-      "freestyle",
-      "flow",
-      "punchline",
-      "mentální-hra"
-    ],
-    "artists": [],
-    "genre": "",
-    "category": "Návody",
-    "date": "2026-05-12",
-    "readingTime": 6
-  },
-  {
-    "slug": "freestyle-a-battle-scena-od-suterenu-k-arene",
-    "title": "Freestyle a battle scéna: od suterénu k aréně",
-    "excerpt": "Freestyle a battle scéna: jak český rap vystoupil ze suterénu na stage — od jamů a Hip Hop Kemp přes Battle Night až po éru streamů.",
-    "tags": [
-      "freestyle",
-      "rap battle",
-      "hip-hop",
-      "hip hop kemp",
-      "battle night",
-      "rap fight",
-      "historie"
-    ],
-    "artists": [],
-    "genre": "",
-    "category": "Články",
-    "date": "2026-05-12",
-    "readingTime": 5
-  },
-  {
     "slug": "beat-od-nuly-jak-cesky-producent-vytvori-hit",
     "title": "Beat od nuly: Jak český producent vytvoří hit",
     "excerpt": "Beat od nuly: Nauč se, jak český producent vytvoří hit z domácího studia — praktické kroky, zvuková paleta, arrangement a zdroje zdarma.",
@@ -194,25 +158,5 @@
     "category": "Články",
     "date": "2025-03-01",
     "readingTime": 5
-  },
-  {
-    "slug": "rozsekej-majk-rapova-bible-texty-flow",
-    "title": "Rozsekej majk: Tvoje rapová bible pro texty a flow, co pálí!",
-    "excerpt": "Chceš rozsekat majk? Tenhle manuál ti ukáže, jak napsat texty a ovládnout flow, co pálí! Žádná vata, jen hardcore tipy přímo z ulice a studia. Připrav se na banger!",
-    "tags": [
-      "rap",
-      "texty",
-      "flow",
-      "psaní",
-      "návod",
-      "hip-hop",
-      "tvorba",
-      "mikrofon"
-    ],
-    "artists": [],
-    "genre": "",
-    "category": "Návody",
-    "date": "2025-02-10",
-    "readingTime": 8
   }
 ]
