@@ -7,6 +7,7 @@ import SearchOverlay from "./components/SearchOverlay";
 import SEO from "./components/SEO";
 import TagFilterBar from "./components/TagFilterBar";
 
+
 type Category = "Vše" | "Rapeři" | "Návody" | "Články";
 type DateFilter = "all" | "7d" | "30d" | "365d";
 type FeedMode = "all" | "unread";
