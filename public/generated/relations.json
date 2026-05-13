@@ -1,17 +1,24 @@
 {
   "zacni-tvorit-beat-pruvodce-bez-draheho-softu": [
     "eminem-shadyho-odkaz-jak-technika-a-kontroverze-prepsaly-rapovej-game",
+    "drake-vs-kendrick-nejvetsi-rapovy-beef-dekady",
     "kendrick-lamar-kral",
     "freestyle-battle-scena-od-suterenu-k-arene",
-    "freestyle-a-battle-scena-od-suterenu-k-arene",
-    "beat-od-nuly-jak-cesky-producent-vytvori-hit"
+    "freestyle-a-battle-scena-od-suterenu-k-arene"
   ],
   "eminem-shadyho-odkaz-jak-technika-a-kontroverze-prepsaly-rapovej-game": [
     "zacni-tvorit-beat-pruvodce-bez-draheho-softu",
+    "drake-vs-kendrick-nejvetsi-rapovy-beef-dekady",
     "kendrick-lamar-kral",
     "freestyle-battle-scena-od-suterenu-k-arene",
-    "freestyle-a-battle-scena-od-suterenu-k-arene",
-    "cesky-rap-z-ulice-na-trun-nova-pravidla-hry"
+    "freestyle-a-battle-scena-od-suterenu-k-arene"
+  ],
+  "drake-vs-kendrick-nejvetsi-rapovy-beef-dekady": [
+    "zacni-tvorit-beat-pruvodce-bez-draheho-softu",
+    "eminem-shadyho-odkaz-jak-technika-a-kontroverze-prepsaly-rapovej-game",
+    "kendrick-lamar-kral",
+    "freestyle-battle-scena-od-suterenu-k-arene",
+    "freestyle-a-battle-scena-od-suterenu-k-arene"
   ],
   "yzomandias-typek-co-zmenil-cesky-trap": [
     "kendrick-lamar-kral"
@@ -19,9 +26,9 @@
   "kendrick-lamar-kral": [
     "zacni-tvorit-beat-pruvodce-bez-draheho-softu",
     "eminem-shadyho-odkaz-jak-technika-a-kontroverze-prepsaly-rapovej-game",
+    "drake-vs-kendrick-nejvetsi-rapovy-beef-dekady",
     "yzomandias-typek-co-zmenil-cesky-trap",
-    "freestyle-battle-scena-od-suterenu-k-arene",
-    "freestyle-a-battle-scena-od-suterenu-k-arene"
+    "freestyle-battle-scena-od-suterenu-k-arene"
   ],
   "jak-vyhrat-battle-prakticky-pruvodce-pro-freestyle": [
     "freestyle-battle-scena-od-suterenu-k-arene",
@@ -33,14 +40,14 @@
     "freestyle-a-battle-scena-od-suterenu-k-arene",
     "zacni-tvorit-beat-pruvodce-bez-draheho-softu",
     "eminem-shadyho-odkaz-jak-technika-a-kontroverze-prepsaly-rapovej-game",
-    "kendrick-lamar-kral"
+    "drake-vs-kendrick-nejvetsi-rapovy-beef-dekady"
   ],
   "freestyle-a-battle-scena-od-suterenu-k-arene": [
     "freestyle-battle-scena-od-suterenu-k-arene",
     "zacni-tvorit-beat-pruvodce-bez-draheho-softu",
     "eminem-shadyho-odkaz-jak-technika-a-kontroverze-prepsaly-rapovej-game",
-    "kendrick-lamar-kral",
-    "jak-vyhrat-battle-prakticky-pruvodce-pro-freestyle"
+    "drake-vs-kendrick-nejvetsi-rapovy-beef-dekady",
+    "kendrick-lamar-kral"
   ],
   "ektor-chlapek-co-rozsekal-ceskou-scenu": [],
   "beat-od-nuly-jak-cesky-producent-vytvori-hit": [
@@ -50,15 +57,15 @@
   "cesky-rap-z-ulice-na-trun-nova-pravidla-hry": [
     "zacni-tvorit-beat-pruvodce-bez-draheho-softu",
     "eminem-shadyho-odkaz-jak-technika-a-kontroverze-prepsaly-rapovej-game",
+    "drake-vs-kendrick-nejvetsi-rapovy-beef-dekady",
     "kendrick-lamar-kral",
-    "freestyle-battle-scena-od-suterenu-k-arene",
-    "freestyle-a-battle-scena-od-suterenu-k-arene"
+    "freestyle-battle-scena-od-suterenu-k-arene"
   ],
   "rozsekej-majk-rapova-bible-texty-flow": [
     "zacni-tvorit-beat-pruvodce-bez-draheho-softu",
     "eminem-shadyho-odkaz-jak-technika-a-kontroverze-prepsaly-rapovej-game",
+    "drake-vs-kendrick-nejvetsi-rapovy-beef-dekady",
     "kendrick-lamar-kral",
-    "jak-vyhrat-battle-prakticky-pruvodce-pro-freestyle",
-    "freestyle-battle-scena-od-suterenu-k-arene"
+    "jak-vyhrat-battle-prakticky-pruvodce-pro-freestyle"
   ]
 }
