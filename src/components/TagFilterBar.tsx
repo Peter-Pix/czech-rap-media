@@ -55,19 +55,19 @@ export default function TagFilterBar({
   const hiddenCount = Math.max(0, filteredTags.length - initialLimit);
 
   return (
-    <section className="bg-white neo-border neo-shadow p-4 md:p-5 flex flex-col gap-4">
-      <div className="flex flex-col md:flex-row md:items-center gap-3 justify-between">
+    <section className="bg-white neo-border neo-shadow p-5 md:p-6 flex flex-col gap-5 rounded-xl">
+      <div className="flex flex-col md:flex-row md:items-center gap-4 justify-between">
         <div>
-          <h2 className="font-heading text-lg uppercase">Tagy ve článcích</h2>
+          <h2 className="font-heading text-lg uppercase text-slate-900">Tagy ve článcích</h2>
         </div>
 
-        <label className="flex items-center gap-2 bg-[#FFDE00] neo-border px-3 py-2 md:min-w-[260px]">
-          <Search size={16} />
+        <label className="flex items-center gap-2 bg-slate-100 border border-slate-300 rounded-lg px-4 py-2.5 md:min-w-[280px]">
+          <Search size={16} className="text-slate-600 shrink-0" />
           <input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Hledat tag…"
-            className="w-full bg-transparent outline-none font-bold text-sm placeholder:text-black/40"
+            className="w-full bg-transparent outline-none font-medium text-sm text-slate-900 placeholder:text-slate-400"
           />
         </label>
       </div>
@@ -79,14 +79,44 @@ export default function TagFilterBar({
             <button
               key={tag}
               onClick={() => onToggleTag(tag)}
-              className={`text-xs font-bold uppercase px-3 py-1 neo-border transition-colors flex items-center gap-1
-                ${active ? "bg-black text-[#FFD800]" : "bg-[#FFD800] text-black hover:bg-black hover:text-[#FFD800]"}`}
-              title={`${count} článků`}
+              className={`text-xs font-semibold uppercase px-3 py-2 rounded-lg border transition-all flex items-center gap-1.5 ${
+                active 
+                  ? "bg-[#ff5a2e] text-white border-[#ff5a2e]" 
+                  : "bg-white text-slate-900 border-slate-300 hover:border-[#ff5a2e] hover:text-[#ff5a2e]"
+              }`}
+              title={`${count} články`}
             >
               #{tag}
-              <span className={`text-[10px] px-1 ${active ? "text-[#FFD800]/70" : "text-black/40"}`}>{count}</span>
+              <span className={`text-[10px] font-medium ${active ? "text-white/80" : "text-slate-500"}`}>{count}</span>
             </button>
           );
+        })}
+
+        {activeTags.length > 0 && (
+          <button
+            onClick={onClearTags}
+            className="flex items-center gap-1.5 text-xs font-semibold uppercase px-3 py-2 rounded-lg bg-[#ff5a2e] text-white hover:bg-[#e63d0a] transition-all"
+          >
+            <X size={14} /> Zrušit tagy
+          </button>
+        )}
+      </div>
+
+      {!visibleTags.length && (
+        <p className="font-heading text-sm uppercase text-slate-500">Žádný tag neodpovídá hledání.</p>
+      )}
+
+      {!query.trim() && hiddenCount > 0 && (
+        <button
+          onClick={() => setExpanded((v) => !v)}
+          className="self-start flex items-center gap-1 font-heading text-xs uppercase text-[#ff5a2e] hover:text-[#e63d0a] transition-colors"
+        >
+          {expanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+          {expanded ? "Ukázat míň" : `Ukázat dalších ${hiddenCount}`}
+        </button>
+      )}
+    </section>
+  );
         })}
 
         {activeTags.length > 0 && (

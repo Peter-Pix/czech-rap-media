@@ -1,22 +1,23 @@
-@import url("https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&display=swap");
 @import "tailwindcss";
 
 @theme {
   --font-heading: "Archivo Black", sans-serif;
-  --font-sans: "Space Grotesk", sans-serif;
+  --font-sans: "Inter", sans-serif;
 }
 
 :root {
-  --color-ink: #000;
-  --color-paper: #fff;
-  --color-cream: #fffae8;
-  --color-yellow: #ffd800;
-  --color-green: #7bc8a4;
-  --color-red: #ff4a4a;
+  --color-ink: #0f0f0f;
+  --color-paper: #ffffff;
+  --color-accent: #ff5a2e;
+  --color-accent-dark: #e63d0a;
+  --color-muted: #666666;
+  --color-border: #e5e5e5;
+  --color-secondary: #f5f5f5;
   --page-x: clamp(1rem, 3vw, 1.5rem);
-  --neo-border: clamp(2px, 0.55vw, 4px);
-  --neo-shadow-x: clamp(4px, 1.35vw, 10px);
-  --neo-shadow-y: clamp(4px, 1.35vw, 10px);
+  --neo-border: 1px;
+  --neo-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --neo-shadow-hover: 0 12px 24px rgba(0, 0, 0, 0.12);
   --tap-size: 44px;
   color-scheme: light;
 }
@@ -40,9 +41,7 @@ body {
   min-height: 100svh;
   margin: 0;
   overflow-x: clip;
-  background-color: #ffde00;
-  background-image: radial-gradient(rgba(0, 0, 0, 0.15) 2px, transparent 2px);
-  background-size: 24px 24px;
+  background-color: var(--color-paper);
   color: var(--color-ink);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -91,37 +90,37 @@ button {
 }
 
 .neo-border {
-  border: var(--neo-border) solid var(--color-ink);
+  border: var(--neo-border) solid var(--color-border);
 }
 
 .neo-shadow {
-  box-shadow: var(--neo-shadow-x) var(--neo-shadow-y) 0 0 var(--color-ink);
+  box-shadow: var(--neo-shadow);
 }
 
 .neo-shadow-sm {
-  box-shadow: calc(var(--neo-shadow-x) * 0.5) calc(var(--neo-shadow-y) * 0.5) 0 0 var(--color-ink);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 .neo-button {
   min-height: var(--tap-size);
-  border: var(--neo-border) solid var(--color-ink);
-  box-shadow: clamp(3px, 0.85vw, 6px) clamp(3px, 0.85vw, 6px) 0 0 var(--color-ink);
-  transition: transform 140ms ease, box-shadow 140ms ease, background-color 140ms ease, color 140ms ease;
+  border: var(--neo-border) solid var(--color-border);
+  box-shadow: var(--neo-shadow);
+  transition: all 200ms ease;
   cursor: pointer;
   user-select: none;
   white-space: nowrap;
+  border-radius: 6px;
 }
 
 @media (hover: hover) and (pointer: fine) {
   .neo-button:hover {
-    transform: translate(-2px, -2px);
-    box-shadow: clamp(5px, 1vw, 8px) clamp(5px, 1vw, 8px) 0 0 var(--color-ink);
+    box-shadow: var(--neo-shadow-hover);
+    border-color: var(--color-muted);
   }
 }
 
 .neo-button:active {
-  box-shadow: 0 0 0 0 var(--color-ink);
-  transform: translate(4px, 4px);
+  transform: scale(0.98);
 }
 
 @keyframes marquee {
@@ -193,72 +192,79 @@ button {
 
 .prose-4rap h2 {
   font-family: "Archivo Black", sans-serif;
-  font-size: clamp(1.18rem, 4.6vw, 1.4rem);
+  font-size: clamp(1.5rem, 5vw, 1.75rem);
   text-transform: uppercase;
-  letter-spacing: -0.01em;
-  margin: clamp(2rem, 7vw, 2.5rem) 0 0.85rem;
-  padding-bottom: 0.5rem;
-  border-bottom: var(--neo-border) solid var(--color-ink);
-  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: clamp(2rem, 7vw, 2.5rem) 0 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--color-accent);
+  line-height: 1.2;
+  color: var(--color-ink);
 }
 
 .prose-4rap h3 {
   font-family: "Archivo Black", sans-serif;
-  font-size: clamp(1rem, 3.8vw, 1.05rem);
+  font-size: clamp(1.1rem, 4vw, 1.3rem);
   text-transform: uppercase;
-  margin: clamp(1.5rem, 6vw, 2rem) 0 0.6rem;
+  margin: clamp(1.5rem, 6vw, 2rem) 0 0.75rem;
   line-height: 1.2;
+  color: var(--color-ink);
 }
 
 .prose-4rap p {
-  font-size: clamp(1rem, 3.9vw, 1.1rem);
+  font-size: 1rem;
   line-height: 1.75;
-  margin-bottom: 1.15rem;
-  font-weight: 500;
+  margin-bottom: 1.25rem;
+  font-weight: 400;
+  color: var(--color-muted);
 }
 
 .prose-4rap ul,
 .prose-4rap ol {
-  padding-left: 1.25rem;
+  padding-left: 1.5rem;
   margin-bottom: 1.25rem;
 }
 
 .prose-4rap li {
-  font-size: clamp(0.98rem, 3.7vw, 1.05rem);
+  font-size: 1rem;
   line-height: 1.75;
-  font-weight: 500;
-  margin-bottom: 0.4rem;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+  color: var(--color-muted);
 }
 
-.prose-4rap ul li { list-style-type: "▸  "; }
+.prose-4rap ul li { list-style-type: disc; }
 .prose-4rap ol li { list-style-type: decimal; }
-.prose-4rap strong { font-weight: 900; }
+.prose-4rap strong { font-weight: 700; }
 .prose-4rap em { font-style: italic; }
 
 .prose-4rap a {
-  font-weight: 700;
-  color: var(--color-ink);
-  text-decoration: underline;
-  text-decoration-color: var(--color-yellow);
-  text-decoration-thickness: 3px;
-  text-underline-offset: 0.18em;
+  font-weight: 600;
+  color: var(--color-accent);
+  text-decoration: none;
+  border-bottom: 2px solid var(--color-accent);
+  transition: all 200ms ease;
 }
 
-.prose-4rap a:hover { background-color: var(--color-yellow); }
+.prose-4rap a:hover { 
+  color: var(--color-accent-dark);
+  border-bottom-color: var(--color-accent-dark);
+}
 
 .prose-4rap blockquote {
-  border-left: 6px solid var(--color-ink);
-  background: var(--color-yellow);
-  padding: clamp(0.9rem, 4vw, 1rem) clamp(1rem, 4vw, 1.25rem);
+  border-left: 4px solid var(--color-accent);
+  background: var(--color-secondary);
+  padding: 1rem 1.25rem;
   margin: 1.75rem 0;
-  font-weight: 700;
-  font-size: clamp(1rem, 3.9vw, 1.1rem);
+  font-weight: 500;
+  font-size: 1rem;
   line-height: 1.65;
+  color: var(--color-ink);
 }
 
 .prose-4rap hr {
   border: none;
-  border-top: var(--neo-border) solid var(--color-ink);
+  border-top: 1px solid var(--color-border);
   margin: 2.5rem 0;
 }
 
@@ -267,7 +273,7 @@ button {
   max-width: 100%;
   border-collapse: collapse;
   margin: 2rem 0;
-  font-weight: 500;
+  font-weight: 400;
   display: block;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
@@ -275,67 +281,69 @@ button {
 
 .prose-4rap th,
 .prose-4rap td {
-  border: 2px solid var(--color-ink);
-  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--color-border);
+  padding: 0.75rem;
   text-align: left;
   vertical-align: top;
 }
 
 .prose-4rap th {
-  background: var(--color-ink);
-  color: var(--color-yellow);
+  background: var(--color-secondary);
+  color: var(--color-ink);
   font-family: "Archivo Black", sans-serif;
   font-size: 0.85rem;
   text-transform: uppercase;
+  font-weight: 700;
 }
 
-.prose-4rap tr:nth-child(even) td { background: var(--color-cream); }
+.prose-4rap tr:nth-child(even) td { background: var(--color-secondary); }
 
 .prose-4rap code {
-  background: var(--color-ink);
-  color: var(--color-green);
+  background: var(--color-secondary);
+  color: var(--color-accent);
   font-size: 0.9em;
-  padding: 0.1em 0.4em;
-  border-radius: 2px;
+  padding: 0.2em 0.5em;
+  border-radius: 4px;
   overflow-wrap: break-word;
+  font-family: "Monaco", "Menlo", monospace;
 }
 
 .prose-4rap pre {
   max-width: 100%;
-  background: #111;
-  color: var(--color-green);
-  padding: clamp(1rem, 4vw, 1.25rem);
+  background: #1a1a1a;
+  color: #e0e0e0;
+  padding: 1.25rem;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   margin: 1.5rem 0;
-  border: var(--neo-border) solid var(--color-ink);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
 }
 
 .prose-4rap pre code {
   background: none;
   padding: 0;
   white-space: pre;
+  color: #e0e0e0;
 }
 
 .prose-4rap img {
   width: auto;
   max-width: 100%;
   height: auto;
-  border: var(--neo-border) solid var(--color-ink);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
   margin: 1.5rem auto;
+  display: block;
 }
 
 /* ── Mobile first viewport tuning ── */
 @media (max-width: 479px) {
   :root {
-    --neo-border: 2px;
-    --neo-shadow-x: 4px;
-    --neo-shadow-y: 4px;
     --tap-size: 42px;
   }
 
   body {
-    background-size: 18px 18px;
     line-height: 1.55;
   }
 
@@ -346,50 +354,31 @@ button {
   }
 
   .neo-button {
-    box-shadow: 3px 3px 0 0 var(--color-ink);
-  }
-
-  .neo-button:active {
-    transform: translate(3px, 3px);
-  }
-
-  .prose-4rap blockquote {
-    border-left-width: 4px;
+    border-radius: 4px;
   }
 }
 
 @media (min-width: 480px) and (max-width: 767px) {
   :root {
-    --neo-border: 3px;
-    --neo-shadow-x: 6px;
-    --neo-shadow-y: 6px;
+    --tap-size: 44px;
   }
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
   :root {
-    --neo-border: 4px;
-    --neo-shadow-x: 8px;
-    --neo-shadow-y: 8px;
+    --tap-size: 44px;
   }
 }
 
 @media (min-width: 1024px) {
-  :root {
-    --neo-border: 4px;
-    --neo-shadow-x: 10px;
-    --neo-shadow-y: 10px;
-  }
-
   body {
     line-height: 1.75;
   }
 }
 
 @media (min-width: 1440px) {
-  :root {
-    --neo-shadow-x: 12px;
-    --neo-shadow-y: 12px;
+  body {
+    font-size: 16px;
   }
 }
 

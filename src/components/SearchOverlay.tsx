@@ -9,9 +9,9 @@ interface Props {
 }
 
 const CATEGORY_COLORS: Record<string, string> = {
-  "Rapeři": "bg-[#FF4A4A] text-white",
-  "Návody": "bg-[#39FF14] text-black",
-  "Články": "bg-[#00BFFF] text-black",
+  "Rapeři": "bg-[#ff5a2e] text-white",
+  "Návody": "bg-[#4a90e2] text-white",
+  "Články": "bg-[#7c3aed] text-white",
 };
 
 export default function SearchOverlay({ isOpen, onClose }: Props) {
@@ -57,57 +57,57 @@ export default function SearchOverlay({ isOpen, onClose }: Props) {
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-start justify-center pt-[10vh] px-4"
+      className="fixed inset-0 z-[100] flex items-start justify-center pt-[15vh] px-4"
       onClick={onClose}
     >
       {/* Backdrop */}
-      <div className="absolute inset-0 bg-black/80" />
+      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
 
       {/* Panel */}
       <div
-        className="relative w-full max-w-2xl bg-[#FFDE00] neo-border neo-shadow"
+        className="relative w-full max-w-2xl bg-white neo-border neo-shadow rounded-xl overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Input row */}
-        <div className="flex items-center gap-3 px-5 py-4 border-b-4 border-black">
-          <Search size={22} className="text-black shrink-0" />
+        <div className="flex items-center gap-3 px-5 py-4 border-b border-[#e5e5e5]">
+          <Search size={20} className="text-[#ff5a2e] shrink-0" />
           <input
             ref={inputRef}
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Hledej články, rapeře, tagy…"
-            className="flex-1 bg-transparent font-heading text-lg uppercase outline-none placeholder:text-black/40"
+            className="flex-1 bg-transparent font-medium text-base outline-none text-slate-900 placeholder:text-slate-400"
           />
-          <button onClick={onClose} className="shrink-0 hover:opacity-70">
-            <X size={22} />
+          <button onClick={onClose} className="shrink-0 text-slate-400 hover:text-slate-600 transition-colors">
+            <X size={20} />
           </button>
         </div>
 
         {/* Results */}
         {results.length > 0 && (
-          <ul className="divide-y-4 divide-black max-h-[60vh] overflow-y-auto">
+          <ul className="divide-y divide-[#e5e5e5] max-h-[60vh] overflow-y-auto">
             {results.map((r) => (
               <li key={r.slug}>
                 <button
                   onClick={() => handleSelect(r.slug)}
-                  className="w-full text-left px-5 py-4 hover:bg-black hover:text-[#FFDE00] transition-colors group"
+                  className="w-full text-left px-5 py-4 hover:bg-slate-50 transition-colors group"
                 >
-                  <div className="flex items-center gap-3 mb-1">
-                    <span className={`text-xs font-bold px-2 py-0.5 neo-border uppercase ${CATEGORY_COLORS[r.category] || "bg-gray-200 text-black"} group-hover:border-[#FFDE00]`}>
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className={`text-xs font-semibold px-2.5 py-1 rounded-md uppercase ${CATEGORY_COLORS[r.category] || "bg-slate-200 text-slate-900"}`}>
                       {r.category}
                     </span>
                     {r.readingTime > 0 && (
-                      <span className="flex items-center gap-1 text-xs font-bold text-black/50 group-hover:text-[#FFDE00]/70">
+                      <span className="flex items-center gap-1 text-xs font-medium text-slate-500 group-hover:text-slate-700">
                         <Clock size={12} /> {r.readingTime} min
                       </span>
                     )}
                   </div>
-                  <p className="font-heading text-base uppercase leading-tight">{r.title}</p>
+                  <p className="font-heading text-base uppercase leading-tight text-slate-900 group-hover:text-[#ff5a2e]">{r.title}</p>
                   {r.tags.length > 0 && (
-                    <div className="flex gap-2 mt-2 flex-wrap">
+                    <div className="flex gap-2 mt-3 flex-wrap">
                       {r.tags.slice(0, 4).map((t) => (
-                        <span key={t} className="flex items-center gap-0.5 text-xs font-bold text-black/60 group-hover:text-[#FFDE00]/60">
+                        <span key={t} className="flex items-center gap-1 text-xs font-medium text-slate-600 group-hover:text-slate-800">
                           <Hash size={10} />#{t}
                         </span>
                       ))}
@@ -121,14 +121,14 @@ export default function SearchOverlay({ isOpen, onClose }: Props) {
 
         {/* Empty state */}
         {query.trim() && !loading && results.length === 0 && (
-          <div className="px-5 py-8 text-center font-heading text-lg uppercase text-black/50">
+          <div className="px-5 py-8 text-center font-heading text-lg uppercase text-slate-500">
             Nic nenalezeno pro „{query}"
           </div>
         )}
 
         {/* Hint */}
         {!query && (
-          <div className="px-5 py-4 font-bold text-sm text-black/50 uppercase tracking-wider">
+          <div className="px-5 py-4 font-medium text-sm text-slate-500 uppercase tracking-wider">
             Začni psát — ESC pro zavření
           </div>
         )}
