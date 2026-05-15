@@ -6,6 +6,7 @@ import ArticlePage from "./ArticlePage";
 import SearchOverlay from "./components/SearchOverlay";
 import SEO from "./components/SEO";
 import TagFilterBar from "./components/TagFilterBar";
+import Analytics from "./components/Analytics";
 
 
 type Category = "Vše" | "Rapeři" | "Návody" | "Články";
@@ -504,6 +505,7 @@ function AppShell({ children, unreadCount, theme, onToggleTheme }: { children: R
 
   return (
     <div className="min-h-screen font-sans overflow-x-clip bg-paper transition-colors duration-200">
+      <Analytics />
       <SearchOverlay isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
       <Header onSearch={() => setSearchOpen(true)} unreadCount={unreadCount} theme={theme} onToggleTheme={onToggleTheme} />
       {children}
