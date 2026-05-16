@@ -35,23 +35,6 @@
     "readingTime": 4
   },
   {
-    "slug": "zaklady-mixu-rapovych-vokalu-prurazny-sound",
-    "title": "Základy mixu rapových vokálů: Jak získat průrazný sound",
-    "excerpt": "Praktický návod na mix rapových vokálů: gain staging, EQ, komprese, de-esser a efekty, aby vokál pronikl beatem a zněl profi.",
-    "tags": [
-      "mixing",
-      "vokaly",
-      "eq",
-      "komprese",
-      "hip-hop"
-    ],
-    "artists": [],
-    "genre": "",
-    "category": "Návody",
-    "date": "2026-05-15",
-    "readingTime": 13
-  },
-  {
     "slug": "vydas-ep-sam-10-kroku-jak-se-neposrat-a-uspjet",
     "title": "Vydáš EP sám? 10 kroků, jak se neposrat a uspět",
     "excerpt": "Vydání EP, DIY: 10 drsných kroků, jak vydat EP bez průseru — mastering, distribuce, artwork, PR a merch. Real talk pro český rap.",
@@ -67,8 +50,25 @@
     "artists": [],
     "genre": "",
     "category": "Návody",
-    "date": "2026-05-14",
+    "date": "2026-05-16",
     "readingTime": 9
+  },
+  {
+    "slug": "zaklady-mixu-rapovych-vokalu-prurazny-sound",
+    "title": "Základy mixu rapových vokálů: Jak získat průrazný sound",
+    "excerpt": "Praktický návod na mix rapových vokálů: gain staging, EQ, komprese, de-esser a efekty, aby vokál pronikl beatem a zněl profi.",
+    "tags": [
+      "mixing",
+      "vokaly",
+      "eq",
+      "komprese",
+      "hip-hop"
+    ],
+    "artists": [],
+    "genre": "",
+    "category": "Návody",
+    "date": "2026-05-15",
+    "readingTime": 13
   },
   {
     "slug": "zacni-tvorit-beat-pruvodce-bez-draheho-softu",
