@@ -106,6 +106,23 @@
     "readingTime": 13
   },
   {
+    "slug": "uk-grime-kde-kdy-a-proc-od-ulic-londyna-po-mainstream",
+    "title": "UK Grime — kde, kdy a proč? Od ulic Londýna po mainstream",
+    "excerpt": "Surový přehled vzniku, šíření a společenského dopadu UK grime — od Wileyho a pirate rádií po Skeptu, Stormzyho a průnik do politiky a mainstreamu.",
+    "tags": [
+      "grime",
+      "uk",
+      "londyn",
+      "skepta",
+      "stormzy"
+    ],
+    "artists": [],
+    "genre": "",
+    "category": "Články",
+    "date": "2026-05-14",
+    "readingTime": 8
+  },
+  {
     "slug": "zacni-tvorit-beat-pruvodce-bez-draheho-softu",
     "title": "Začni tvořit beat: Kompletní průvodce od nuly bez drahého softu",
     "excerpt": "Praktický návod pro začátečníky: udělej první hip-hop beat bez drahého softu. Doporučené DAW, hardware a krok za krokem postup.",
@@ -193,23 +210,6 @@
     "category": "Články",
     "date": "",
     "readingTime": 4
-  },
-  {
-    "slug": "uk-grime-kde-kdy-a-proc-od-ulic-londyna-po-mainstream",
-    "title": "UK Grime — kde, kdy a proč? Od ulic Londýna po mainstream",
-    "excerpt": "Surový přehled vzniku, šíření a společenského dopadu UK grime — od Wileyho a pirate rádií po Skeptu, Stormzyho a průnik do politiky a mainstreamu.",
-    "tags": [
-      "grime",
-      "uk",
-      "londyn",
-      "skepta",
-      "stormzy"
-    ],
-    "artists": [],
-    "genre": "",
-    "category": "Články",
-    "date": "",
-    "readingTime": 8
   },
   {
     "slug": "proc-hodne-lidi-uz-nebavi-rap",
