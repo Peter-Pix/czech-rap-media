@@ -70,24 +70,6 @@
     "readingTime": 4
   },
   {
-    "slug": "cesky-rap-v-plamenech-beefy-ktere-definovaly-scenu-od-psh-po-milion",
-    "title": "Český rap v plamenech: Beefy, které definovaly scénu – od PSH po Milion+",
-    "excerpt": "Projděte si klíčové rapové beefy české scény, které formovaly kariéry, labely i byznys. Od PSH vs. Chaozz, přes Toxxxe a Řezníka, až po Milion+ a veterány.",
-    "tags": [
-      "český rap",
-      "beef",
-      "historie",
-      "psh",
-      "milion+",
-      "hugo toxxx"
-    ],
-    "artists": [],
-    "genre": "",
-    "category": "Články",
-    "date": "2026-05-17",
-    "readingTime": 12
-  },
-  {
     "slug": "vydas-ep-sam-10-kroku-jak-se-neposrat-a-uspjet",
     "title": "Vydáš EP sám? 10 kroků, jak se neposrat a uspět",
     "excerpt": "Vydání EP, DIY: 10 drsných kroků, jak vydat EP bez průseru — mastering, distribuce, artwork, PR a merch. Real talk pro český rap.",
@@ -193,6 +175,24 @@
     "category": "Články",
     "date": "2026-05-14",
     "readingTime": 8
+  },
+  {
+    "slug": "cesky-rap-v-plamenech-beefy-ktere-definovaly-scenu-od-psh-po-milion",
+    "title": "Český rap v plamenech: Beefy, které definovaly scénu – od PSH po Milion+",
+    "excerpt": "Projděte si klíčové rapové beefy české scény, které formovaly kariéry, labely i byznys. Od PSH vs. Chaozz, přes Toxxxe a Řezníka, až po Milion+ a veterány.",
+    "tags": [
+      "český rap",
+      "beef",
+      "historie",
+      "psh",
+      "milion+",
+      "hugo toxxx"
+    ],
+    "artists": [],
+    "genre": "",
+    "category": "Články",
+    "date": "2026-05-14",
+    "readingTime": 12
   },
   {
     "slug": "zacni-tvorit-beat-pruvodce-bez-draheho-softu",
