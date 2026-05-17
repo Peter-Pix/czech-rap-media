@@ -84,7 +84,8 @@
     "kato-z-prago-union-basnik-lingvista-a-antihrdina-ceskeho-rapu",
     "cesky-rap-v-plamenech-beefy-ktere-definovaly-scenu-od-psh-po-milion",
     "ben-cristovao-prelozil-svet-do-cestiny",
-    "yzomandias-zmenil-pravidla-a-odletel-zpatky-na-svoji-planetu"
+    "yzomandias-zmenil-pravidla-a-odletel-zpatky-na-svoji-planetu",
+    "gangster-poza-v-ceskem-rapu-proc-to-nici-scenu"
   ],
   "chaozz": [
     "kato-z-prago-union-basnik-lingvista-a-antihrdina-ceskeho-rapu"
@@ -236,13 +237,15 @@
     "proc-hodne-lidi-uz-nebavi-rap"
   ],
   "autenticita": [
-    "proc-hodne-lidi-uz-nebavi-rap"
+    "proc-hodne-lidi-uz-nebavi-rap",
+    "gangster-poza-v-ceskem-rapu-proc-to-nici-scenu"
   ],
   "český hip-hop": [
     "proc-hodne-lidi-uz-nebavi-rap"
   ],
   "kritika": [
-    "proc-hodne-lidi-uz-nebavi-rap"
+    "proc-hodne-lidi-uz-nebavi-rap",
+    "gangster-poza-v-ceskem-rapu-proc-to-nici-scenu"
   ],
   "kultura": [
     "proc-hodne-lidi-uz-nebavi-rap"
@@ -276,5 +279,11 @@
   ],
   "tipy": [
     "mikrofon-pro-rap-jak-vybrat-ten-pravy-aby-tvuj-hlas-znel-profi"
+  ],
+  "gangster rap": [
+    "gangster-poza-v-ceskem-rapu-proc-to-nici-scenu"
+  ],
+  "scéna": [
+    "gangster-poza-v-ceskem-rapu-proc-to-nici-scenu"
   ]
 }
