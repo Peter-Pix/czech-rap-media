@@ -1,23 +1,5 @@
 [
   {
-    "slug": "jak-psat-rapove-texty-co-neco-rikaj",
-    "title": "Jak napsat silné rapové texty: postupy, rýmy a storytelling",
-    "excerpt": "Máš skvělou flow, ale tvé texty sklouzávají po uchu? Nauč se, jak psát rapové texty, které osloví, vypráví a zanechají silný dojem. Objev techniky, které tvé rýmy posunou dál.",
-    "tags": [
-      "psaní textů",
-      "rapové texty",
-      "flow",
-      "rýmy",
-      "tvorba textů",
-      "hip hop"
-    ],
-    "artists": [],
-    "genre": "",
-    "category": "Návody",
-    "date": "2026-05-18",
-    "readingTime": 7
-  },
-  {
     "slug": "hudba-jako-byznys-pruvodce-pro-nezavisleho-umelce",
     "title": "Hudba jako byznys: Střízlivej průvodce pro nezávislýho umělce",
     "excerpt": "Distribuce, vydavatelství, autorský práva a monetizace. Bez pohádek, bez easy mode — ale taky bez katastrofismu. Dá se to.",
@@ -221,6 +203,24 @@
       "nahravani",
       "hip-hop",
       "navody"
+    ],
+    "artists": [],
+    "genre": "",
+    "category": "Návody",
+    "date": "2026-05-13",
+    "readingTime": 7
+  },
+  {
+    "slug": "jak-psat-rapove-texty-co-neco-rikaj",
+    "title": "Jak napsat silné rapové texty: postupy, rýmy a storytelling",
+    "excerpt": "Máš skvělou flow, ale tvé texty sklouzávají po uchu? Nauč se, jak psát rapové texty, které osloví, vypráví a zanechají silný dojem. Objev techniky, které tvé rýmy posunou dál.",
+    "tags": [
+      "psaní textů",
+      "rapové texty",
+      "flow",
+      "rýmy",
+      "tvorba textů",
+      "hip hop"
     ],
     "artists": [],
     "genre": "",
