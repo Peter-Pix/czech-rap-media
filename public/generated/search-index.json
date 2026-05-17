@@ -1,22 +1,5 @@
 [
   {
-    "slug": "gangster-poza-v-ceskem-rapu-proc-to-nici-scenu",
-    "title": "Gangster póza v českém rapu: proč to ničí scénu",
-    "excerpt": "Analýza fenoménu „gangster pózy“ v českém rapu — proč kopírování amerického stylu ubíjí originalitu a chybí autentické české příběhy.",
-    "tags": [
-      "český rap",
-      "autenticita",
-      "gangster rap",
-      "scéna",
-      "kritika"
-    ],
-    "artists": [],
-    "genre": "",
-    "category": "Články",
-    "date": "2026-05-18",
-    "readingTime": 8
-  },
-  {
     "slug": "hudba-jako-byznys-pruvodce-pro-nezavisleho-umelce",
     "title": "Hudba jako byznys: Střízlivej průvodce pro nezávislýho umělce",
     "excerpt": "Distribuce, vydavatelství, autorský práva a monetizace. Bez pohádek, bez easy mode — ale taky bez katastrofismu. Dá se to.",
@@ -316,6 +299,23 @@
     "category": "Články",
     "date": "2026-05-12",
     "readingTime": 6
+  },
+  {
+    "slug": "gangster-poza-v-ceskem-rapu-proc-to-nici-scenu",
+    "title": "Gangster póza v českém rapu: proč to ničí scénu",
+    "excerpt": "Analýza fenoménu „gangster pózy“ v českém rapu — proč kopírování amerického stylu ubíjí originalitu a chybí autentické české příběhy.",
+    "tags": [
+      "český rap",
+      "autenticita",
+      "gangster rap",
+      "scéna",
+      "kritika"
+    ],
+    "artists": [],
+    "genre": "",
+    "category": "Články",
+    "date": "2026-05-11",
+    "readingTime": 8
   },
   {
     "slug": "mikrofon-pro-rap-jak-vybrat-ten-pravy-aby-tvuj-hlas-znel-profi",
